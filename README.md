@@ -9,3 +9,10 @@
 * Spectates a Quake 3 server from NodeJS and relays chat messages
 * Maintains reliable connection with Quake 3 for receiving game events from new server API
 
+## Use this bot
+
+https://discord.com/oauth2/authorize?response_type=code&client_id=723583889779589221&scope=bot&permissions=2248399936&redirect_uri=https://discord.com/channels/@me
+
+## Run this bot
+
+Good luck
