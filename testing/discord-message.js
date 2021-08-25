@@ -1,11 +1,9 @@
-var discordApi = importer.import('discord api')
-var {authorizeGateway} = importer.import('authorize discord')
+var discordApi = require('../discordApi')
 
 async function testMessage()
 {
-    var discordSocket = await authorizeGateway()
-    await discordApi.createMessage('beep boop', '752568660819837019')
-    discordSocket.close()
+  await discordApi.createMessage('beep boop')
+  discordApi.closeGateway()
 }
 
 module.exports = testMessage

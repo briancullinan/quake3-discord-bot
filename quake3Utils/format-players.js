@@ -1,4 +1,3 @@
-var impoter = require('../Core')
 var removeCtrlChars = importer.import('remove ctrl characters')
 
 function formatPlayerList(server) {

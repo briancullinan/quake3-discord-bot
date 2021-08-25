@@ -1,4 +1,3 @@
-var importer = require('../Core')
 var serverApi = importer.import('quake 3 server commands')
 var {authorizeGateway} = importer.import('authorize discord')
 var discordApi = importer.import('discord api')
@@ -6,40 +5,39 @@ var removeCtrlChars = importer.import('remove ctrl characters')
 var DEFAULT_USERNAME = 'Orbb'
 
 async function getServerChannel(server) {
-    
-    // get a list of channels to pair gametype up with
-    var channels = await discordApi.guildChannels()
-    var channel
+  // get a list of channels to pair gametype up with
+  var channels = await discordApi.guildChannels()
+  var channel
 
-    // sort ffa/ctf/freeZe
-    if(!channel && (server.server_freezetag == '1'
-        || server.gamename.toLowerCase() == 'freon'
-        || (typeof server.xp_version != 'undefined'
-           && server.g_gametype == '8'))) {
-        channel = channels.filter(c => c.name.toLowerCase() == 'freeze-tag')[0]
-    }
-    if(!channel && server.gamename.toLowerCase() == 'defrag') {
-        channel = channels.filter(c => c.name.toLowerCase() == 'defrag')[0]
-    }
-    if(!channel && server.g_gametype == '4') {
-        channel = channels.filter(c => c.name.toLowerCase() == 'capture-the-flag')[0]
-    }
-    if(!channel && server.g_gametype == '3') {
-        channel = channels.filter(c => c.name.toLowerCase() == 'team-deathmatch')[0]
-    }
-    if(!channel && typeof server.xp_version != 'undefined'
-        && server.g_gametype == '7') {
-        channel = channels.filter(c => c.name.toLowerCase() == 'clan-arena')[0]
-    }
-    if(!channel && typeof server.xp_version != 'undefined'
-        && server.g_gametype == '1') {
-        channel = channels.filter(c => c.name.toLowerCase() == '1on1-duel')[0]
-    }
-    if(!channel) {
-        channel = channels.filter(c => c.name.toLowerCase() == 'general')[0]
-    }
+  // sort ffa/ctf/freeZe
+  if(!channel && (server.server_freezetag == '1'
+    || server.gamename.toLowerCase() == 'freon'
+    || (typeof server.xp_version != 'undefined'
+      && server.g_gametype == '8'))) {
+    channel = channels.filter(c => c.name.toLowerCase() == 'freeze-tag')[0]
+  }
+  if(!channel && server.gamename.toLowerCase() == 'defrag') {
+    channel = channels.filter(c => c.name.toLowerCase() == 'defrag')[0]
+  }
+  if(!channel && server.g_gametype == '4') {
+    channel = channels.filter(c => c.name.toLowerCase() == 'capture-the-flag')[0]
+  }
+  if(!channel && server.g_gametype == '3') {
+    channel = channels.filter(c => c.name.toLowerCase() == 'team-deathmatch')[0]
+  }
+  if(!channel && typeof server.xp_version != 'undefined'
+    && server.g_gametype == '7') {
+    channel = channels.filter(c => c.name.toLowerCase() == 'clan-arena')[0]
+  }
+  if(!channel && typeof server.xp_version != 'undefined'
+    && server.g_gametype == '1') {
+    channel = channels.filter(c => c.name.toLowerCase() == '1on1-duel')[0]
+  }
+  if(!channel) {
+    channel = channels.filter(c => c.name.toLowerCase() == 'general')[0]
+  }
 
-    return channel
+  return channel
 }
 
 async function updateChannelThread(threadName, channel, json) {

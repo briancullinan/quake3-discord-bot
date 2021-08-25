@@ -1,70 +1,52 @@
+var {DEFAULT_CHANNEL} = require('./default-config.js')
+var {request} = require('./authorize.js')
+
 
 async function createMessage(message, channelId = DEFAULT_CHANNEL) {
-    await delay()
-    var params = typeof message == 'string' ? ({
-        'content': message
-    }) : message
-    var result = await request({
-        headers: {
-            Authorization: `Bot ${token}`,
-            'Content-Type': 'application/json'
-        },
-        method: 'POST',
-        url: `${DEFAULT_API}channels/${channelId}/messages`,
-        data: JSON.stringify(params)
-    })
-    return result.data
+  var params = typeof message == 'string' ? ({
+    'content': message
+  }) : message
+  return await request({
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    method: 'POST',
+    url: `channels/${channelId}/messages`,
+    data: JSON.stringify(params)
+  })
 }
 
 async function updateMessage(message, messageId, channelId = DEFAULT_CHANNEL) {
-    await delay()
-    var params = typeof message == 'string' ? ({
-        'content': message
-    }) : message
-    var result = await request({
-        headers: {
-            Authorization: `Bot ${token}`,
-            'Content-Type': 'application/json'
-        },
-        method: 'PATCH',
-        url: `${DEFAULT_API}channels/${channelId}/messages/${messageId}`,
-        data: JSON.stringify(params)
-    })
-    return result.data
+  var params = typeof message == 'string' ? ({
+    'content': message
+  }) : message
+  return await request({
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    method: 'PATCH',
+    url: `channels/${channelId}/messages/${messageId}`,
+    data: JSON.stringify(params)
+  })
 }
 
 async function getPins(channelId = DEFAULT_CHANNEL) {
-    await delay()
-    var result = await request({
-        headers: {
-            Authorization: `Bot ${token}`
-        },
-        method: 'GET',
-        url: `${DEFAULT_API}channels/${channelId}/pins`
-    })
-    return result.data
+  return await request({
+    method: 'GET',
+    url: `channels/${channelId}/pins`
+  })
 }
 
 async function pinMessage(messageId, channelId = DEFAULT_CHANNEL) {
-    await delay()
-    var result = await request({
-        headers: {
-            Authorization: `Bot ${token}`
-        },
-        method: 'PUT',
-        url: `${DEFAULT_API}channels/${channelId}/pins/${messageId}`
-    })
-    return result.data
+  return await request({
+    method: 'PUT',
+    url: `channels/${channelId}/pins/${messageId}`
+  })
 }
 
 async function unpinMessage(messageId, channelId = DEFAULT_CHANNEL) {
-    await delay()
-    var result = await request({
-        headers: {
-            Authorization: `Bot ${token}`
-        },
-        method: 'DELETE',
-        url: `${DEFAULT_API}channels/${channelId}/pins/${messageId}`
-    })
-    return result.data
+  return await request({
+    method: 'DELETE',
+    url: `channels/${channelId}/pins/${messageId}`
+  })
 }

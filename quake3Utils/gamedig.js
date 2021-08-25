@@ -1,4 +1,3 @@
-var importer = require('../Core')
 var gamedig = require('gamedig')
 var serverApi = importer.import('quake 3 server commands')
 var { sendRcon, nextAllResponses, udpClient } = importer.import('quake 3 server commands')
@@ -20,7 +19,7 @@ async function getStatus(ip, port) {
 }
 
 async function captureAllStats() {
-    var masters = await serverApi.listMasters('master.ioquake3.org', void 0, false)
+    var masters = await serverApi.getServers('master.ioquake3.org', void 0, false)
     //var status = await getStatus(masters[1].ip, masters[1].port)
     var status = await getStatus('45.32.237.139', 27960)
     console.log(status.bots)
