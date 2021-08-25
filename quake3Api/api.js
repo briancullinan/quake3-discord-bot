@@ -1,30 +1,22 @@
-var path = require('path')
-var fs = require('fs')
 var dgram = require('dgram')
 var udpClient = dgram.createSocket('udp4')
 udpClient.on('message', updateInfo)
 
-var lookupDNS = importer.import('dns lookup')
-var {compressMessage} = importer.import('huffman decode')
-var decodeClientMessage = importer.import('decode client message')
-
-var MAX_TIMEOUT = process.env.DEFAULT_TIMEOUT || 10000
-
 var masters = []
 
 function mergeMaster(master) {
-    var found = false
-    masters.forEach((ma, i) => {
-        if(ma['ip'] == master['ip'] && ma['port'] == master['port']) {
-            found = true
-            Object.assign(masters[i], master)
-            Object.assign(master, masters[i])
-            return false
-        }
-    })
-    if(!found)
-        masters.push(master)
-    return master
+  var found = false
+  masters.forEach((ma, i) => {
+    if(ma['ip'] == master['ip'] && ma['port'] == master['port']) {
+      found = true
+      Object.assign(masters[i], master)
+      Object.assign(master, masters[i])
+      return false
+    }
+  })
+  if(!found)
+    masters.push(master)
+  return master
 }
 
 async function updateInfo(m, rinfo) {
@@ -52,26 +44,31 @@ async function updateInfo(m, rinfo) {
 }
 
 module.exports = {
-    getServers,
-    getInfo,
-    getStatus,
-    getChallenge,
-    sendRcon,
-    sendConnect,
-    sendSequence,
-    sendReliable,
-    sendPureChecksums,
-    udpClient,
-    nextInfoResponse,
-    nextStatusResponse,
-    nextServerResponse,
-    nextPrintResponse,
-    nextChallengeResponse,
-    nextConnectResponse,
-    nextChannelMessage,
-    nextGamestate,
-    nextAnyResponse,
-    nextSnapshot,
-    nextChat,
-    nextAllResponses,
+  udpClient,
+  /*
+  getServers,
+  getInfo,
+  getStatus,
+  getChallenge,
+  sendRcon,
+  sendConnect,
+  sendSequence,
+  sendReliable,
+  sendPureChecksums,
+
+  
+
+  nextInfoResponse,
+  nextStatusResponse,
+  nextServerResponse,
+  nextPrintResponse,
+  nextChallengeResponse,
+  nextConnectResponse,
+  nextChannelMessage,
+  nextGamestate,
+  nextAnyResponse,
+  nextSnapshot,
+  nextChat,
+  nextAllResponses,
+  */
 }

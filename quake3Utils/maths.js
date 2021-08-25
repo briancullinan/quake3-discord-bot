@@ -1,4 +1,4 @@
-var {readBits} = importer.import('huffman decode')
+var {readBits} = require('./huffman.js')
 
 function SwapLong(read, message) {
   return (message[(read>>3)+3] << 24) + (message[(read>>3)+2] << 16)

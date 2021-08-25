@@ -1,11 +1,11 @@
-var serverApi = importer.import('quake 3 server commands')
+var {getServers, sendRcon, udpClient} = require('../quake3Api')
 
 async function testRcon (command) {
-  var masters = await serverApi.getServers(void 0, void 0, false)
+  var masters = await getServers(void 0, void 0, false)
   console.log(masters)
-  await serverApi.sendRcon(masters[0].ip, masters[0].port, command)
-  await new Promise(resolve => setTimeout(resolve, 1000))
-  serverApi.udpClient.close()
+  var result = await sendRcon(masters[0].ip, masters[0].port, command)
+  console.log(result)
+  udpClient.close()
 }
 
 module.exports = testRcon

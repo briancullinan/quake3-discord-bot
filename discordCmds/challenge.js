@@ -1,5 +1,5 @@
-var discordApi = importer.import('discord api')
-var serverApi = importer.import('quake 3 server commands')
+var {createMessage, triggerTyping} = require('../discordApi')
+var {getServers, sendRcon} = require('../quake3Api')
 
 var CHALLENGE = /(@[^:@\s]+\s*chall?[ae]nge|chall?[ae]nge\s*@[^:@\s]+)\s*([^:@\s]*?)\s*([^:@\s]*?)/ig
 var DEFAULT_HOST = process.env.DEFAULT_HOST || 'http://quakeiiiarena.com/play/'
@@ -36,21 +36,21 @@ async function challengeCommand(command) {
   }
   if(command.launching) {
     message = 'Launching'
-    await discordApi.createMessage(message + instruction + '\n```BOT'+command.id+'L\nbeep boop\n```\n', command.channel_id)
-    await discordApi.triggerTyping(command.channel_id)
+    await createMessage(message + instruction + '\n```BOT'+command.id+'L\nbeep boop\n```\n', command.channel_id)
+    await triggerTyping(command.channel_id)
     var masters = await serverApi.getServers(void 0, void 0, false)
     if(masters.length === 0) {
-        await discordApi.createMessage(`Boo hoo, no servers available. :cry:` 
-            + '\n```BOT'+command.id+'L\nbeep boop\n```\n', command.channel_id)
-        return
+      await createMessage(`Boo hoo, no servers available. :cry:` 
+          + '\n```BOT'+command.id+'L\nbeep boop\n```\n', command.channel_id)
+      return
     }
-    await serverApi.sendRcon(masters[0].ip, masters[0].port, '\exec ' + launch + '.cfg')
-    await serverApi.sendRcon(masters[0].ip, masters[0].port, '\map ' + map)
+    await sendRcon(masters[0].ip, masters[0].port, '\exec ' + launch + '.cfg')
+    await sendRcon(masters[0].ip, masters[0].port, '\map ' + map)
     await new Promise(resolve => setTimeout(resolve, 1000))
-    await discordApi.createMessage(`Match is ready ${DEFAULT_HOST}?connect%20${masters[0].ip}:${masters[0].port} (${masters[0].ip}:${masters[0].port})`
+    await createMessage(`Match is ready ${DEFAULT_HOST}?connect%20${masters[0].ip}:${masters[0].port} (${masters[0].ip}:${masters[0].port})`
                                    + '\n```BOT'+command.id+'L\nbeep boop\n```\n', command.channel_id)
   } else if (instruction.length > 0) {
-    await discordApi.createMessage(message + instruction + '\n```BOT'+command.id+'\nbeep boop\n```\n', command.channel_id)
+    await createMessage(message + instruction + '\n```BOT'+command.id+'\nbeep boop\n```\n', command.channel_id)
   }
 }
 

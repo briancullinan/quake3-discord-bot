@@ -67,3 +67,11 @@ async function deleteCommand(commandId) {
     url: `applications/${DEFAULT_APPLICATION}/commands/${commandId}`
   })
 }
+
+module.exports = {
+  registerCommand,
+  interactionResponse,
+  getCommands,
+  updateInteraction,
+  deleteCommand
+}

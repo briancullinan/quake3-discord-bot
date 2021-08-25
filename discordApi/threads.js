@@ -30,3 +30,9 @@ async function activeThreads(channelId = DEFAULT_CHANNEL) {
     url: `channels/${channelId}/threads/active`
   })
 }
+
+module.exports = {
+  createThread,
+  archivedThreads,
+  activeThreads
+}

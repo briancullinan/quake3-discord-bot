@@ -1,5 +1,6 @@
-var {authorizeGateway} = importer.import('authorize discord')
-var {registerCommand, getCommands, deleteCommand} = importer.import('discord api')
+var {
+  registerCommand, getCommands, deleteCommand
+} = require('../discordApi')
 
 // used by legacy poller and discord commands reconstructed into this format
 var DISCORD_COMMANDS = {
@@ -16,7 +17,6 @@ var DISCORD_COMMANDS = {
 
 // bot commands using new API, same names as above but lower-case
 async function syncCommands() {
-  await authorizeGateway()
   var commandResult = (await getCommands())
   var commands = commandResult.map(command => command.name)
   if(commands.includes('hello-orbb'))

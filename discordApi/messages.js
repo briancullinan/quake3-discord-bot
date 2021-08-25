@@ -50,3 +50,11 @@ async function unpinMessage(messageId, channelId = DEFAULT_CHANNEL) {
     url: `channels/${channelId}/pins/${messageId}`
   })
 }
+
+module.exports = {
+  createMessage,
+  updateMessage,
+  getPins,
+  pinMessage,
+  unpinMessage
+}

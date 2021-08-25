@@ -4,8 +4,8 @@ This is basically organized the same way as the Quake 3 client code
 
 ***/
 
-var {readBits} = importer.import('huffman decode')
-var {parseConfigStr} = importer.import('quake 3 server responses')
+var {readBits} = require('../quake3Utils/huffman.js')
+var parseConfigStr = require('../quake3Utils/parse-configstr.js')
 
 var BIG_INFO_STRING = 8192
 var MAX_STRING_CHARS = 1024
@@ -329,4 +329,4 @@ function parseServerMessage(message, channel) {
   return channel
 }
 
-module.exports = decodeClientMessage
+module.exports = parseServerMessage

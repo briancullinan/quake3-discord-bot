@@ -1,3 +1,5 @@
+var {TOKEN} = require('./default-config.js')
+
 var indentifyTimer
 var globalWS = null
 var privateChannels = {}
@@ -28,7 +30,7 @@ function gatewayMessage(ws, reconnectGateway, message) {
       op: 2,
       intents: ['DIRECT_MESSAGES', 'GUILD_MESSAGES', 'GUILDS'],
       d: {
-        token: token,
+        token: TOKEN,
         properties: {
           "$os": "linux",
           "$browser": "nodejs",
@@ -79,7 +81,7 @@ async function gatewayIdentified(ws) {
     globalWS = ws
   await new Promise(resolve => {
     indentifyTimer = setInterval(() => {
-      if(ws.identified
+      if((ws && ws.identified)
         || (globalWS && globalWS.identified)
         || identifyCount == 30) {
         clearInterval(indentifyTimer)

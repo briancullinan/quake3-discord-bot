@@ -3,7 +3,9 @@ var WebSocket = require('ws')
 var {
   gatewayIdentified, gatewayClose, gatewayMessage
 } = require('./gateway.js')
-var {TOKEN, DEFAULT_API} = require('./default-config.js')
+var {
+  TOKEN, DEFAULT_API, DEFAULT_RATE
+} = require('./default-config.js')
 
 var ws = false
 var wsConnecting = false
@@ -31,10 +33,15 @@ async function requestAuthQ(outgoing) {
 
 async function gatewayUrl() {
   // TODO: return the same result if queried less than 1 second ago
-  return await request({
+  // doesn't use requestAuthQ because that would create an infinite loop
+  var result = await request({
+    headers: {
+      'Authorization': `Bot ${TOKEN}`
+    },
     method: 'GET',
-    url: `gateway/bot`
+    url: `${DEFAULT_API}gateway/bot`
   })
+  return result.data
 }
 
 function gatewayOpen() {
@@ -50,7 +57,7 @@ async function authorizeGateway() {
     return // already connected, no need to continue
   wsConnecting = true
   try {
-    result = await authorizeUrl()
+    result = await gatewayUrl()
   } catch (e) {
     console.log(e.message)
     ws = false
