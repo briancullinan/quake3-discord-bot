@@ -1,4 +1,7 @@
 var {DEFAULT_CHANNEL} = require('./default-config.js')
+var {
+  authorizeUrl, closeGateway, request
+} = require('./authorize.js'),
 
 async function triggerTyping(channelId = DEFAULT_CHANNEL) {
   return await request({
@@ -8,13 +11,12 @@ async function triggerTyping(channelId = DEFAULT_CHANNEL) {
 }
 
 module.exports = {
+  authorizeUrl,
+  closeGateway,
   triggerTyping,
   ... {
     userChannels, guildChannels, channelMessages
   } = require('./channels.js'),
-  ... {
-    authorizeUrl, closeGateway
-  } = require('./authorize.js'),
   ... {
     userGuilds, userConnections, getGuildRoles
   } = require('./guilds.js'),

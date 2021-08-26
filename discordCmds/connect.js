@@ -20,3 +20,5 @@ async function connectCommand(command) {
   else
     await discordApi.createMessage(json, command.channel_id)    
 }
+
+module.exports = connectCommand

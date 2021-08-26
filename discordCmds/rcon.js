@@ -1,18 +1,23 @@
-
+var {
+  triggerTyping, updateInteraction, createMessage
+} = require('../discordApi')
+var {
+  sendRcon, nextPrintResponse
+}
+var formatQuake3Response = require('../quake3Utils/format-status.js')
 var userLogins = {}
 // username: {address, password, lastUsed, }
-
 
 async function rconCommand(command) {
   var user = command.author.username
   var options = discordCommands.RCON.exec(command.content)
   if(typeof userLogins[user] == 'undefined')
-      userLogins[user] = {}
+    userLogins[user] = {}
   userLogins[user] = {
     address: userLogins[user].address || 'quakeIIIarena.com',
     password: options[2] || userLogins[user].password || 'password123!'
   }
-  await discordApi.triggerTyping(command.channel_id)
+  await triggerTyping(command.channel_id)
   var match = (/^(.*?):*([0-9]+)*$/ig).exec(userLogins[user].address)
 
   await sendRcon(match[1], parseInt(match[2]) || 27960,
@@ -29,7 +34,7 @@ async function rconCommand(command) {
     response.content = '\n```BOT'+command.id+'\nbeep boop\n```\n'
     
   if(command.interaction)
-    await discordApi.updateInteraction(response, command.id, command.token)    
+    await updateInteraction(response, command.id, command.token)    
   else
-    await discordApi.createMessage(response, command.channel_id)    
+    await createMessage(response, command.channel_id)    
 }

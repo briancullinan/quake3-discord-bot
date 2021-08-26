@@ -107,7 +107,7 @@ function readDeltaEntity(read, message, channel, number) {
   read = readBits(message, read[0], 1)
   if(read[1] == 1) { // remove
     delete channel.entities[number]
-    break
+    return
   }
   
   // check for no delta
@@ -115,7 +115,7 @@ function readDeltaEntity(read, message, channel, number) {
   if(read[1] == 0) { // no delta
     if(typeof channel.entities[number] == 'undefined')
       channel.entities[number] = 0
-    break
+    return
   }
   
   

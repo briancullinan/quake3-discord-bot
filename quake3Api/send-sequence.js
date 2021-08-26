@@ -1,4 +1,6 @@
-var {writeBits} = importer.import('huffman decode')
+var {udpClient, mergeMaster} = require('./send-connectionless.js')
+var {writeBits} = require('../quake3Utils/huffman.js')
+var lookupDNS = require('../utilities/dns.js')
 var MAX_RELIABLE_COMMANDS = 64
 
 async function sendSequence(address, port, channel) {
@@ -68,4 +70,9 @@ async function sendReliable(address, port, cmd) {
     await sendSequence(address, port, channel)
   } else
     console.log('Not connected')
+}
+
+module.exports = {
+  sendSequence,
+  sendReliable
 }

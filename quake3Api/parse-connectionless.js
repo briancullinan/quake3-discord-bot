@@ -1,4 +1,4 @@
-var statusResponse = require('./status-response.js')
+var statusResponse = require('./parse-status.js')
 var parseConfigStr = require('../quake3Utils/parse-configstr.js')
 var parseMasters = require('../quake3Utils/parse-masters.js')
 
@@ -61,3 +61,5 @@ function connectionlessPacket(message) {
   }
   console.log('Unknown message:', message.toString('utf-8'))
 }
+
+module.exports = connectionlessPacket

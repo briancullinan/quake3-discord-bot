@@ -1,16 +1,6 @@
-var ip6addr = require('ip6addr')
-var challengeCommand = importer.import('challenge discord command')
-var discordApi = importer.import('discord api')
-var {
-  getInfo, sendRcon, nextInfoResponse,
-  nextPrintResponse
-} = importer.import('quake 3 server commands')
-var formatQuake3Response = importer.import('format quake 3 response')
-var removeCtrlChars = importer.import('remove ctrl characters')
-
+var challengeCommand = require('./challenge.js')
 
 async function respondCommand(specificChannel) {
-  await authorizeGateway()
   var commands = await readAllCommands(specificChannel)
   for(var i = 0; i < commands.length; i++) {
     if(commands[i].commands.includes('CHALLENGE'))

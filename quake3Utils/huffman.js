@@ -1,8 +1,8 @@
 // this is in the Quake 3 folder instead of utilities folder because
 //   the huffman table is specific to Quake 3
-
+var path = require('path')
 var fs = require('fs')
-var huffman = fs.readFileSync('./huffman_js.wasm')
+var huffman = fs.readFileSync(path.join(__dirname, './huffman_js.wasm'))
 //var Huffman = require('/Users/briancullinan/planet_quake/code/xquakejs/lib/huffman.js')
 var Huff_Compress
 var Huff_Decompress
@@ -85,7 +85,7 @@ async function decompressMessage(message, offset) {
   for(var i = 0; i < message.length; i++)
     Huffman.HEAP8[msgData+i] = c
 	Huffman.HEAP32[(msg>>2)+5] = message.length
-	Huffman._Huff_Decompress( msg, 12 )
+	Huffman._Huff_Decompress( msg, 0 )
 	return Huffman.HEAP8.slice(msgData + offset, msgData + Huffman.HEAP32[(msg>>2)+5])
 }
 
@@ -113,7 +113,7 @@ async function compressMessage(message) {
     memory[msgStart + i] = message[i].charCodeAt(0)
   memory[msgStart + message.length] = 0
 
-  Huff_Compress(msg, 12)
+  Huff_Compress(msg, 0)
   var msgLength = (memory[msg + 21] << 8) + memory[msg + 20]
   var compressed = memory.slice(msgStart, msgStart + msgLength)
   return compressed

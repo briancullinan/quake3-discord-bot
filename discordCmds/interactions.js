@@ -1,5 +1,4 @@
-var discordApi = importer.import('discord api')
-var {authorizeGateway, privateChannels, interactions} = importer.import('authorize discord')
+var {interactions} = require('./gateway.js')
 
 // converts an interaction into the same format as a message command
 async function readInteractions() {
