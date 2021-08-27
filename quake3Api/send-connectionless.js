@@ -1,6 +1,7 @@
 var dgram = require('dgram')
 var udpClient = dgram.createSocket('udp4')
 var {mergeMaster, packetEvent, nextResponse} = require('./parse-packet.js')
+var {connectionlessEvent} = require('./parse-connectionless.js')
 var lookupDNS = require('../utilities/dns.js')
 udpClient.on('message', packetEvent)
 var {compressMessage} = require('../quake3Utils/huffman.js')
@@ -63,10 +64,23 @@ async function getServers(master = DEFAULT_MASTER, port = 27950, wait = true) {
   if(!servers || !servers.length)
     return []
   for(var m in servers) {
-    getStatus(servers[m].ip, servers[m].port)
+    Promise.resolve(getStatus(servers[m].ip, servers[m].port))
   }
   if(wait) {
-    await new Promise(resolve => setTimeout(resolve, MAX_TIMEOUT))
+    await new Promise(resolve => {
+      var waitForResponses = setTimeout(resolve, MAX_TIMEOUT)
+      var responseCount = 0
+      var countResponses
+      countResponses = () => {
+        responseCount++
+        if(responseCount == servers.length) {
+          clearTimeout(waitForResponses)
+          connectionlessEvent.off('statusResponse', countResponses)
+          resolve() // return immediately instead
+        }
+      }
+      connectionlessEvent.on('statusResponse', countResponses)
+    })
   } else {
     // can't use getInfo() because it depends on at least 1 statusResponse
     await nextResponse('statusResponse')

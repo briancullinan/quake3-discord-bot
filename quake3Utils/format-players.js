@@ -1,7 +1,6 @@
-var removeCtrlChars = importer.import('remove ctrl characters')
+var removeCtrlChars = require('./remove-ctrl.js')
 
 function formatPlayerList(server) {
-    var threadName = 'Pickup for ' + removeCtrlChars(server.sv_hostname || server.hostname).replace(/[^0-9a-z-]/ig, '-')
     var redTeam = (server.Players_Red || '').trim()
         .split(/\s+/ig).filter(n => n)
         .map(i => parseInt(i))

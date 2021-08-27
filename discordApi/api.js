@@ -1,7 +1,7 @@
 var {DEFAULT_CHANNEL} = require('./default-config.js')
 var {
   authorizeUrl, closeGateway, request
-} = require('./authorize.js'),
+} = require('./authorize.js')
 
 async function triggerTyping(channelId = DEFAULT_CHANNEL) {
   return await request({

@@ -14,15 +14,17 @@ function mergeMaster(master) {
   var found = false
   masters.forEach((ma, i) => {
     if(ma['ip'] == master['ip'] && ma['port'] == master['port']) {
-      found = true
+      found = masters[i]
       Object.assign(masters[i], master)
       Object.assign(master, masters[i])
       return false
     }
   })
-  if(!found)
+  if(!found) {
     masters.push(master)
-  return master
+    return master
+  }
+  return found
 }
 
 async function packetEvent(m, rinfo) {

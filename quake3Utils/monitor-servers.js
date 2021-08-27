@@ -1,10 +1,11 @@
-var {getInfo, getStatus} = importer.import('quake 3 server commands')
+var {getInfo, getStatus} = require('../quake3Api')
 var {
   guildChannels, archivedThreads, getPins,
   activeThreads, createThread, createMessage,
-  pinMessage, unpinMessage
+  pinMessage, unpinMessage, udpClose
 } = require('../discordApi')
-var removeCtrlChars = importer.import('remove ctrl characters')
+var formatPlayerList = require('./format-players.js')
+var removeCtrlChars = require('./remove-ctrl.js')
 var DEFAULT_USERNAME = 'Orbb'
 
 async function getServerChannel(server) {
@@ -81,22 +82,30 @@ async function updateChannelThread(threadName, channel, json) {
 async function monitorServer(address = 'q3msk.ru', port = 27977) {
   await getInfo(address, port)
   var server = await getStatus(address, port)
-  if(!server || server.monitorRunning)
-    return
+  var threadName = 'Pickup for ' + removeCtrlChars(server.sv_hostname || server.hostname).replace(/[^0-9a-z-]/ig, '-')
+  var json = formatPlayerList(server)
+  if(!server || server.monitorRunning) {
+    console.log('Server not found.')
+    return    
+  }
+
   server.monitorRunning = true
 
-  var channel = getServerChannel(server)
-  var thread
-  if(!channel) {
-    console.log('No channel to create thread on.')
-  } else {
-    thread = await updateChannelThread(threadName, channel, json)
-    server.channelId = thread.id
+  var serverMonitor = async () => {
+    var channel = await getServerChannel(server)
+    var thread
+    if(!channel) {
+      console.log('No channel to create thread on.')
+    } else {
+      thread = await updateChannelThread(threadName, channel, json)
+      server.channelId = thread.id
+    }
+    return thread
   }
-  server.monitorRunning = setTimeout(() => {
-    monitorServer(address, port)
+  server.monitorRunning = setInterval(() => {
+    Promise.resolve(serverMonitor())
   }, 60 * 1000)
-  return thread
+  return await serverMonitor()
 }
 
 module.exports = monitorServer
