@@ -11,8 +11,7 @@ async function connectCommand(command) {
   // TODO: try to connect to server and respond with a getinfo print out
   await discordApi.triggerTyping(command.channel_id)
   var match = (/^(.*?):*([0-9]+)*$/ig).exec(userLogins[user].address)
-  await getInfo(match[1], parseInt(match[2]) || 27960)
-  var info = await nextInfoResponse()
+  var info = await getInfo(match[1], parseInt(match[2]) || 27960)
   var json = formatInfoResponse(info)
   
   if(command.interaction)

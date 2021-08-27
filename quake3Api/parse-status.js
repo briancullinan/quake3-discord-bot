@@ -1,3 +1,4 @@
+var parseConfigStr = require('../quake3Utils/parse-configstr.js')
 
 function statusResponse(m) {
   var status = parseConfigStr(m)

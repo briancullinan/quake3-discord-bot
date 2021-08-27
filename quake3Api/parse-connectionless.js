@@ -1,13 +1,16 @@
+var {inherits} = require('util')
+var {EventEmitter} = require('events')
 var statusResponse = require('./parse-status.js')
 var parseConfigStr = require('../quake3Utils/parse-configstr.js')
 var parseMasters = require('../quake3Utils/parse-masters.js')
+function CE() {}
+inherits(CE, EventEmitter)
+var connectionlessEvent = new CE
 
-function getServersResponse(message) {
-  var servers = parseMasters(message)
-  for(var m in servers) {
-    getStatus(servers[m].ip, servers[m].port)
-  }
+function getServersResponse(message, buffer) {
+  var servers = parseMasters(buffer)
   return {
+    getserversResponse: true,
     servers: servers
   }
 }
@@ -52,14 +55,20 @@ function connectionlessPacket(message) {
     {name: 'connectResponse', fn: connectResponse},
   ]
   for(var i = 0; i < connectionlessResponses.length; i++) {
-    var name = connectionlessResponses[i]
-    if(message.slice(0, name.length).toString('utf-8').toLowerCase() == name) {
-      message = message.slice(name.length).toString('utf-8').trim()
-      var data = connectionlessResponses.fn(message)
+    var name = connectionlessResponses[i].name
+    if(message.slice(0, name.length).toString('utf-8').toLowerCase() == name.toLowerCase()) {
+      var buffer = message.slice(name.length)
+      var message = buffer.toString('utf-8').trim()
+      var data = connectionlessResponses[i].fn(message, buffer)
+      data[name] = data
+      connectionlessEvent.emit(name, data)
       return data
     }
   }
   console.log('Unknown message:', message.toString('utf-8'))
 }
 
-module.exports = connectionlessPacket
+module.exports = {
+  connectionlessPacket,
+  connectionlessEvent
+}

@@ -5,16 +5,11 @@ var {
 
 module.exports = {
   getChallenge, sendConnect, sendRcon, 
-  getStatus, getInfo, getServers, udpClose
+  getStatus, getInfo, getServers, udpClose,
   ... {sendPureChecksums} = require('./send-checksums.js'),
   ... {sendSequence, sendReliable} = require('./send-sequence.js'),
 
   /*
-  nextInfoResponse,
-  nextStatusResponse,
-  nextPrintResponse,
-  nextChallengeResponse,
-  nextConnectResponse,
   nextGamestate,
   nextSnapshot,
   nextChat,

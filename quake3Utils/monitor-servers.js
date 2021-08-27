@@ -80,8 +80,7 @@ async function updateChannelThread(threadName, channel, json) {
 
 async function monitorServer(address = 'q3msk.ru', port = 27977) {
   await getInfo(address, port)
-  await getStatus(address, port)
-  var server = await nextStatusResponse(address, port)
+  var server = await getStatus(address, port)
   if(!server || server.monitorRunning)
     return
   server.monitorRunning = true

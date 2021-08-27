@@ -1,7 +1,7 @@
 var {
-  getInfo, nextInfoResponse,
-  getChallenge, nextChallengeResponse,
-  sendConnect, nextConnectResponse,
+  getInfo,
+  getChallenge,
+  sendConnect,
   nextGamestate, sendReliable, nextChat,
   sendPureChecksums, nextSnapshot,
 } = importer.import('quake 3 server commands')
@@ -14,18 +14,15 @@ async function spectateServer(address = 'localhost', port = 27960) {
   for(var c = 0; c < 4; c++) {
       challenge[c] = Math.round(Math.random() * 255)
   }
-  await getInfo(address, port)
-  var info = await nextInfoResponse(address, port)
+  var info = await getInfo(address, port)
   if(!info)
     return
-  await getChallenge(address, port, new Uint32Array(challenge)[0], info.gamename || info.game)
-  var challenge = (await nextChallengeResponse(address, port)).challenge
+  var challenge = await getChallenge(address, port, new Uint32Array(challenge)[0], info.gamename || info.game)
   await sendConnect(address, port, {
     challenge: challenge,
     name: 'Orbb-Bot',
     protocol: 71,
   })
-  challenge = await nextConnectResponse(address, port)
   var gamestate = await nextGamestate(address, port)
   console.log('gamestate', server.sv_hostname || server.hostname)
   if(!gamestate.channel)

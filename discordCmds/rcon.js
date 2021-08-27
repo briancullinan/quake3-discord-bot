@@ -2,7 +2,7 @@ var {
   triggerTyping, updateInteraction, createMessage
 } = require('../discordApi')
 var {
-  sendRcon, nextPrintResponse
+  sendRcon
 }
 var formatQuake3Response = require('../quake3Utils/format-status.js')
 var userLogins = {}
@@ -20,13 +20,11 @@ async function rconCommand(command) {
   await triggerTyping(command.channel_id)
   var match = (/^(.*?):*([0-9]+)*$/ig).exec(userLogins[user].address)
 
-  await sendRcon(match[1], parseInt(match[2]) || 27960,
+  var response = await sendRcon(match[1], parseInt(match[2]) || 27960,
     options[3] && options[3].length > 0
       ? options[3]
       : 'cmdlist',
     userLogins[user].password)
-
-  var response = await nextPrintResponse()
   response = formatQuake3Response(response.content, command, response)
   if(typeof response == 'string')
     response += '\n```BOT'+command.id+'\nbeep boop\n```\n'

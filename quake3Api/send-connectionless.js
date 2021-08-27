@@ -1,6 +1,6 @@
 var dgram = require('dgram')
 var udpClient = dgram.createSocket('udp4')
-var {packetEvent} = require('./parse-packet.js')
+var {mergeMaster, packetEvent, nextResponse} = require('./parse-packet.js')
 var lookupDNS = require('../utilities/dns.js')
 udpClient.on('message', packetEvent)
 var {compressMessage} = require('../quake3Utils/huffman.js')
@@ -27,6 +27,7 @@ async function sendConnectionless(buffer, address, port) {
 
 async function getChallenge(address, port = 27960, challenge, gamename) {
   await sendConnectionless(`getchallenge ${challenge} ${gamename}`, address, port)
+  return await nextResponse('challengeResponse', address, port)
 }
 
 async function sendConnect(address, port = 27960, info) {
@@ -37,31 +38,46 @@ async function sendConnect(address, port = 27960, info) {
     : Object.keys(info).map(k => '\\' + k + '\\' + info[k]).join('')
   var compressedInfo = await compressMessage(`"${compressedInfo}"`)
   await sendConnectionless(`connect ${compressedInfo}`, address, port)
+  return await nextResponse('connectResponse', address, port)
 }
 
 async function sendRcon(address, port = 27960, command, password = DEFAULT_PASS) {
   await sendConnectionless(`rcon "${password}" ${command}`, address, port)
+  return await nextResponse('printResponse', address, port)
 }
 
 async function getStatus(address, port = 27960) {
   await sendConnectionless('getstatus', address, port)
+  return await nextResponse('statusResponse', address, port)
 }
 
 async function getInfo(address, port = 27960) {
   await sendConnectionless('getinfo xxx', address, port)
+  return await nextResponse('infoResponse', address, port)
 }
 
 async function getServers(master = DEFAULT_MASTER, port = 27950, wait = true) {
   await sendConnectionless('getservers 68 empty', master, port)
+  var response = await nextResponse('getserversResponse', master, port)
+  var servers = response.servers
+  if(!servers || !servers.length)
+    return []
+  for(var m in servers) {
+    getStatus(servers[m].ip, servers[m].port)
+  }
   if(wait) {
     await new Promise(resolve => setTimeout(resolve, MAX_TIMEOUT))
   } else {
-    var timeout = 0
-    var timer
-    // can't use nextInfoResponse() because it depends on at least 1 statusResponse
-    await nextStatusResponse()
+    // can't use getInfo() because it depends on at least 1 statusResponse
+    await nextResponse('statusResponse')
   }
-  return masters
+  for(var m in servers) {
+    servers[m] = mergeMaster({
+      ip: servers[m].ip, 
+      port: servers[m].port
+    })
+  }
+  return servers
 }
 
 module.exports = {
