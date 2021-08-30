@@ -4,17 +4,33 @@ var {
   activeThreads, createThread, createMessage,
   pinMessage, unpinMessage, udpClose
 } = require('../discordApi')
+var {mergeMaster} = require('../quake3Api/parse-packet.js')
 var formatPlayerList = require('./format-players.js')
 var removeCtrlChars = require('./remove-ctrl.js')
 var DEFAULT_USERNAME = 'Orbb'
+var channelsLastUpdated = 0
+var channelsUpdating = false
+var channels
+var monitors = {}
 
 async function getServerChannel(server) {
   // get a list of channels to pair gametype up with
-  var channels = await guildChannels()
+  if(channelsUpdating) {
+    await new Promise(resolve => setTimeout(resolve, 3000))
+  }
+  if((new Date).getTime() - channelsLastUpdated > 10 * 1000
+    || !channels) {
+    channelsUpdating = true
+    channelsLastUpdated = (new Date).getTime()
+    channels = await guildChannels()
+    channelsLastUpdated = (new Date).getTime()
+    //console.log(channels)
+    channelsUpdating = false
+  }
   var channel
   // sort ffa/ctf/freeZe
   if(!channel && (server.server_freezetag == '1'
-    || server.gamename.toLowerCase() == 'freon'
+    || (server.game || server.gamename || '').toLowerCase() == 'freon'
     || (typeof server.xp_version != 'undefined'
       && server.g_gametype == '8'))) {
     channel = channels.filter(c => c.name.toLowerCase() == 'freeze-tag')[0]
@@ -81,18 +97,32 @@ async function updateChannelThread(threadName, channel, json) {
 
 async function monitorServer(address = 'q3msk.ru', port = 27977) {
   await getInfo(address, port)
-  var server = await getStatus(address, port)
-  var threadName = 'Pickup for ' + removeCtrlChars(server.sv_hostname || server.hostname).replace(/[^0-9a-z-]/ig, '-')
-  var json = formatPlayerList(server)
-  if(!server || server.monitorRunning) {
+  var status = await getStatus(address, port)
+  if(!status || !status.mapname) {
     console.log('Server not found.')
     return    
   }
+  if(monitors[status.ip + ':' + status.port])
+  {
+    return
+  } else {
+    monitors[status.ip + ':' + status.port] = true
+  }
 
-  server.monitorRunning = true
+  // merge server info in case theres something we need for sorting the channel
+  //  like the "game" key which only shows up in infoResponse
+  var server = mergeMaster({
+    ip: status.ip,
+    port: status.port
+  })
+  var threadName = 'Pickup for ' + removeCtrlChars(server.sv_hostname || server.hostname).replace(/[^0-9a-z-]/ig, '-')
+  //console.log(server)
+  //console.log(threadName)
+  var json = formatPlayerList(server)
 
   var serverMonitor = async () => {
     var channel = await getServerChannel(server)
+    //console.log(channel)
     var thread
     if(!channel) {
       console.log('No channel to create thread on.')
@@ -102,7 +132,7 @@ async function monitorServer(address = 'q3msk.ru', port = 27977) {
     }
     return thread
   }
-  server.monitorRunning = setInterval(() => {
+  monitors[server.ip + ':' + server.port] = setInterval(() => {
     Promise.resolve(serverMonitor())
   }, 60 * 1000)
   return await serverMonitor()

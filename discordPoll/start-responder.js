@@ -4,13 +4,6 @@ var spectateServer = importer.import('spectate q3 server')
 
 var DEFAULT_CHANNEL = process.env.DEFAULT_CHANNEL || 'general'
 
-serverList.forEach(async (s) => {
-  var address = s.split(':')[0]
-  var port = parseInt(s.split(':')[1] || '27960')
-  await monitorServer(address, port)
-  //await spectateServer(address, port)
-})
-
 var stillRunning = false
 var commandResponder
 async function startResponder() {

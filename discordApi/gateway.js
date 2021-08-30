@@ -21,6 +21,7 @@ function sendHeartbeat(ws) {
 function gatewayMessage(ws, reconnectGateway, message) {
   var msgBuff = new Buffer.from(message)
   var gateway = JSON.parse(msgBuff.toString('utf-8'))
+  console.log(gateway)
   if(gateway.s) seq = gateway.s
   if(gateway.d && gateway.d.seq) seq = gateway.d.seq
   if(gateway.op == 10) {
@@ -40,6 +41,7 @@ function gatewayMessage(ws, reconnectGateway, message) {
     }))
     return
   } else if (gateway.op === 7) {
+    console.log('Reconnecting...')
     gatewayClose(ws)
     setTimeout(reconnectGateway, 1000)
     return
@@ -71,6 +73,7 @@ function gatewayClose(ws) {
     clearInterval(heartbeat)
   if(ws.readyState == 1)
     ws.close()
+  ws.identified = false
   globalWS = false
   return
 }

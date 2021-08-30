@@ -26,9 +26,24 @@ async function requestAuthQ(outgoing) {
   outgoing.headers['Authorization'] = `Bot ${TOKEN}`
   outgoing.url = DEFAULT_API + outgoing.url
   await delay()
-  var result = await request(outgoing)
-  // TODO: check result for rate limit and re-run this request in a queue
-  return result.data
+  var resolveRequest
+  resolveRequest = async () => {
+    var result
+    try {
+      result = (await request(outgoing)).data
+    } catch (e) {
+      // check result for rate limit and re-run this request in a queue
+      if(e.code == 429) {
+        result = await new Promise(resolve => setTimeout(() => {
+          resolve(resolveRequest())
+        }, e.response.data.retry_after * 1000))
+      } else {
+        throw e
+      }
+    }
+    return result
+  }
+  return await resolveRequest()
 }
 
 async function gatewayUrl() {
@@ -53,7 +68,7 @@ async function authorizeGateway() {
   if(wsConnecting) {
     await gatewayIdentified()
   }
-  if(typeof ws == 'object' && ws.identified == 1)
+  if(typeof ws == 'object' && ws.identified)
     return // already connected, no need to continue
   wsConnecting = true
   try {

@@ -75,6 +75,7 @@ async function nextResponse(key, address, port = 27960, isChannel = false) {
   } else {
     var dstIP = await lookupDNS(address)
     server = mergeMaster({
+        domain: address,
         ip: dstIP,
         port: port
     })
