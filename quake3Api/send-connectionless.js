@@ -37,8 +37,11 @@ async function sendConnect(address, port = 27960, info) {
   var connectInfo = typeof info == 'string' 
     ? info 
     : Object.keys(info).map(k => '\\' + k + '\\' + info[k]).join('')
-  var compressedInfo = await compressMessage(`"${compressedInfo}"`)
-  await sendConnectionless(`connect ${compressedInfo}`, address, port)
+  var compressedInfo = await compressMessage(`"${connectInfo}"`)
+  await sendConnectionless(Buffer.concat([
+    Buffer.from('connect '.split('').map(c => c.charCodeAt(0))),
+    Buffer.from(compressedInfo)
+  ]), address, port)
   return await nextResponse('connectResponse', address, port)
 }
 

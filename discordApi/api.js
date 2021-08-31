@@ -15,7 +15,7 @@ module.exports = {
   closeGateway,
   triggerTyping,
   ... {
-    userChannels, guildChannels, channelMessages
+    userChannels, guildChannels, channelMessages, deleteChannel
   } = require('./channels.js'),
   ... {
     userGuilds, userConnections, getGuildRoles

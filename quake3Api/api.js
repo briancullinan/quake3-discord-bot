@@ -8,11 +8,5 @@ module.exports = {
   getStatus, getInfo, getServers, udpClose,
   ... {sendPureChecksums} = require('./send-checksums.js'),
   ... {sendSequence, sendReliable} = require('./send-sequence.js'),
-
-  /*
-  nextGamestate,
-  nextSnapshot,
-  nextChat,
-  nextAllResponses,
-  */
+  ... {nextResponse} = require('./parse-packet.js'),
 }

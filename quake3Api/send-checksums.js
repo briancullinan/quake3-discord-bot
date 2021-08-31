@@ -26,5 +26,5 @@ async function sendPureChecksums(address, port, channel) {
 
 module.exports = {
   sendPureChecksums,
-  NETCHAN_GENCHECKSUM
+  NETCHAN_GENCHECKSUM,
 }

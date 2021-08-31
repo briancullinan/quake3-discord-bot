@@ -29,8 +29,16 @@ async function channelMessages(channelId = DEFAULT_CHANNEL) {
   })
 }
 
+async function deleteChannel(channelId) {
+  return await request({
+    method: 'DELETE',
+    url: `channels/${channelId}`
+  })
+}
+
 module.exports = {
   userChannels,
   guildChannels,
-  channelMessages
+  channelMessages,
+  deleteChannel
 }

@@ -1,3 +1,5 @@
+var GENTITYNUM_BITS = 10
+var MAX_POWERUPS = 16
 
 var entityStateFields = [
     32, //  NETF(pos.trTime)
@@ -53,4 +55,8 @@ var entityStateFields = [
     16, //  NETF(frame)
 ]
 
-module.exports = entityStateFields
+module.exports = {
+  entityStateFields,
+  GENTITYNUM_BITS,
+  MAX_POWERUPS,
+}

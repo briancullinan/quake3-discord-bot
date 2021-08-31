@@ -62,6 +62,7 @@ function connectionlessPacket(message) {
       var data = connectionlessResponses[i].fn(message, buffer)
       data[name] = data
       connectionlessEvent.emit(name, data)
+      //console.log(name, data)
       return data
     }
   }

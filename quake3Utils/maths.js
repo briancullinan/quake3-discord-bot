@@ -1,4 +1,6 @@
 var {readBits} = require('./huffman.js')
+var MAX_STRING_CHARS = 1024
+var BIG_INFO_STRING = 8192
 
 function SwapLong(read, message) {
   return (message[(read>>3)+3] << 24) + (message[(read>>3)+2] << 16)

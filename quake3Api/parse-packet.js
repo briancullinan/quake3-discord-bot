@@ -3,7 +3,8 @@ var {
   connectionlessEvent, connectionlessPacket
 } = require('./parse-connectionless.js')
 var {
-  parseServerMessage, serverMessageEvent
+  parseServerMessage, serverMessageEvent,
+  netchanProcess
 } = require('./parse-server.js')
 
 var MAX_TIMEOUT = process.env.DEFAULT_TIMEOUT || 10000
@@ -13,7 +14,9 @@ var masters = []
 function mergeMaster(master) {
   var found = false
   masters.forEach((ma, i) => {
-    if(ma['ip'] == master['ip'] && ma['port'] == master['port']) {
+    if((ma['ip'] == master['ip']
+      || ma['domain'] == master['domain'])
+      && ma['port'] == master['port']) {
       found = masters[i]
       Object.assign(masters[i], master)
       Object.assign(master, masters[i])
@@ -44,9 +47,16 @@ async function packetEvent(m, rinfo) {
       console.log("Sequenced packet without connection")
       return
     }
-    var read = netchanProcess(m, channel)
+    var read = netchanProcess(m, master.channel)
     if(read === false) return // fragment message, do nothing more
-    m = m.slice(read, m.length)
+    if(read === true && master.channel.fragmentLength) {
+      m = master.channel.fragmentBuffer
+      master.channel.fragmentBuffer = Buffer.from([])
+      master.channel.fragmentLength = 0
+    } else {
+      m = m.slice(read / 8, m.length)
+    }
+    //console.log(m)
     master.channel = master.channel || {}
     var commandNumber = master.channel.commandSequence
     var channel = parseServerMessage(m, master.channel)
@@ -57,7 +67,7 @@ async function packetEvent(m, rinfo) {
     // always respond with input event
     // response to snapshots automatically and not waiting,
     //   so new messages can be received
-    Promise.resolve(sendSequence(rinfo.address, rinfo.port, channel))
+    Promise.resolve(sendSequence(rinfo.address, rinfo.port, master.channel))
   }
 }
 
@@ -110,5 +120,5 @@ async function nextResponse(key, address, port = 27960, isChannel = false) {
 module.exports = {
   packetEvent,
   mergeMaster,
-  nextResponse
+  nextResponse,
 }

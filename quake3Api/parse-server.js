@@ -6,13 +6,17 @@ This is basically organized the same way as the Quake 3 client code
 var {inherits} = require('util')
 var {EventEmitter} = require('events')
 var {readBits} = require('../quake3Utils/huffman.js')
+var {
+  SwapLong, SwapShort, NETCHAN_GENCHECKSUM, ReadString
+} = require('../quake3Utils/maths.js')
+var {
+  entityStateFields, GENTITYNUM_BITS, MAX_POWERUPS,
+} = require('./entity-fields.js')
 var parseConfigStr = require('../quake3Utils/parse-configstr.js')
 function SE() {}
 inherits(SE, EventEmitter)
 var serverMessageEvent = new SE
 
-var BIG_INFO_STRING = 8192
-var MAX_STRING_CHARS = 1024
 var MAX_PACKETLEN = 1400
 var FRAGMENT_SIZE = (MAX_PACKETLEN - 100)
 var MAX_MSGLEN = 16384
@@ -21,8 +25,6 @@ var FLOAT_INT_BIAS = (1<<(FLOAT_INT_BITS-1))
 var	CS_SERVERINFO = 0 // an info string with all the serverinfo cvars
 var CS_SYSTEMINFO = 1 // an info string for server system to client system configuration (timescale, etc)
 var MAX_RELIABLE_COMMANDS = 64
-var GENTITYNUM_BITS = 10
-var MAX_POWERUPS = 16
 
 function netchanProcess(message, channel) {
   var read = 0
@@ -64,7 +66,7 @@ function netchanProcess(message, channel) {
   //channel.dropped = sequence - (channel.incomingSequence+1)
   
   if(fragment) {
-    //console.log('fragment message')
+    console.log('fragment message')
     // fragment and only return on final message
     if(!channel.fragmentBuffer) channel.fragmentBuffer = Buffer.from([])
     if(sequence != channel.fragmentSequence) {
@@ -91,14 +93,7 @@ function netchanProcess(message, channel) {
       return false
     }
 
-    // make sure the message sequence is still there
-    message = Buffer.concat([
-      new Uint8Array(4),
-      Buffer.from(channel.fragmentBuffer)
-    ])
-    read = 32
-    channel.fragmentBuffer = Buffer.from([])
-    channel.fragmentLength = 0
+    return true
   }
 
   channel.serverSequence = sequence
@@ -111,7 +106,7 @@ function readDeltaEntity(read, message, channel, number) {
   read = readBits(message, read[0], 1)
   if(read[1] == 1) { // remove
     delete channel.entities[number]
-    return
+    return read
   }
   
   // check for no delta
@@ -119,7 +114,7 @@ function readDeltaEntity(read, message, channel, number) {
   if(read[1] == 0) { // no delta
     if(typeof channel.entities[number] == 'undefined')
       channel.entities[number] = 0
-    return
+    return read
   }
   
   
@@ -218,6 +213,7 @@ function readDeltaPlayerstate() {
 }
 
 function parseGamestate(read, message, channel) {
+  console.log('parse gamestate')
   read = readBits(message, read[0], 32)
   channel.commandSequence = read[1]
   while(true) {
@@ -327,6 +323,9 @@ function parseServerMessage(message, channel) {
         //   all this does is echo the ACK number back to the server
         // TODO: properly parse snapshot and read XYZ locations
         eventName = 'svc_snapshot'
+        channel[eventName] = channel
+        serverMessageEvent.emit(eventName, channel)
+        return
       break
       case 9: // svc_voipSpeex
       break
@@ -339,6 +338,7 @@ function parseServerMessage(message, channel) {
         eventName = 'svc_zcmd'
       break
     }
+    //console.log(channel)
     channel[eventName] = channel
     serverMessageEvent.emit(eventName, channel)
   }
@@ -347,5 +347,6 @@ function parseServerMessage(message, channel) {
 
 module.exports = {
   parseServerMessage,
-  serverMessageEvent
+  serverMessageEvent,
+  netchanProcess,
 }

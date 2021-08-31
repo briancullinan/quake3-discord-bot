@@ -79,8 +79,17 @@ async function updateChannelThread(threadName, channel, json) {
       var pins = (await getPins(thread.id))
         .filter(p => p.author.username == DEFAULT_USERNAME)
       if(pins.length > 0) {
-        await updateMessage(json, pins[0].id, thread.id)
-        return thread
+        try {
+          console.log('Updating ', threadName)
+          await updateMessage(json, pins[0].id, thread.id)
+          return thread
+        } catch (e) {
+          if(e.code == '400' 
+            && ((e.response.data || {}).message || '').includes('archived')) {
+            console.log(e.response.data.message)
+            return // do nothing because it will run again in 1 minute
+          }
+        }
       }
     } else {
       thread = await createThread(threadName, channel.id)
@@ -98,44 +107,54 @@ async function updateChannelThread(threadName, channel, json) {
 async function monitorServer(address = 'q3msk.ru', port = 27977) {
   await getInfo(address, port)
   var status = await getStatus(address, port)
-  if(!status || !status.mapname) {
-    console.log('Server not found.')
-    return    
-  }
-  if(monitors[status.ip + ':' + status.port])
-  {
-    return
-  } else {
-    monitors[status.ip + ':' + status.port] = true
-  }
 
   // merge server info in case theres something we need for sorting the channel
   //  like the "game" key which only shows up in infoResponse
   var server = mergeMaster({
-    ip: status.ip,
-    port: status.port
+    domain: address,
+    port: port
   })
-  var threadName = 'Pickup for ' + removeCtrlChars(server.sv_hostname || server.hostname).replace(/[^0-9a-z-]/ig, '-')
   //console.log(server)
-  //console.log(threadName)
-  var json = formatPlayerList(server)
 
-  var serverMonitor = async () => {
-    var channel = await getServerChannel(server)
-    //console.log(channel)
-    var thread
-    if(!channel) {
-      console.log('No channel to create thread on.')
-    } else {
-      thread = await updateChannelThread(threadName, channel, json)
-      server.channelId = thread.id
-    }
-    return thread
+  if(!monitors[server.ip + ':' + server.port]) {
+    monitors[server.ip + ':' + server.port] = setInterval(() => {
+      Promise.resolve(monitorServer.bind(null, address, port)())
+    }, 60 * 1000)
   }
-  monitors[server.ip + ':' + server.port] = setInterval(() => {
-    Promise.resolve(serverMonitor())
-  }, 60 * 1000)
-  return await serverMonitor()
+
+  if(!server || !server.mapname) {
+    console.log('Server not found.')
+    return    
+  }
+
+  var threadName = 'Pickup for '
+    + removeCtrlChars(server.sv_hostname || server.hostname)
+      .trim()
+      .replace(/[^0-9a-z\-]/ig, '-')
+  //console.log(threadName)
+
+  var json = formatPlayerList(server)
+  var channel = await getServerChannel(server)
+  //console.log(channel)
+
+  var thread
+  if(!channel) {
+    console.log('No channel to create thread on.')
+  } else if(server.players.filter(p => p.ping > 0).length == 0) {
+    console.log('Skipping ' + address + ' because no humans.')
+    return
+  } else {
+    try {
+      thread = await updateChannelThread(threadName, channel, json)
+    } catch (e) {
+      if(e.response && e.response.data)
+        console.log(e.response.data.message)
+      else
+        console.log(e)
+    }
+    server.channelId = thread.id
+  }
+  return thread
 }
 
 module.exports = monitorServer

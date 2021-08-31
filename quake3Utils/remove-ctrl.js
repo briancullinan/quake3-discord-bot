@@ -4,6 +4,9 @@ function removeCtrlChars(str) {
     return str
         .replace(/\^\^[a-z0-9][a-z0-9]/ig, '')
         .replace(/\^[a-z0-9]/ig, '')
+        .split('')
+        .filter(c => c.charCodeAt(0) >= 20)
+        .join('')
         .trim()
 }
 
