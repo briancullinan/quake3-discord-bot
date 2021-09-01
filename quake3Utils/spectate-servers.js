@@ -4,6 +4,7 @@ var {
 } = require('../quake3Api')
 var {createMessage} = require('../discordApi')
 var removeCtrlChars = require('./remove-ctrl.js')
+var {mergeMaster} = require('../quake3Api/parse-packet.js')
 
 
 async function spectateServer(address = 'localhost', port = 27960) {
@@ -20,14 +21,18 @@ async function spectateServer(address = 'localhost', port = 27960) {
     name: 'Orbb-Bot',
     protocol: 71,
   })
-  var gamestate = await nextResponse(
-    'svc_gamestate', address, port, true /* isChannel */)
+  await nextResponse('svc_gamestate', address, port, true /* isChannel */)
+  var server = mergeMaster({
+    domain: address,
+    port: port
+  })
   //console.log('gamestate', server.sv_hostname || server.hostname)
-  if(!gamestate.channel)
+  console.log(server)
+  if(!server.channel)
     return
-  if(gamestate.isPure) {
+  if(server.channel.isPure) {
     // TODO: send valid "cp" checksums to pure servers
-    await sendPureChecksums(address, port, gamestate)
+    await sendPureChecksums(address, port, server.channel)
   }
   await nextResponse('svc_snapshot', address, port, true /* isChannel */)
   await sendReliable(address, port, 'team s')
