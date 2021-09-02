@@ -2,17 +2,18 @@ var {
   userGuilds, guildChannels, channelMessages,
   DEFAULT_USERNAME,
 } = require('../discordApi')
+var {DISCORD_COMMANDS} = require('./cmd-definitions.js')
 
 function interpretCommand(message) {
-  return Object.keys(discordCommands)
-    .filter(k => message.content.match(discordCommands[k])
+  return Object.keys(DISCORD_COMMANDS)
+    .filter(k => message.content.match(DISCORD_COMMANDS[k])
       || (message.attachments 
         && message.attachments
-          .filter(a => a.filename.match(discordCommands[k])).length > 0)
+          .filter(a => a.filename.match(DISCORD_COMMANDS[k])).length > 0)
       || (message.embeds 
         && message.embeds
-          .filter(e => (e.title && e.title.match(discordCommands[k]))
-            || (e.description && e.description.match(discordCommands[k]))).length > 0))
+          .filter(e => (e.title && e.title.match(DISCORD_COMMANDS[k]))
+            || (e.description && e.description.match(DISCORD_COMMANDS[k]))).length > 0))
 }
 
 async function readAllCommands(specificChannel) {

@@ -1,10 +1,11 @@
+var {DISCORD_COMMANDS} = require('./cmd-definitions.js')
 
 async function configCommand(command) {
   if(!command.attachments && !command.embed) return
   var user = command.author.username
-  var options = discordCommands.CONFIG.exec(command.content)
+  var options = DISCORD_COMMANDS.CONFIG.exec(command.content)
   var options2 = command.attachments
-    .map(a => discordCommands.CONFIG.exec(a.filename))
+    .map(a => DISCORD_COMMANDS.CONFIG.exec(a.filename))
     .filter(a => a)[0]
   var name = options ? options[1] : options2 ? options2[1] : ''
     .replace(options[2], '')

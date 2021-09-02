@@ -1,4 +1,9 @@
+var {DISCORD_COMMANDS} = require('./cmd-definitions.js')
 var challengeCommand = require('./challenge.js')
+var connectCommand = require('./connect.js')
+var configCommand = require('./config.js')
+var rconCommand = require('./rcon.js')
+var chatCommand = require('./chat.js')
 
 async function respondCommand(specificChannel) {
   var commands = await readAllCommands(specificChannel)
@@ -22,7 +27,7 @@ async function respondCommand(specificChannel) {
 
 
 module.exports = {
-  discordCommands,
+  DISCORD_COMMANDS,
   challengeCommand,
   configCommand,
   connectCommand,

@@ -1,7 +1,9 @@
+var {DISCORD_COMMANDS} = require('./cmd-definitions.js')
+
 async function connectCommand(command) {
   // TODO: record last address and password given
   var user = command.author.username
-  var options = discordCommands.CONNECT.exec(command.content)
+  var options = DISCORD_COMMANDS.CONNECT.exec(command.content)
   if(typeof userLogins[user] == 'undefined')
     userLogins[user] = {}
   userLogins[user] = {
