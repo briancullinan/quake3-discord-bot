@@ -1,4 +1,7 @@
-var DEFAULT_USERNAME = 'Orbb'
+var {
+  userGuilds, guildChannels, channelMessages,
+  DEFAULT_USERNAME,
+} = require('../discordApi')
 
 function interpretCommand(message) {
   return Object.keys(discordCommands)
@@ -31,10 +34,10 @@ async function readAllCommands(specificChannel) {
     specificChannel = ''
     private = true
   } else {
-    var guilds = await discordApi.userGuilds()
+    var guilds = await userGuilds()
     console.log(`Reading ${guilds.length} guilds`)
     for(var i = 0; i < guilds.length; i++) {
-      channels.push.apply(channels, await discordApi.guildChannels(guilds[i].id))
+      channels.push.apply(channels, await guildChannels(guilds[i].id))
     }
   }
   
@@ -48,7 +51,7 @@ async function readAllCommands(specificChannel) {
          && channels[i].name.match(new RegExp(specificChannel, 'ig'))
       )))) {
       console.log(`Reading ${channels[i].name}`)
-      messages.push.apply(messages, await discordApi.channelMessages(channels[i].id))
+      messages.push.apply(messages, await channelMessages(channels[i].id))
     }
   }
   

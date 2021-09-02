@@ -349,4 +349,5 @@ module.exports = {
   parseServerMessage,
   serverMessageEvent,
   netchanProcess,
+  MAX_RELIABLE_COMMANDS,
 }

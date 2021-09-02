@@ -1,4 +1,4 @@
-var {DEFAULT_CHANNEL} = require('./default-config.js')
+var {DEFAULT_CHANNEL, DEFAULT_USERNAME} = require('./default-config.js')
 var {
   authorizeUrl, closeGateway, request
 } = require('./authorize.js')
@@ -11,6 +11,7 @@ async function triggerTyping(channelId = DEFAULT_CHANNEL) {
 }
 
 module.exports = {
+  DEFAULT_USERNAME,
   authorizeUrl,
   closeGateway,
   triggerTyping,

@@ -8,6 +8,7 @@ var DEFAULT_API = process.env.DEFAULT_API || 'https://discord.com/api/v8/'
 var MESSAGE_TIME = process.env.DEFAULT_TIME || 1000 * 60 * 60 // 1 hour to respond
 var DEFAULT_RATE = 1000 / 50 // from discord documentation
 var PROFILE_PATH = process.env.HOME || process.env.HOMEPATH || process.env.USERPROFILE
+var DEFAULT_USERNAME = 'Orbb'
 
 var tokenPath
 if(fs.existsSync('./discord-bot.txt')) {
@@ -25,5 +26,6 @@ module.exports = {
   MESSAGE_TIME,
   DEFAULT_RATE,
   PROFILE_PATH,
-  TOKEN
+  TOKEN,
+  DEFAULT_USERNAME,
 }
