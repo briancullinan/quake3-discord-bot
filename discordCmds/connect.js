@@ -1,6 +1,4 @@
-var {
-  createMessage, triggerTyping, updateInteraction
-} = require('../discordApi')
+var {triggerTyping} = require('../discordApi')
 var {DISCORD_COMMANDS} = require('./cmd-definitions.js')
 
 async function connectCommand(command) {
@@ -18,11 +16,7 @@ async function connectCommand(command) {
   var match = (/^(.*?):*([0-9]+)*$/ig).exec(userLogins[user].address)
   var info = await getInfo(match[1], parseInt(match[2]) || 27960)
   var json = formatInfoResponse(info)
-  
-  if(command.interaction)
-    await updateInteraction(json, command.id, command.token)    
-  else
-    await createMessage(json, command.channel_id)    
+  return json
 }
 
 module.exports = connectCommand

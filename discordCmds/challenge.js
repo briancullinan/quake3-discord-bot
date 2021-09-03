@@ -1,4 +1,4 @@
-var {createMessage, triggerTyping} = require('../discordApi')
+var {triggerTyping} = require('../discordApi')
 var {getServers, sendRcon} = require('../quake3Api')
 
 var CHALLENGE = /(@[^:@\s]+\s*chall?[ae]nge|chall?[ae]nge\s*@[^:@\s]+)\s*([^:@\s]*?)\s*([^:@\s]*?)/ig
@@ -10,7 +10,7 @@ var MODS = typeof process.env.DEFAULT_MODS == 'string'
     'freon'
   ]
 
-async function challengeCommand(command) {
+async function challengeCommand(replyCommand, command) {
   if(!command.private && (!command.mentions || command.mentions.length === 0))
     return
   var options = CHALLENGE.exec(command.content)
@@ -36,21 +36,18 @@ async function challengeCommand(command) {
   }
   if(command.launching) {
     message = 'Launching'
-    await createMessage(message + instruction + '\n```BOT'+command.id+'L\nbeep boop\n```\n', command.channel_id)
+    await replyCommand(message + instruction, command)
     await triggerTyping(command.channel_id)
     var masters = await serverApi.getServers(void 0, void 0, false)
     if(masters.length === 0) {
-      await createMessage(`Boo hoo, no servers available. :cry:` 
-          + '\n```BOT'+command.id+'L\nbeep boop\n```\n', command.channel_id)
-      return
+      return `Boo hoo, no servers available. :cry:`
     }
     await sendRcon(masters[0].ip, masters[0].port, '\exec ' + launch + '.cfg')
     await sendRcon(masters[0].ip, masters[0].port, '\map ' + map)
     await new Promise(resolve => setTimeout(resolve, 1000))
-    await createMessage(`Match is ready ${DEFAULT_HOST}?connect%20${masters[0].ip}:${masters[0].port} (${masters[0].ip}:${masters[0].port})`
-                                   + '\n```BOT'+command.id+'L\nbeep boop\n```\n', command.channel_id)
+    return `Match is ready ${DEFAULT_HOST}?connect%20${masters[0].ip}:${masters[0].port} (${masters[0].ip}:${masters[0].port})`
   } else if (instruction.length > 0) {
-    await createMessage(message + instruction + '\n```BOT'+command.id+'\nbeep boop\n```\n', command.channel_id)
+    return message + instruction
   }
 }
 

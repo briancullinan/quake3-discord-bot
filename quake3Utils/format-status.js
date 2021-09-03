@@ -1,4 +1,5 @@
 var removeCtrlChars = require('./remove-ctrl.js')
+var {mapSearch} = require('../utilities/map-search.js')
 
 function formatQuake3Response(response, command, server) {
   // try to detect format from response
@@ -8,7 +9,7 @@ function formatQuake3Response(response, command, server) {
   var players = importer.regexToArray(/^\s*([0-9]+)\s+([0-9]+)\s+([0-9]+)\s+([^\s]+)\s+([^\s]+)\s+.*?$/igm, response, false)
   if(map && status && div) {
     server.mapname = map[1]
-    return {
+    var json = {
       embeds: [{
         title: removeCtrlChars(server.sv_hostname || server.hostname || server.gamename || server.game || ''),
         description: server.ip + ':' + server.port,
@@ -16,7 +17,7 @@ function formatQuake3Response(response, command, server) {
         fields: [
           {
             name: 'Map',
-            value: map[1],
+            value: server.mapname,
             inline: false
           },
           {
@@ -42,6 +43,18 @@ function formatQuake3Response(response, command, server) {
         ]
       }]
     }
+  
+    var lvlWorld = mapSearch(server.mapname)[0]
+    if(lvlWorld)
+    Object.assign(json.embeds[0], {
+      image: {
+        url: `https://lvlworld.com/levels/${lvlWorld.item.zip}/${lvlWorld.item.zip}320x240.jpg`,
+        height: 240,
+        width: 320
+      }
+    })
+
+    return json
   }
   return '\n```\n' + response + '\n```\n'
 }

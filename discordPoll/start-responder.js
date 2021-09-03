@@ -20,7 +20,7 @@ async function startResponder() {
     var commands = await readAllCommands('@me')
     await respondCommand(commands)
     var commands = await readInteractions()
-    console.log(commands)
+    //console.log(commands)
     await respondCommand(commands)
   } catch (e) {
     console.log(e)

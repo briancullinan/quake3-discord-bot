@@ -1,4 +1,5 @@
 var remoteCtrlChars = require('./remove-ctrl.js')
+var {mapSearch} = require('../utilities/map-search.js')
 
 function formatInfoResponse(info) {
   var filteredKeys = Object.keys(info)
@@ -15,7 +16,6 @@ function formatInfoResponse(info) {
   var filteredValues = filteredKeys
     .map(k => removeCtrlChars(info[k]))
   var json = {
-    content: '\n```BOT'+command.id+'\nbeep boop\n```\n',
     embeds: [{
       title: removeCtrlChars(info.sv_hostname || info.hostname || info.gamename || info.game || ''),
       description: info.ip + ':' + info.port,
@@ -41,8 +41,19 @@ function formatInfoResponse(info) {
           value: '```yaml\n' + filteredValues.join('\n') + '```',
           inline: true
         }
-      ]
+      ],
     }]
-}  
+  }
+
+  var lvlWorld = mapSearch(info.mapname)[0]
+  if(lvlWorld)
+  Object.assign(json.embeds[0], {
+    image: {
+      url: `https://lvlworld.com/levels/${lvlWorld.item.zip}/${lvlWorld.item.zip}320x240.jpg`,
+      height: 240,
+      width: 320
+    }
+  })
+
   return json
 }

@@ -11,8 +11,7 @@ async function registerCommand(cmd, desc, guildId = null) {
   } else {
     json = {
       'name': cmd,
-      'description': desc,
-      'options': []
+      'description': desc
     }
   }
   console.log('Registering command ', json.name)
@@ -51,6 +50,15 @@ async function getCommands(guildId = null) {
   })
 }
 
+async function getCommand(commandId, guildId = null) {
+  return await request({
+    method: 'GET',
+    url: guildId
+      ? `applications/${DEFAULT_APPLICATION}/guilds/${guildId}/commands/${commandId}`
+      : `applications/${DEFAULT_APPLICATION}/commands/${commandId}`
+  })
+}
+
 async function updateInteraction(message, interactionId, interactionToken) {
   var json = typeof message == 'string' ? ({
       'content': message
@@ -71,8 +79,7 @@ async function updateCommand(cmd, desc, commandId, guildId = null) {
   } else {
     json = {
       'name': cmd,
-      'description': desc,
-      'options': []
+      'description': desc
     }
   }
   console.log('Updating command ', json.name)
@@ -102,6 +109,7 @@ module.exports = {
   registerCommand,
   interactionResponse,
   getCommands,
+  getCommand,
   updateInteraction,
   deleteCommand,
   updateCommand,

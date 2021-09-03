@@ -1,4 +1,5 @@
 var removeCtrlChars = require('./remove-ctrl.js')
+var {mapSearch} = require('../utilities/map-search.js')
 
 function formatPlayerList(server) {
     var redTeam = (server.Players_Red || '').trim()
@@ -103,6 +104,16 @@ function formatPlayerList(server) {
             }]
         }
     }
+  
+    var lvlWorld = mapSearch(server.mapname)[0]
+    if(lvlWorld)
+    Object.assign(json.embeds[0], {
+      image: {
+        url: `https://lvlworld.com/levels/${lvlWorld.item.zip}/${lvlWorld.item.zip}320x240.jpg`,
+        height: 240,
+        width: 320
+      }
+    })
 
     return json
 }

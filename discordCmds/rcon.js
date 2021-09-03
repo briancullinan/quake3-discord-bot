@@ -1,7 +1,5 @@
 var {DISCORD_COMMANDS} = require('./cmd-definitions.js')
-var {
-  triggerTyping, updateInteraction, createMessage
-} = require('../discordApi')
+var {triggerTyping} = require('../discordApi')
 var {sendRcon} = require('../quake3Api')
 var formatQuake3Response = require('../quake3Utils/format-status.js')
 var userLogins = {}
@@ -25,15 +23,7 @@ async function rconCommand(command) {
       : 'cmdlist',
     userLogins[user].password)
   response = formatQuake3Response(response.content, command, response)
-  if(typeof response == 'string')
-    response += '\n```BOT'+command.id+'\nbeep boop\n```\n'
-  else if(typeof response == 'object')
-    response.content = '\n```BOT'+command.id+'\nbeep boop\n```\n'
-    
-  if(command.interaction)
-    await updateInteraction(response, command.id, command.token)    
-  else
-    await createMessage(response, command.channel_id)    
+  return response
 }
 
 module.exports = rconCommand

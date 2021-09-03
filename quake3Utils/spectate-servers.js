@@ -2,7 +2,7 @@ var {
   getInfo, getChallenge, sendConnect,
   nextResponse, sendReliable, sendPureChecksums,
 } = require('../quake3Api')
-var {DEFAULT_USERNAME, createMessage} = require('../discordApi')
+var {DEFAULT_USERNAME} = require('../discordApi')
 var removeCtrlChars = require('./remove-ctrl.js')
 var {mergeMaster} = require('../quake3Api/parse-packet.js')
 var {MAX_RELIABLE_COMMANDS} = require('../quake3Api/parse-server.js')
