@@ -1,9 +1,9 @@
-var discordApi = require('../discordApi')
+var {createMessage, closeGateway} = require('../discordApi')
 
 async function testMessage()
 {
-  await discordApi.createMessage('beep boop')
-  discordApi.closeGateway()
+  await createMessage('beep boop')
+  closeGateway()
 }
 
 module.exports = testMessage

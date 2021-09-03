@@ -35,3 +35,5 @@ async function rconCommand(command) {
   else
     await createMessage(response, command.channel_id)    
 }
+
+module.exports = rconCommand

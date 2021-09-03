@@ -12,7 +12,7 @@ async function getServerChannel(server) {
     || !channels) {
     channelsUpdating = true
     channelsLastUpdated = (new Date).getTime()
-    channels = await guildChannels()
+    channels = (await guildChannels()).filter(c => c.type == 0)
     channelsLastUpdated = (new Date).getTime()
     //console.log(channels)
     channelsUpdating = false
@@ -41,6 +41,9 @@ async function getServerChannel(server) {
   if(!channel && typeof server.xp_version != 'undefined'
     && server.g_gametype == '1') {
     channel = channels.filter(c => c.name.toLowerCase() == '1on1-duel')[0]
+  }
+  if(!channel) {
+    channel = channels.filter(c => c.name.toLowerCase() == 'quake3')[0]
   }
   if(!channel) {
     channel = channels.filter(c => c.name.toLowerCase() == 'general')[0]

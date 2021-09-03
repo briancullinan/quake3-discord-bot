@@ -12,7 +12,7 @@
 
 ## Use this bot
 
-https://discord.com/oauth2/authorize?response_type=code&client_id=723583889779589221&scope=bot&permissions=2248399936&redirect_uri=https://discord.com/channels/@me
+https://discord.com/oauth2/authorize?response_type=code&client_id=723583889779589221&scope=applications.commands%20bot%20guilds%20guilds.join%20email%20identify%20messages.read&permissions=54596725809&redirect_uri=https://discord.com/channels/@me
 
 ## Run this bot
 

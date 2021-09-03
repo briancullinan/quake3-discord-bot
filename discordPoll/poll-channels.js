@@ -2,7 +2,8 @@ var {
   userGuilds, guildChannels, channelMessages,
   DEFAULT_USERNAME,
 } = require('../discordApi')
-var {DISCORD_COMMANDS} = require('./cmd-definitions.js')
+var {privateChannels} = require('../discordApi/gateway.js')
+var {DISCORD_COMMANDS} = require('../discordCmds')
 
 function interpretCommand(message) {
   return Object.keys(DISCORD_COMMANDS)

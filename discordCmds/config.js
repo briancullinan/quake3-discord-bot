@@ -1,3 +1,6 @@
+var {
+  createMessage, triggerTyping, updateInteraction
+} = require('../discordApi')
 var {DISCORD_COMMANDS} = require('./cmd-definitions.js')
 
 async function configCommand(command) {
@@ -13,12 +16,12 @@ async function configCommand(command) {
     .replace(new RegExp(user, 'ig'), '')
     .replace(/[^0-9-_a-z]/ig, '-')
   if(name.length === 0) {
-    await discordApi.createMessage(`Couldn't compute filename.` + '\n```BOT'+command.id+'\nbeep boop\n```\n', command.channel_id)
+    await createMessage(`Couldn't compute filename.` + '\n```BOT'+command.id+'\nbeep boop\n```\n', command.channel_id)
     return
   }
   var file = 'player-' + user + '-' + name + '.cfg'
-  await discordApi.triggerTyping(command.channel_id)
+  await triggerTyping(command.channel_id)
   // TODO: remote post
   //await remoteGet(command.attachments[0].url, file, '/home/freonjs/baseq3-cc/conf/')
-  await discordApi.createMessage(`exec conf/player-${user}-${name}` + '\n```BOT'+command.id+'\nbeep boop\n```\n', command.channel_id)
+  await createMessage(`exec conf/player-${user}-${name}` + '\n```BOT'+command.id+'\nbeep boop\n```\n', command.channel_id)
 }

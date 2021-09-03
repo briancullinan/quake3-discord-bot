@@ -94,6 +94,7 @@ function closeGateway() {
 }
 
 module.exports = {
+  authorizeGateway,
   request: requestAuthQ,
   gatewayUrl,
   closeGateway

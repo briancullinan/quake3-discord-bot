@@ -4,9 +4,10 @@ var connectCommand = require('./connect.js')
 var configCommand = require('./config.js')
 var rconCommand = require('./rcon.js')
 var chatCommand = require('./chat.js')
+var searchCommand = require('./search.js')
+var readInteractions = require('./interactions.js')
 
-async function respondCommand(specificChannel) {
-  var commands = await readAllCommands(specificChannel)
+async function respondCommand(commands) {
   for(var i = 0; i < commands.length; i++) {
     if(commands[i].commands.includes('CHALLENGE'))
       await challengeCommand(commands[i])
@@ -18,6 +19,8 @@ async function respondCommand(specificChannel) {
       await rconCommand(commands[i])
     else if(commands[i].commands.includes('HELLO'))
       await chatCommand(commands[i])
+    else if(commands[i].commands.includes('SEARCH'))
+      await searchCommand(commands[i])
     else if(commands[i].private) {
       console.log('Unknown command', commands[i])
       //await unknownCommand(commands[i])
@@ -33,4 +36,6 @@ module.exports = {
   connectCommand,
   rconCommand,
   chatCommand,
+  respondCommand,
+  readInteractions,
 }

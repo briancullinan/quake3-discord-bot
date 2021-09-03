@@ -1,3 +1,6 @@
+var {
+  createMessage, triggerTyping, updateInteraction
+} = require('../discordApi')
 var {DISCORD_COMMANDS} = require('./cmd-definitions.js')
 
 async function connectCommand(command) {
@@ -11,15 +14,15 @@ async function connectCommand(command) {
     password: userLogins[user].password || 'password123!'
   }
   // TODO: try to connect to server and respond with a getinfo print out
-  await discordApi.triggerTyping(command.channel_id)
+  await triggerTyping(command.channel_id)
   var match = (/^(.*?):*([0-9]+)*$/ig).exec(userLogins[user].address)
   var info = await getInfo(match[1], parseInt(match[2]) || 27960)
   var json = formatInfoResponse(info)
   
   if(command.interaction)
-    await discordApi.updateInteraction(json, command.id, command.token)    
+    await updateInteraction(json, command.id, command.token)    
   else
-    await discordApi.createMessage(json, command.channel_id)    
+    await createMessage(json, command.channel_id)    
 }
 
 module.exports = connectCommand

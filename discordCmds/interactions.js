@@ -1,4 +1,4 @@
-var {interactions} = require('./gateway.js')
+var {interactions} = require('../discordApi/gateway.js')
 
 // converts an interaction into the same format as a message command
 async function readInteractions() {

@@ -1,3 +1,6 @@
+var {
+  createMessage, triggerTyping, updateInteraction
+} = require('../discordApi')
 var gamedig = require('gamedig')
 var serverApi = importer.import('quake 3 server commands')
 var { sendRcon, nextAllResponses } = importer.import('quake 3 server commands')
@@ -86,14 +89,14 @@ async function getChats(channelId) {
     console.log(match[match.length-1])
   }
 
-  //console.log(await discordApi.getGuildRoles('752561748611039362'))
+  //console.log(await getGuildRoles('752561748611039362'))
   if(call.length) {
-    await discordApi.triggerTyping(channelId)        
+    await triggerTyping(channelId)        
   }
   for(var i = 0; i < call.length; i++) {
     try {
       //console.log('Say: ' + call[i].value)
-      await discordApi.createMessage({
+      await createMessage({
         embed: {
           title: removeCtrlChars(server.hostname || server.sv_hostname || server.gamename),
           description: server.ip + ':' + server.port,
@@ -112,7 +115,7 @@ async function getChats(channelId) {
           roles: []
         }
       }, channelId)
-      //await discordApi.createMessage(`@admin ${call[i].value}`, channelId)
+      //await createMessage(`@admin ${call[i].value}`, channelId)
     } catch (e) {
       console.log(e)
     }

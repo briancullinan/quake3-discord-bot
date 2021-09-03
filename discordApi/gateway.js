@@ -21,7 +21,7 @@ function sendHeartbeat(ws) {
 function gatewayMessage(ws, reconnectGateway, message) {
   var msgBuff = new Buffer.from(message)
   var gateway = JSON.parse(msgBuff.toString('utf-8'))
-  console.log(gateway)
+  //console.log(gateway)
   if(gateway.s) seq = gateway.s
   if(gateway.d && gateway.d.seq) seq = gateway.d.seq
   if(gateway.op == 10) {

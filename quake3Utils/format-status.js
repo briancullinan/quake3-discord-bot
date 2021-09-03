@@ -1,4 +1,4 @@
-var removeCtrlChars = importer.import('remove ctrl characters')
+var removeCtrlChars = require('./remove-ctrl.js')
 
 function formatQuake3Response(response, command, server) {
   // try to detect format from response

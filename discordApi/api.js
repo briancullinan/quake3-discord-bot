@@ -1,6 +1,6 @@
 var {DEFAULT_CHANNEL, DEFAULT_USERNAME} = require('./default-config.js')
 var {
-  authorizeUrl, closeGateway, request
+  authorizeGateway, authorizeUrl, closeGateway, request
 } = require('./authorize.js')
 
 async function triggerTyping(channelId = DEFAULT_CHANNEL) {
@@ -12,6 +12,7 @@ async function triggerTyping(channelId = DEFAULT_CHANNEL) {
 
 module.exports = {
   DEFAULT_USERNAME,
+  authorizeGateway,
   authorizeUrl,
   closeGateway,
   triggerTyping,
@@ -27,7 +28,7 @@ module.exports = {
   } = require('./messages.js'),
   ... {
     registerCommand, getCommands, deleteCommand,
-    interactionResponse, updateInteraction
+    interactionResponse, updateInteraction, updateCommand
   } = require('./commands.js'),
   ... {
     createThread, archivedThreads, activeThreads

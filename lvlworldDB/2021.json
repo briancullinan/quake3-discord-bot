@@ -1,0 +1,1977 @@
+{
+  "map-13circle_xt": {
+    "levelId": null,
+    "dateStamp": "2021-01-15",
+    "zip": "map-13circle_xt",
+    "sha256": "f6782b94778add0d2ca9a6ff058899780f9bea942265dbe2ee570f68e5c24f9b",
+    "author": null,
+    "extract": null,
+    "includes": [
+      {
+        "bsp": "13circle_xt",
+        "title": "Circle Of Death - Extended (by sst13)"
+      }
+    ],
+    "gameMode": []
+  },
+  "map-13house": {
+    "levelId": "2433",
+    "dateStamp": "2021-01-15",
+    "zip": "map-13house",
+    "sha256": "28caf7aefa93690a384170b7fad518e9dc61a20226ab2954532afad60e5a978e",
+    "author": "sst13",
+    "extract": "sst13 brings us an awesome re-envisioning of the Quake classic, The House of Chthon (e1m7) - the Boss fight level from the Shareware release. This is an expanded, aged version with signs of the past that respects the location history. Highe",
+    "includes": [
+      {
+        "bsp": "13house",
+        "title": "House Of Chthon (by sst13)"
+      }
+    ],
+    "gameMode": [
+      "DM",
+      "Team DM",
+      "4-8 players"
+    ]
+  },
+  "map-13yard_xt": {
+    "levelId": "2445",
+    "dateStamp": "2021-01-15",
+    "zip": "map-13yard_xt",
+    "sha256": "c8f69807daa7bc718e119a1b1c368dec7ce768a6edaa49b55575fa46e74689b7",
+    "author": "sst13",
+    "extract": "sst13 continues to improve existing maps with The Lost Yard - Extended. This time, not only is it a remake of The Longest Yard (q3dm17), this release is also an extended version of the authors previous remake of the same map, The Lost Ya",
+    "includes": [
+      {
+        "bsp": "13yard_xt",
+        "title": "Lost Yard - Extended (by sst13)"
+      }
+    ],
+    "gameMode": [
+      "DM",
+      "Tourney",
+      "2-5 players"
+    ]
+  },
+  "agony": {
+    "levelId": "1556",
+    "dateStamp": "2021-01-25",
+    "zip": "agony",
+    "sha256": "bf07a1ff7ef6db525844227bf15d386006ac716a88af9492b8249fa8cc1af67e",
+    "author": "Boffo",
+    "extract": "The author says in his readme, The map is a conversion of Agony from Nintendo 64's Quake 2. I immediately assume the graphics would not be pretty and lighting would be gaudy colored, to show off what was once the great Quake",
+    "includes": [
+      {
+        "bsp": "agony",
+        "title": "Agony by Boffo"
+      }
+    ],
+    "gameMode": [
+      "DM",
+      "Tourney",
+      "2-3 players"
+    ]
+  },
+  "arena": {
+    "levelId": "285",
+    "dateStamp": "2021-01-25",
+    "zip": "arena",
+    "sha256": "c3d2bfbcd8c1c0009e139a914bf93811379f19683f74f254a87c75e8204aa9ac",
+    "author": "Zero",
+    "extract": "The elaborate layout, detailing and shear size of this master piece of Q3A level design will really challenge both your hardware and your skills ... not. This is the level that dares to ask the question, when is a box not a box.. When its a bone.",
+    "includes": [
+      {
+        "bsp": "arena",
+        "title": "arena"
+      }
+    ],
+    "gameMode": [
+      "Tourney",
+      "2 players"
+    ]
+  },
+  "arena110": {
+    "levelId": "1053",
+    "dateStamp": "2021-01-25",
+    "zip": "arena110",
+    "sha256": "89dff9454f9b50b150fb7f99f5f3794f8b37cb069678a21a28b54e7010b694c3",
+    "author": "Anwulf",
+    "extract": "A Railgun only arena, presented exclusively for tourney play. The physical  design of the map is an elegant take on neo-classical architecture ( that's  Greek- and Roman-influenced for those who don't know ) and contains a large  amount of attractive detai",
+    "includes": [
+      {
+        "bsp": "arena110",
+        "title": "subtilis et simplex"
+      }
+    ],
+    "gameMode": [
+      "DM",
+      "Tourney",
+      "2-3 players"
+    ]
+  },
+  "at": {
+    "levelId": "862",
+    "dateStamp": "2021-01-25",
+    "zip": "at",
+    "sha256": "27bed43864ba992143d4d37ad900d9f1b124656bfeed5a883beda1b4f7ca2add",
+    "author": "EmaentrA",
+    "extract": "A group of large flat platforms floating just off Saturn is the setting for this space map. Game play is almost entirely made up of long distance fighting and the Rail gun is indubitably the weapon of choice. Mid air gibing is always fun but otherwise the ",
+    "includes": [
+      {
+        "bsp": "at",
+        "title": "Alien Temple - v 1.0c - (c) EmaentrA 2001"
+      }
+    ],
+    "gameMode": [
+      "DM",
+      "Floater",
+      "Tourney",
+      "2-6 players"
+    ]
+  },
+  "axdm1": {
+    "levelId": "2310",
+    "dateStamp": "2021-01-25",
+    "zip": "axdm1",
+    "sha256": "108a292765602670775cd351334f068ce5b22f27f88bcdb87b5154c428fcc08b",
+    "author": "AndehX",
+    "extract": "We have yet another Quake 1-ish map. This time with high-res textures in TGA format which makes for a pretty big download. Layout is similar to The Place of Two Deaths (dm1) from Quake 1. Some platforms are present and it would not be a great redux if ther",
+    "includes": [
+      {
+        "bsp": "axdm1",
+        "title": "The Heinous Place by AndehX"
+      }
+    ],
+    "gameMode": [
+      "DM",
+      "3-6 players"
+    ]
+  },
+  "b3dm1": {
+    "levelId": "617",
+    "dateStamp": "2021-01-25",
+    "zip": "b3dm1",
+    "sha256": "c7a82719d5b6d385f58e63efc002826766da4f99344039953c7b6f064e472f9b",
+    "author": ".:BAPHOMET:...IRL",
+    "extract": "Set in a concrete and steel tech base environment, lots of moving 'electric' shaders and shiny surfaces. There are a number of nice custom textures and the lighting is good but the aesthetic just doesn't come together. The layout is not working at all eith",
+    "includes": [
+      {
+        "bsp": "b3dm1",
+        "title": "Baphomets Place"
+      }
+    ],
+    "gameMode": [
+      "DM",
+      "3-6 players"
+    ]
+  },
+  "base": {
+    "levelId": "2086",
+    "dateStamp": "2021-01-25",
+    "zip": "base",
+    "sha256": "24e05b401c4589bc70ea9d00cb12a1290bf997662e39ce96d20669d183932612",
+    "author": "vnekOnator",
+    "extract": "I'll repeat the comment from my review of vnekOnator's secret complex map: Once again, it is all a matter of first-time mappers getting plenty of practice before eventually, many mapping essays later, constructing a candidate that might be worthy of public",
+    "includes": [
+      {
+        "bsp": "base",
+        "title": "The forgotten base"
+      }
+    ],
+    "gameMode": [
+      "DM",
+      "3-6 players"
+    ]
+  },
+  "battle": {
+    "levelId": "446",
+    "dateStamp": "2021-01-25",
+    "zip": "battle",
+    "sha256": "6a1c6bc62e261ad5ae97120742c4fcdc84f168cdc2876657232a49e14225b682",
+    "author": "Quid",
+    "extract": "Good layout and flow, but way too tight and totally bland. The quad secret attracts the bots like flies to a honey pot and is not really needed on a map of this size. With all the textures that came with Q3A the author has chosen about 5 in total and even ",
+    "includes": [
+      {
+        "bsp": "battle",
+        "title": "Battle zone, by Quid"
+      }
+    ],
+    "gameMode": [
+      "DM",
+      "Tourney",
+      "2-3 players"
+    ]
+  },
+  "cage": {
+    "levelId": "420",
+    "dateStamp": "2021-01-25",
+    "zip": "cage",
+    "sha256": "dc74329c3b90aee3a689074e1ee6a1de567dd3245940215a456c845240c07d61",
+    "author": "toad",
+    "extract": "Interesting concept - lots of horizontal and vertical *bars* to duck and weave between while trying to frag. The constant bars make for confident careful shots with the rocket and quick aiming with the rail. The map however is an ugly miss-mash of textures",
+    "includes": [
+      {
+        "bsp": "cage",
+        "title": "The Cage"
+      }
+    ],
+    "gameMode": [
+      "DM",
+      "Tourney",
+      "2-4 players"
+    ]
+  },
+  "casablanca": {
+    "levelId": "1061",
+    "dateStamp": "2021-01-25",
+    "zip": "casablanca",
+    "sha256": "fc648213c9c8198c43e57d905230716a1d7cd9228448c2898d2a24526d191acb",
+    "author": "Comic Relief",
+    "extract": "This tropical feeling map makes for some great fun.  You can ride the flying carpet to  the BFG or walk the rooftops for quad.  There are two neat spots that I'm sure you will  be bound to camp.  One gives you armour in small doses and the other gives heal",
+    "includes": [
+      {
+        "bsp": "casablanca",
+        "title": "Casablanca"
+      }
+    ],
+    "gameMode": [
+      "DM",
+      "4-6 players"
+    ]
+  },
+  "castle": {
+    "levelId": "1151",
+    "dateStamp": "2021-01-25",
+    "zip": "castle",
+    "sha256": "e92bbc5de79bab1e742fc5525ac915843a37e0cccfaf4b55730e84466ade274a",
+    "author": "Jan Janele",
+    "extract": "Set in a strange castle, this map has a lot going for it. But no bot file (see update below). The texturing of the map looks good, and the garish pink and orange colour schemes create a unique aesthetic. There are no glitches anywhere, which is surprising ",
+    "includes": [
+      {
+        "bsp": "castle",
+        "title": "Dark Castle"
+      }
+    ],
+    "gameMode": [
+      "DM",
+      "3-8 players"
+    ]
+  },
+  "center": {
+    "levelId": "674",
+    "dateStamp": "2021-01-25",
+    "zip": "center",
+    "sha256": "6306b2377bb57a481b59b4d53135eeddfc711549c2bdaa658b4e42b2c06f3501",
+    "author": "maxxus",
+    "extract": "A tech themed box map with tight walkways. The game play is fun for a while but it soon becomes repetitive and predictable. Much like the constant bipping sounds. The tightness of the upper level is really irritating, its just way too restrictive. It almos",
+    "includes": [
+      {
+        "bsp": "center",
+        "title": "tech station"
+      }
+    ],
+    "gameMode": [
+      "DM",
+      "Tourney",
+      "2-3 players"
+    ]
+  },
+  "charonq2dm1v2": {
+    "levelId": "500",
+    "dateStamp": "2021-01-25",
+    "zip": "charonq2dm1v2",
+    "sha256": "c5a131257ad851f629db28ff7b941f077ffbcf8c75654dd35c9a45bb5f5f2bfd",
+    "author": "Charon",
+    "extract": "Possibly the best conversion of Quake2's The Edge (q2dm1, id Software). The author has made lots of small tweaks and changes that don't stray too far from the original, yet still feel right at home in Q3A. Game play is good and the texturing and lighting a",
+    "includes": [
+      {
+        "bsp": "charonq2dm1v2",
+        "title": "Return to the Edge"
+      }
+    ],
+    "gameMode": [
+      "DM",
+      "3-6 players"
+    ]
+  },
+  "church": {
+    "levelId": "744",
+    "dateStamp": "2021-01-25",
+    "zip": "church",
+    "sha256": "6efe0e05da3a223e4fec6f931c541444d8c8537716a318a50f10255e927cc6e9",
+    "author": "David M. Law",
+    "extract": "Based on the St. Mary's Steps church in Exeter, England. The map comes with its own ghost story purportedly from the church's history of heresy, plague and demons released. Sadly, this is about the bes",
+    "includes": [
+      {
+        "bsp": "church",
+        "title": "Haunted Salvation"
+      }
+    ],
+    "gameMode": [
+      "DM",
+      "Tourney",
+      "2-4 players"
+    ]
+  },
+  "ci": {
+    "levelId": "1570",
+    "dateStamp": "2021-01-25",
+    "zip": "ci",
+    "sha256": "f04b7b94a47ae095329cea707548ef328a78ff612a748bb7504f3d668b7df0fc",
+    "author": "Myth",
+    "extract": "A piece of mapping yumminess from Myth, this is a medium-sized map with a large-scale look. I'd describe the style of architecture as Gothic-Romanesque, and the texturing as mostly apt. My one reservation about the texturing is the shiny trim and bevel cap",
+    "includes": [
+      {
+        "bsp": "ci",
+        "title": "Citadel Insatiable - by Myth"
+      }
+    ],
+    "gameMode": [
+      "DM",
+      "Team DM",
+      "Tourney",
+      "2-6 players"
+    ]
+  },
+  "complex": {
+    "levelId": "332",
+    "dateStamp": "2021-01-25",
+    "zip": "complex",
+    "sha256": "ef372a89acd51d2fd78b043430a58d0ae595d5c1454f54aa3f780629a6eab1f6",
+    "author": "SMKnight",
+    "extract": "A radical level which boldly breaks away from the dominant gothic and tech paradigms, think black and white stripes with polka dots glowing under primary coloured lights. Cool. Box shaped rooms with little ramps between levels, it takes me back to my days ",
+    "includes": [
+      {
+        "bsp": "complex",
+        "title": "Goldeneye's Complex"
+      }
+    ],
+    "gameMode": [
+      "DM",
+      "3-5 players"
+    ]
+  },
+  "cq3dm1": {
+    "levelId": "498",
+    "dateStamp": "2021-01-25",
+    "zip": "cq3dm1",
+    "sha256": "70e38c1e36919aee57f2d08a052d338c789ac1c1e3dae945e7a763b49c4ffafc",
+    "author": "Cold",
+    "extract": "Some good ideas, and texturing but the layout is not well connected and the game play suffers for it. The fleshy walls and features are a good touch and the custom corpse model of Doom is great. The lighting is a little dark. Very keen to see what this aut",
+    "includes": [
+      {
+        "bsp": "cq3dm1",
+        "title": "Body of DOOM - cold@owned.com"
+      }
+    ],
+    "gameMode": [
+      "CPM",
+      "DM",
+      "Tourney",
+      "2-5 players"
+    ]
+  },
+  "damn": {
+    "levelId": "172",
+    "dateStamp": "2021-01-25",
+    "zip": "damn",
+    "sha256": "dfe2b44fbb8c8719653980dde8035f40ce839f0ba400025fced6cc3f75f1b084",
+    "author": "Tom Fritzon",
+    "extract": "A space floater with a difference. The platforms are simple computer cards and motherboard like components. The *cards* are a little small and I kept falling off the edges, the personal teleporter was a great 2nd chance when I had one :] Small games of 3 w",
+    "includes": [
+      {
+        "bsp": "damn",
+        "title": "The Damndest Thing"
+      }
+    ],
+    "gameMode": [
+      "DM",
+      "Floater",
+      "Tourney",
+      "2-3 players"
+    ]
+  },
+  "dead1": {
+    "levelId": "873",
+    "dateStamp": "2021-01-25",
+    "zip": "dead1",
+    "sha256": "6e9065acb114341e6930237703533ce0c88cf883f5dbfdfbad6e0de9bbf7a07b",
+    "author": "bwf",
+    "extract": "A complete mish-mash of styles and texture themes for this space map. Suspended water, slippery ledges and lava pits, all mixed up and connected by jump pads. The level plays ok for a few rounds but does lead to Rail Gun camping. There does seem to be a gh",
+    "includes": [
+      {
+        "bsp": "dead1",
+        "title": "DEAD1"
+      }
+    ],
+    "gameMode": [
+      "DM",
+      "Floater",
+      "Tourney",
+      "2-6 players"
+    ]
+  },
+  "dm3dm17": {
+    "levelId": "450",
+    "dateStamp": "2021-01-25",
+    "zip": "dm3dm17",
+    "sha256": "ee752aa948e5f02387c3fe730079dceb1f8f042ff0162060585027005aaea0d5",
+    "author": "Deathmonger",
+    "extract": "There are space maps and then there are q3dm17 tweaks - this is one of the latter, albeit one of the best we've seen. The long launch pad out to the rail has been replaced with a whole new section. Gameplay is pretty good (well, its a primarly iD software'",
+    "includes": [
+      {
+        "bsp": "dm3dm17",
+        "title": "The Lengthened Yard"
+      }
+    ],
+    "gameMode": [
+      "DM",
+      "Floater",
+      "Tourney",
+      "2-4 players"
+    ]
+  },
+  "drum": {
+    "levelId": "1934",
+    "dateStamp": "2021-01-25",
+    "zip": "drum",
+    "sha256": "d2d7845772b1fca536bb956c5492d8081fb31d7340b1440a44a28746038b4966",
+    "author": "Rota",
+    "extract": "There are a lot of things I like about this map, the first came the second I loaded it where the screenshot was a top view layout of the map. The textures/lighting aren't award winning but they look good enough for me to have a fun time playing this map.  ",
+    "includes": [
+      {
+        "bsp": "drum",
+        "title": "PAMPUCH 4EVER by ROTA"
+      }
+    ],
+    "gameMode": [
+      "DM",
+      "Tourney",
+      "2-6 players"
+    ]
+  },
+  "duel": {
+    "levelId": "1398",
+    "dateStamp": "2021-01-25",
+    "zip": "duel",
+    "sha256": "de722fbb2b23f13e1c01ca3b7194f04db51d729cffe4815c2c9bb178034ece30",
+    "author": "Kirk Barnes",
+    "extract": "Playing this map, I kept hearing myself saying, \"Damn, I'm looking good!\" It includes a huge mirror shader that makes a great centerpiece with a huge frame rate hit. The map consists of a main area with a walkway above that includes the mirror. Below via r",
+    "includes": [
+      {
+        "bsp": "dueling_core",
+        "title": "Dueling Core"
+      }
+    ],
+    "gameMode": [
+      "DM",
+      "Tourney",
+      "2-4 players"
+    ]
+  },
+  "eq3dm1": {
+    "levelId": "161",
+    "dateStamp": "2021-01-25",
+    "zip": "eq3dm1",
+    "sha256": "e9cde3deea44b174952a6e67924d234358d7f1a681718d1f62559b6283b2342b",
+    "author": "Equim",
+    "extract": "Pretty good map as far as gameflow and archictectural theme. The Lighting is a bit dull in parts. Structurally there are a few walls and door supports that look too thin to be real. A few of the models are not solid which is something I'm finding more and ",
+    "includes": [
+      {
+        "bsp": "eq3dm1",
+        "title": "Malthusian Temple"
+      }
+    ],
+    "gameMode": [
+      "DM",
+      "3-6 players"
+    ]
+  },
+  "esq3dm1": {
+    "levelId": "389",
+    "dateStamp": "2021-01-25",
+    "zip": "esq3dm1",
+    "sha256": "65644c472d0f6f2b0b200442fc43fc29bcfea71a28255cbfcccc9594d88fc1c7",
+    "author": "Etienne Smith",
+    "extract": "Well used dark gothic texturing for a straight up DM level. There is a custom mouth and tongue which is holding a 100h. The gameplay is mostly horizontal and does seem to focus around the main arena section with the rocket launcher and quad. Bot play is go",
+    "includes": [
+      {
+        "bsp": "esq3dm1",
+        "title": " "
+      }
+    ],
+    "gameMode": [
+      "DM",
+      "3-6 players"
+    ]
+  },
+  "ex3dm1": {
+    "levelId": "249",
+    "dateStamp": "2021-01-25",
+    "zip": "ex3dm1",
+    "sha256": "e6f7befeb73437deb76be378cca3ca0724f31223859ae73337c1c1416a8834b1",
+    "author": "Equino-x Forever",
+    "extract": "A gothic / industrial level with solid construction, well finished and fast but very small. Vertically grandiose,  horizontally challenged.  The floor layout is divided by a simple maze of girders of player height. You can  hear players but you can't see t",
+    "includes": [
+      {
+        "bsp": "ex3dm1",
+        "title": "Gauntlet III"
+      }
+    ],
+    "gameMode": [
+      "DM",
+      "Tourney",
+      "2-3 players"
+    ]
+  },
+  "face": {
+    "levelId": "1810",
+    "dateStamp": "2021-01-25",
+    "zip": "face",
+    "sha256": "c4c2bb7d538dcfa3b57511eb60014dafb3ab2d620567b70c03bd12a0379f9894",
+    "author": "BerneyBoy",
+    "extract": "These levels are too similar to be different map files. The gameplay is OK, the lighting and texture selection is pretty damn good. However, I still don't think that makes it eligible for a 9.42MB download. Extension of the same central idea. 4/10. Reviewe",
+    "includes": [
+      {
+        "bsp": "Face2Face",
+        "title": "Face-2-Face by BerneyBoy"
+      },
+      {
+        "bsp": "FaceLittle",
+        "title": "FaceLittle by BerneyBoy"
+      },
+      {
+        "bsp": "FaceOut",
+        "title": "FaceOut by BerneyBoy"
+      }
+    ],
+    "gameMode": [
+      "CTF",
+      "DM",
+      "Harvester",
+      "One Flag CTF",
+      "Overload",
+      "Team Arena",
+      "2-8 players"
+    ]
+  },
+  "fortress": {
+    "levelId": "691",
+    "dateStamp": "2021-01-25",
+    "zip": "fortress",
+    "sha256": "7755a8da45b976a7767d7b1f136ee7568e3e446ad84056e936b486d49a275776",
+    "author": "maxxus",
+    "extract": "A small space map with an asteroid belt sky. The layout is primarily a platform, hovering in space, with a small ledge above and below. The propellers are very cool and the ambient sounds are spot on. A problem with the skybox is that the mapper has not us",
+    "includes": [
+      {
+        "bsp": "fortress",
+        "title": "space fortress"
+      }
+    ],
+    "gameMode": [
+      "DM",
+      "Floater",
+      "Tourney",
+      "2-3 players"
+    ]
+  },
+  "g3dm1": {
+    "levelId": "131",
+    "dateStamp": "2021-01-25",
+    "zip": "g3dm1",
+    "sha256": "7d236a78d7b7ab3766ba3c70684516376e9943bdc438dc5d77339ccb80e22fba",
+    "author": "Gila",
+    "extract": "Steep ramps (maybe 45 degree?) that extend out from the center. The ramps are kind of fun the jump down (is kind of like doing a big ollie for the skaters out there). The length of the ramps makes them a real trap. Once your running along a ramp there is n",
+    "includes": [
+      {
+        "bsp": "g3dm1",
+        "title": "A Shorter Yard"
+      }
+    ],
+    "gameMode": [
+      "DM",
+      "Floater",
+      "Tourney",
+      "2-4 players"
+    ]
+  },
+  "gothic": {
+    "levelId": "102",
+    "dateStamp": "2021-01-25",
+    "zip": "gothic",
+    "sha256": "2b6f838f1d76ed8dfd4a4647cd06242fbcabbe048937acac53a5227522de435a",
+    "author": "OUTCAST",
+    "extract": "Kind of a nice looking map at 1st glance, then it falls apart. I was running around thinking *why is the frame rate so low?* then I realised that the .bsp had leaks, or wasn't vised correctly :[ There is no clip brushes used, and  _trans textures have been",
+    "includes": [
+      {
+        "bsp": "gothic",
+        "title": "gothic"
+      }
+    ],
+    "gameMode": [
+      "DM",
+      "2-4 players"
+    ]
+  },
+  "hdm2": {
+    "levelId": "1355",
+    "dateStamp": "2021-01-25",
+    "zip": "hdm2",
+    "sha256": "752c8203da6c6677a6363f7bf030636828c9636ee8e28896dece4cfb2c1794bb",
+    "author": "}{ammer",
+    "extract": "When I first loaded this map, my jaw struck the table quite solidly. The use of textures is flawless and incredibly effective. I spent so much time gawking at the beauty of this level that I hardly got any fragging done. Stunning theme is carried by suitab",
+    "includes": [
+      {
+        "bsp": "hdm2",
+        "title": "Maximum Carnage, By }{ammer"
+      }
+    ],
+    "gameMode": [
+      "DM",
+      "4-10 players"
+    ]
+  },
+  "hodq3dm1": {
+    "levelId": "1070",
+    "dateStamp": "2021-01-25",
+    "zip": "hodq3dm1",
+    "sha256": "1da74e44d6e32e0d4bca676003577817bf64bd91df7e953a13adc1bbed387124",
+    "author": "RRROOOAAARRR",
+    "extract": "A surreal and sculpted terrain formed from curving, blade-like growths that warp  and fracture out into the abyss. The entire realm is wreathed in blue methane fog, giving it an almost underwater ambience. You will need a high end  machine to do more than ",
+    "includes": [
+      {
+        "bsp": "hodq3dm1",
+        "title": "GOD OF EMPTINESS by RRROOOAAARRR"
+      }
+    ],
+    "gameMode": [
+      "DM",
+      "Floater",
+      "3-5 players"
+    ]
+  },
+  "jlctf1": {
+    "levelId": "264",
+    "dateStamp": "2021-01-25",
+    "zip": "jlctf1",
+    "sha256": "b3dafff8c322bd70157f7089fe76aa58a66c4ae68cc078dcc0778e1f4abbd3e9",
+    "author": "Johnny Law",
+    "extract": "A well finished space station CTF map that successfully combines complexity and simplicity. The layout and atmosphere create a sense of architectural integrity without sacrificing gameplay. The use of forcefields, alternative routes, secert passages and dr",
+    "includes": [
+      {
+        "bsp": "jlctf1",
+        "title": "Grazer Station - by Johnny Law"
+      }
+    ],
+    "gameMode": [
+      "CTF",
+      "DM",
+      "4-12 players"
+    ]
+  },
+  "jmdm1": {
+    "levelId": "116",
+    "dateStamp": "2021-01-25",
+    "zip": "jmdm1",
+    "sha256": "283296568fba0c58e41e09c28abf5a161de057a06d5c1f578847c900835dcecc",
+    "author": "Thingie",
+    "extract": "A dark cavern kind of lava hole thingy :] Basically three main rooms, some bounce pads and corridors. Lots of lava and a room full of ammo and weapons. Not much to it, but apparently its good for fragin' your younger bro Not much of a map really.",
+    "includes": [
+      {
+        "bsp": "jmdm1",
+        "title": "Simplisity -- by Thingie"
+      }
+    ],
+    "gameMode": [
+      "DM",
+      "Tourney",
+      "2-3 players"
+    ]
+  },
+  "jmdm2": {
+    "levelId": "1258",
+    "dateStamp": "2021-01-25",
+    "zip": "jmdm2",
+    "sha256": "c6cc8e56b9ee4ecc69cf0ab44a3df9f3a1bc12933fccf7510a070d6365e99b51",
+    "author": "JEDMaster",
+    "extract": "This level is particularly unique.  The textures are brighter than what you  find in your typical futuristic map, and they surprisingly good. The connectivity  is effective but runs on the simple side.  The item placement has its interesting  points; while",
+    "includes": [
+      {
+        "bsp": "jmdm2",
+        "title": "More Foolery"
+      }
+    ],
+    "gameMode": [
+      "DM",
+      "Tourney",
+      "2-3 players"
+    ]
+  },
+  "kazdm1": {
+    "levelId": "1798",
+    "dateStamp": "2021-01-25",
+    "zip": "kazdm1",
+    "sha256": "90caf1934b8b6117ce7b70cd7656959b7a3cc8846a09ede6d3d36295c8823cd5",
+    "author": "Kaz",
+    "extract": "Emptiness comes to mind more fiercely than misery does when playing this level.  The level is of a gothic theme with a few of the metallic base textures thrown in. The map is comprised of one large, central, multi-level chamber with a number of smaller, ou",
+    "includes": [
+      {
+        "bsp": "kazdm1",
+        "title": "kazdm1"
+      }
+    ],
+    "gameMode": [
+      "DM",
+      "Tourney",
+      "2-4 players"
+    ]
+  },
+  "l3dm1": {
+    "levelId": "1351",
+    "dateStamp": "2021-01-25",
+    "zip": "l3dm1",
+    "sha256": "d1c8e5e8efdd7590d66bbb7da4db65a98a7a5aa01621547db2ed317c4f0047c3",
+    "author": "Lukin",
+    "extract": "This small, vertical map is that simple tourney arena you were looking for. The author recommends to play it with the CPMA mod. The design is basically base type, but with varied styles from room to room, which has a very refreshing effect. The author also",
+    "includes": [
+      {
+        "bsp": "l3dm1",
+        "title": "- Just Like Suicide - by Lukin"
+      }
+    ],
+    "gameMode": [
+      "CPM",
+      "DM",
+      "Tourney",
+      "2-3 players"
+    ]
+  },
+  "l3dm3": {
+    "levelId": "1723",
+    "dateStamp": "2021-01-25",
+    "zip": "l3dm3",
+    "sha256": "bcbc8645eced2246a26c009afbd58659b38b1078daa4a764dac8ce6000d144e6",
+    "author": "Lukin",
+    "extract": "First thing I liked about it was the Shader Lab custom textures use in it. Base style with its stylish setting and works quite nicely with the brush work. The flickering light shader was very kewl and I thought wasn't possible for the Quake3 engine. Shows ",
+    "includes": [
+      {
+        "bsp": "l3dm3",
+        "title": "- Heavy Metal Machine - by Lukin"
+      }
+    ],
+    "gameMode": [
+      "CPM",
+      "DM",
+      "Tourney",
+      "2-4 players"
+    ]
+  },
+  "marsv1": {
+    "levelId": "1056",
+    "dateStamp": "2021-01-25",
+    "zip": "marsv1",
+    "sha256": "6ee1bf04c1cfa8f8a337de649ea047a7e4a974aac470e4e5879f5ef132da46cb",
+    "author": "Goose & Castle",
+    "extract": "A very fine map reminiscent of Quake 2 with it's outdoor-on-an-alien-word feel. As the README mentions, this map was started by Goose (who went on to get a level job - congrats) and finished by Castle.  The README also mentions high r_speeds and is very co",
+    "includes": [
+      {
+        "bsp": "marsv1",
+        "title": "Vermilion Dreams Ver 1.0"
+      }
+    ],
+    "gameMode": [
+      "DM",
+      "Team DM",
+      "8-16 players"
+    ]
+  },
+  "maze": {
+    "levelId": "592",
+    "dateStamp": "2021-01-25",
+    "zip": "maze",
+    "sha256": "19755d35c522900845b07b06435a36ab75f55fa724f6e8861c34af9d5b5a519b",
+    "author": "Tscheckepp",
+    "extract": "A perimeter fence, a sniper tower, a row of small sheds, a maze. Its just not very interesting as a game or eye candy, its not even a matter of needing to learn the maze you just have to plasma climb or rocket jump into the fenced off teleporter. Teleport ",
+    "includes": [
+      {
+        "bsp": "maze",
+        "title": "the maze"
+      }
+    ],
+    "gameMode": [
+      "DM",
+      "3-6 players"
+    ]
+  },
+  "mpteam9": {
+    "levelId": "1670",
+    "dateStamp": "2021-01-25",
+    "zip": "mpteam9",
+    "sha256": "b8b8492eb5cd6eb0b74a843ee1bce1f95add288b29aa99fbf21a0ff8db67e54e",
+    "author": "id Software",
+    "extract": "What can you really say about an id Software map besides it owns?  Beyond Reality II is a upgraded version of Team Arena level Beyond Reality which was based on the Q3A CTF level Across Space.  The low down on this map is no more moving platforms from base",
+    "includes": [
+      {
+        "bsp": "mpteam9",
+        "title": "Beyond Reality II"
+      }
+    ],
+    "gameMode": [
+      "CTF",
+      "Harvester",
+      "One Flag CTF",
+      "Overload",
+      "Team Arena",
+      "2-8 players"
+    ]
+  },
+  "mq3dm1": {
+    "levelId": "257",
+    "dateStamp": "2021-01-25",
+    "zip": "mq3dm1",
+    "sha256": "ae7e912c2a488e9a1b8aeba0687701a9642aafcb0f495dc8d0d40e45abe8d13f",
+    "author": "Myth",
+    "extract": "A very large space map. For a 1st map its pretty good, just way to big. The size of the map leads to a few dull games with everyone just sniping or running for the railgun. There are a few very black spots where you can hide (r/jump onto a *roof* and camp ",
+    "includes": [
+      {
+        "bsp": "mq3dm1",
+        "title": "Brogan"
+      }
+    ],
+    "gameMode": [
+      "DM",
+      "Floater",
+      "3-6 players"
+    ]
+  },
+  "nemesis": {
+    "levelId": "174",
+    "dateStamp": "2021-01-25",
+    "zip": "nemesis",
+    "sha256": "a2875fa5a92c1ab2cef306a7a7a80462d300782d6fa46e1c9234f9434a70bf37",
+    "author": "Vondur",
+    "extract": "A complex series of short connecting corridors between open areas. The texture set is very consistent throughout  the level, maybe a little too consistent. I could have had less of the yellow & black stripes. The map feels quite  big; its not exactly quiet",
+    "includes": [
+      {
+        "bsp": "nemesis",
+        "title": "Nemesis Online - by Vondur"
+      }
+    ],
+    "gameMode": [
+      "DM",
+      "4-6 players"
+    ]
+  },
+  "nodm2": {
+    "levelId": "1459",
+    "dateStamp": "2021-01-25",
+    "zip": "nodm2",
+    "sha256": "dd3859dcbd1f2f0ada86f76dd99ad1f12b8db8312e1c1ff0b25f25bd9d0d7289",
+    "author": "swelt",
+    "extract": "A tech based theme with plenty of hazard stripes.  A 4vs4 TDM excelled using the CPMA mod. FFA with 7 Hardcore bots was a blast, although you may find yourself struggling to tool up. Gauntlet time! Would have been nice too see the author being a little mo",
+    "includes": [
+      {
+        "bsp": "nodm2",
+        "title": "PowaHaus"
+      }
+    ],
+    "gameMode": [
+      "CPM",
+      "DM",
+      "Team DM",
+      "4-8 players"
+    ]
+  },
+  "nodm4": {
+    "levelId": "1507",
+    "dateStamp": "2021-01-25",
+    "zip": "nodm4",
+    "sha256": "8b76d222c788323df85a73fce7ec444de87317a3fdf0787e6708fd054ac2e3d1",
+    "author": "swelt",
+    "extract": "Winter Chill by Swelt is a FFA/TDM map designed specifically for use with CPMA mod. Swelt is famed for his artistic direction in the 1.0 release of CPMA, with his maps cpm16 and cpm18 bringing a whole new mapping flavor to the mod, and a brand new focus to",
+    "includes": [
+      {
+        "bsp": "nodm4",
+        "title": "Winter Chill"
+      }
+    ],
+    "gameMode": [
+      "CPM",
+      "Team DM",
+      "4-8 players"
+    ]
+  },
+  "ordm1": {
+    "levelId": "239",
+    "dateStamp": "2021-01-25",
+    "zip": "ordm1",
+    "sha256": "5f016b439e0c7076f84c3816d9b89ef08b6a2a80647034f4b7e5d79f488ff6d8",
+    "author": "Orion",
+    "extract": "A map with a lot of potential, the atmosphere, architecture and layout are almost really good. Unfortunately, there are a heap of small irritations. In particular, the lack of clip brushes around vertical *supports*, too many over dark areas, and an appare",
+    "includes": [
+      {
+        "bsp": "ordm1",
+        "title": "ordm1"
+      }
+    ],
+    "gameMode": [
+      "DM",
+      "2-5 players"
+    ]
+  },
+  "p61ctf1": {
+    "levelId": "2211",
+    "dateStamp": "2021-01-25",
+    "zip": "p61ctf1",
+    "sha256": "89c91a16a2d39907fc3af144a473bcfc351c22d91a63f58947c6d17f055083bc",
+    "author": "PaN61",
+    "extract": "PaN61 has made a great CTF floater with great gameplay. The layout is a very square, symmetrical rotation with the only changes around the axis point being textures. This has lead to a rectangle gameplay area. Even a small area off the flag base would have",
+    "includes": [
+      {
+        "bsp": "p61ctf1",
+        "title": "Opposing Force (By PaN61)"
+      }
+    ],
+    "gameMode": [
+      "CTF",
+      "Floater",
+      "6-12 players"
+    ]
+  },
+  "pain": {
+    "levelId": "207",
+    "dateStamp": "2021-01-25",
+    "zip": "pain",
+    "sha256": "6ee17f0446e95c54db2c00870b1020bc2ac7942bee1aa6417d75950841782203",
+    "author": "Da Imp",
+    "extract": "A pretty simple blocky map based on a Blood 2 map. The layout is not bad (You get that when you rip someone else's level) but the texturing is very dull. And the item placement sucks; the BFG just dominates this map. Personally, I found so many Blood 2 *ha",
+    "includes": [
+      {
+        "bsp": "pain",
+        "title": "Bring on Da Pain!"
+      }
+    ],
+    "gameMode": [
+      "DM",
+      "3-5 players"
+    ]
+  },
+  "palace": {
+    "levelId": "163",
+    "dateStamp": "2021-01-25",
+    "zip": "palace",
+    "sha256": "8e04b5ddd59067f20c24cb808272f1b75883264de4c3b4069b15a61a739a6b03",
+    "author": "Pirate",
+    "extract": "This 24meg monster ain't worth the download. There is a 22meg .wav file included which did nothing for me (but then I'm not here to judge music). The map is basicaly baddly finished. Its riddled with texture errors and the lighting appears to have been for",
+    "includes": [
+      {
+        "bsp": "palace",
+        "title": "Pirate's Palace of Pain"
+      }
+    ],
+    "gameMode": [
+      "DM",
+      "5-9 players"
+    ]
+  },
+  "phdm2": {
+    "levelId": "2067",
+    "dateStamp": "2021-01-25",
+    "zip": "phdm2",
+    "sha256": "bfd2388b19c8b82b517f162c6310f93932522677f00866455f310afd1e49542a",
+    "author": "Pat Howard",
+    "extract": "This is the work of a professional. The theme, the visuals and the gameplay are all well thought out and creatively executed. Gameplay has been thoroughly tested and it shows. The layout is at the same time simple, small and yet quite intricate. Teleporter",
+    "includes": [
+      {
+        "bsp": "phdm2",
+        "title": "Q"
+      }
+    ],
+    "gameMode": [
+      "DM",
+      "Floater",
+      "Tourney",
+      "2-4 players"
+    ]
+  },
+  "pit": {
+    "levelId": "1319",
+    "dateStamp": "2021-01-25",
+    "zip": "pit",
+    "sha256": "27bec4ebefc39eb9891a16d2a2206a3b4bf73226de9dc2414ec69a5b0cbf7d3e",
+    "author": "Anton",
+    "extract": "Lava Pit is not quite what the name suggests.  While there is a bottom filled with hot lava, you do not fall down there too often and neither do the bots (though when you do, it says you were in the wrong place). Players spawn up on RL ledges, and can grab",
+    "includes": [
+      {
+        "bsp": "pit",
+        "title": "Lava Pit by Anton"
+      }
+    ],
+    "gameMode": [
+      "DM",
+      "Tourney",
+      "2-4 players"
+    ]
+  },
+  "poptart": {
+    "levelId": "2006",
+    "dateStamp": "2021-01-25",
+    "zip": "poptart",
+    "sha256": "7a49ed5b7747e0c53d690a4375909928f74993f73f1c67c4a014e46f26007bf4",
+    "author": "NaturalSpringWater",
+    "extract": "A single player puzzle map in which the object is to find 101 items in under 10 minutes, a.k.a. a scavenger hunt. The items range from pictures to objects to all sorts of things. You can bump into some and shot others. Once the 10 minutes up, you are sent ",
+    "includes": [
+      {
+        "bsp": "poptart",
+        "title": "poptart"
+      }
+    ],
+    "gameMode": [
+      "Experimental",
+      "Scavenger Hunt"
+    ]
+  },
+  "prejudice": {
+    "levelId": "1903",
+    "dateStamp": "2021-01-25",
+    "zip": "prejudice",
+    "sha256": "f6b533b4859fb4a165735e267c7634589d7a247d35a011c0a5d91a8e7703d37e",
+    "author": "spirit",
+    "extract": "At a first glance this map may seem like boxed map with not much of a game play, but once you start playing it and take a good look around it becomes a map well worth having on a server for some human play. The author added some gothic like walls, windows ",
+    "includes": [
+      {
+        "bsp": "prejudice",
+        "title": "prejudice"
+      }
+    ],
+    "gameMode": [
+      "CPM",
+      "DM",
+      "Tourney",
+      "2-5 players"
+    ]
+  },
+  "q3deck_final": {
+    "levelId": "1866",
+    "dateStamp": "2021-01-25",
+    "zip": "q3deck_final",
+    "sha256": "c4c8dc50083bee748722d0f481219905d4c734380c9efe5eec6383ac659ccd7c",
+    "author": "kinetix",
+    "extract": "Q3Deck is a remake of Deck16 (from UT) and Deck17 (from UT2004) and is the authors first Quake 3 map.  It is a pretty accurate remake, which has its strong and weak points; e.g. mission accomplished porting over the map, but as with most UT map conversions",
+    "includes": [
+      {
+        "bsp": "q3deck",
+        "title": "Deck"
+      }
+    ],
+    "gameMode": [
+      "DM",
+      "Team DM",
+      "3-8 players"
+    ]
+  },
+  "q3_prison": {
+    "levelId": "927",
+    "dateStamp": "2021-01-25",
+    "zip": "q3_prison",
+    "sha256": "cf776d2a3a28f447020f415a9010d0afafb04b99f4e4eb473bd7fa13d0e77138",
+    "author": "Flava Clown",
+    "extract": "A walled prison yard surrounded by mountains. Guard towers at each corner are connected by grilled walkways. In the center of the yard there is a sunken area with crates and doors which lead to the cells. The level has been well textured and the lighting i",
+    "includes": [
+      {
+        "bsp": "prison",
+        "title": "A Prison for Wicked Clown's"
+      }
+    ],
+    "gameMode": [
+      "DM",
+      "Tourney",
+      "2-4 players"
+    ]
+  },
+  "q3_prison_ta": {
+    "levelId": "926",
+    "dateStamp": "2021-01-25",
+    "zip": "q3_prison_ta",
+    "sha256": "62b3ddbc0e4e30492a378229359f73ccaacebf38583a6288a32d044febf914b6",
+    "author": "Flava Clown",
+    "extract": "A Team Arena version of A Prison for wicked Clown's (Q3A) by the same author. A DM only level which includes the Doubler and Guard power ups. This version is a lot more fun than the Q3A version because there are a larger variety of weapons. A 3 player DM c",
+    "includes": [
+      {
+        "bsp": "prison_ta",
+        "title": "A Prison for Wicked Clown's"
+      }
+    ],
+    "gameMode": [
+      "Team Arena",
+      "2-4 players"
+    ]
+  },
+  "q3_q2dm1": {
+    "levelId": "68",
+    "dateStamp": "2021-01-25",
+    "zip": "q3_q2dm1",
+    "sha256": "e34654f4b2c74b05188206e29a5eb52527a5cdea86260533f02ed1f28b7aab0a",
+    "author": "Finko",
+    "extract": "It is amazing how bspc.exe -bsp2map can turn anyone into a level author. This bastardisation of the Quake2 classic is full of problems and damaged seams. Finko also decided that jumppads and scupltures would be an improvement as well, however they just do ",
+    "includes": [
+      {
+        "bsp": "q3_q2dm1",
+        "title": "The Edge converted by Finko"
+      }
+    ],
+    "gameMode": [
+      "DM",
+      "3-6 players"
+    ]
+  },
+  "q3_race": {
+    "levelId": "745",
+    "dateStamp": "2021-01-25",
+    "zip": "q3_race",
+    "sha256": "c7044118e4a6c61fe8523c98e98c379ebb2e9a068edc18738a94224cf299f51d",
+    "author": "chris",
+    "extract": "An experimental map that is probably best suited to the QuakeRally mod. The layout is a figure 8 race track in space, players run around the track picking up weapons and power-ups. A 3 player DM game is surprisingly fun for a few rounds but the game play g",
+    "includes": [
+      {
+        "bsp": "q3_race",
+        "title": "the ultimate race"
+      }
+    ],
+    "gameMode": [
+      "DM",
+      "Experimental",
+      "Floater",
+      "3-5 players"
+    ]
+  },
+  "q3_redq3dm5": {
+    "levelId": "2228",
+    "dateStamp": "2021-01-25",
+    "zip": "q3_redq3dm5",
+    "sha256": "d5a6e7a12645e13ad342f7fe1b95c90858f395806ae76ff3e096f57b631602a9",
+    "author": "redfella",
+    "extract": "A modern mapping attempt from Redfella after an astounding 7-year break from the Quake III level design scene. I wasn't around to watch his previous efforts sprout, but this one from him certainly caught my attention. Panopticon",
+    "includes": [
+      {
+        "bsp": "redq3dm5",
+        "title": "panopticon"
+      }
+    ],
+    "gameMode": [
+      "DM",
+      "Tourney",
+      "2-6 players"
+    ]
+  },
+  "q3_rtsindm1": {
+    "levelId": "334",
+    "dateStamp": "2021-01-25",
+    "zip": "q3_rtsindm1",
+    "sha256": "ce1be2f2fa14f97cf5941a9d320c0f69fba62653cc3ad7a73c18fb75bf9241b7",
+    "author": "Flava Clown",
+    "extract": "What is with the whole *porting levels from one game to another* thing? This is a terrible conversion. There are a heap of missing textures and the layout does not work well with the game. The architecture is bland. What may have been a good level for SiN ",
+    "includes": [
+      {
+        "bsp": "rtsindm1",
+        "title": "original by Richard Tompkins"
+      }
+    ],
+    "gameMode": [
+      "DM",
+      "Tourney",
+      "2-4 players"
+    ]
+  },
+  "q3_spacectf1": {
+    "levelId": "63",
+    "dateStamp": "2021-01-25",
+    "zip": "q3_spacectf1",
+    "sha256": "1341d6fc488a2238e6564411920c65c77e6f814acadd848213b9622c1d27cb32",
+    "author": "RedLick",
+    "extract": "Not a bad space based CTF map for a short while. The main goal is to defend your base from Invaders caterpaulted from the opposing base. - So expect a lot of deaths from these suicide leaps. Not much else to this map. Also requires the Threewave CTF pak as",
+    "includes": [
+      {
+        "bsp": "q3_spacectf1",
+        "title": "SpaceCTF : Opposing Platforms"
+      }
+    ],
+    "gameMode": [
+      "CTF",
+      "Floater",
+      "2-8 players"
+    ]
+  },
+  "q3_trueblue": {
+    "levelId": "1782",
+    "dateStamp": "2021-01-25",
+    "zip": "q3_trueblue",
+    "sha256": "7ce7f1bbe3d253d237f3bfb46c55e2e53922e07a8e789e65bdc6fa6d6859442e",
+    "author": "KIIIA",
+    "extract": "I can start off by saying I love the cel shading technique how it brings a cool cartoonish style to the Quake 3 World. The custom ecel texturing from evillair. Plus the author himself has some custom textures to display for this type of format which is ver",
+    "includes": [
+      {
+        "bsp": "q3_trueblue",
+        "title": "AcidNeoToon"
+      }
+    ],
+    "gameMode": [
+      "DM",
+      "3-6 players"
+    ]
+  },
+  "q3_ultrav": {
+    "levelId": "1981",
+    "dateStamp": "2021-01-25",
+    "zip": "q3_ultrav",
+    "sha256": "efd5b6168ac87bbb81482b0fbde1003e128aaa7690b73784c1bce3cf5cbdd2c1",
+    "author": "Speaker",
+    "extract": "A remake of the Quake classic map, UltraViolence. Fans of the original will be excited at first but will soon be questioning a few of the layout and item changes. For example, rocketjumps to middle ledge in the main atrium are now a piece of cake. The obel",
+    "includes": [
+      {
+        "bsp": "q3_ultrav",
+        "title": "Ultraviolence"
+      }
+    ],
+    "gameMode": [
+      "DM",
+      "Tourney",
+      "2-4 players"
+    ]
+  },
+  "qbeast_nomusic": {
+    "levelId": "1302",
+    "dateStamp": "2021-01-25",
+    "zip": "qbeast_nomusic",
+    "sha256": "1f3edbce3ffaa81f7b22f9deed1302b704b5b0cc65f288333f10459c86ff51d8",
+    "author": "Quint",
+    "extract": "This Geocomp 2 map is laid out like your typical space map but has very elaborate architecture.  Given the limitations of the Geo Comp, the level looks good, but it is otherwise just like another floater.  Average item placement and bot play make the lev",
+    "includes": [
+      {
+        "bsp": "qbeast",
+        "title": "qbeast | quint"
+      }
+    ],
+    "gameMode": [
+      "DM",
+      "Floater",
+      "OpenArena",
+      "Tourney",
+      "2-4 players"
+    ]
+  },
+  "qbw": {
+    "levelId": "1314",
+    "dateStamp": "2021-01-25",
+    "zip": "qbw",
+    "sha256": "903cbd839f3c30dca22979f4773699b5abcda14f0e5666c4ff7c5686731a71ab",
+    "author": "{MoD}SnyperKiLL",
+    "extract": "The map is a remake of the old WWF raw set complete with backstage, a ladder and table in the middle of the ring. Players spawn with 200 health, full ammo on all weapons apart from BFG and lightning gun. There are no items on the map. The map is quite fun.",
+    "includes": [
+      {
+        "bsp": "QBW",
+        "title": "Quake, Beer, and Wrestling"
+      }
+    ],
+    "gameMode": [
+      "DM",
+      "4-8 players"
+    ]
+  },
+  "qd3dm1": {
+    "levelId": "1180",
+    "dateStamp": "2021-01-25",
+    "zip": "qd3dm1",
+    "sha256": "33571ea354fed3ddc535c06f884b0e8ad11ce12365dedd1e5b078ea12aa9e2c5",
+    "author": "Qd",
+    "extract": "Another tiered space level.  At the top, you have (worthless) grenades, Shotguns, and mixed armour and health.  The next tier has the Rocket Launcher and a surprise power-up for a space level - a Battle Suit! Might make for an interesting twist against the",
+    "includes": [
+      {
+        "bsp": "qd3dm1",
+        "title": "Space BattleGround Pro"
+      }
+    ],
+    "gameMode": [
+      "DM",
+      "Floater",
+      "Tourney",
+      "2-4 players"
+    ]
+  },
+  "qfraggel1": {
+    "levelId": "557",
+    "dateStamp": "2021-01-25",
+    "zip": "qfraggel1",
+    "sha256": "b924267698bddc4292f5477bb3f2a46439fdb19b7f1d4cee8eefac99b73e3531",
+    "author": "Q-Fraggel",
+    "extract": "An underground temple, the formal structures contrasting with connecting passages of rough hewn rock and some fleshy sections. The theme is well realised with interesting architecture, excellent lighting, and some nice whimsical touches like the tentical e",
+    "includes": [
+      {
+        "bsp": "qfraggel1",
+        "title": "The Kristall Keep - by Q-Fraggel"
+      }
+    ],
+    "gameMode": [
+      "DM",
+      "Tourney",
+      "2-5 players"
+    ]
+  },
+  "qfraggel2a": {
+    "levelId": "662",
+    "dateStamp": "2021-01-25",
+    "zip": "qfraggel2a",
+    "sha256": "a01fe866d663d87dd3a929ef6061e8df1563b86800131c6a2c6dff6977c81982",
+    "author": "Q-Fraggel",
+    "extract": "Very smooth layout, great architecture, lovely use of custom textures, and an interesting sky box. Mmm, mmm this baby is working it. The aesthetic is solid, consistent and great for the layout. The open layout flows seamlessly through each area without eve",
+    "includes": [
+      {
+        "bsp": "qfraggel2a",
+        "title": "Last Fortress (Badlands Edition)"
+      }
+    ],
+    "gameMode": [
+      "CPM",
+      "DM",
+      "4-12 players"
+    ]
+  },
+  "qisland": {
+    "levelId": "1761",
+    "dateStamp": "2021-01-25",
+    "zip": "qisland",
+    "sha256": "f4eabdc3bb71ca6326baf50fbb982c0b77fc6e51248ee66db6a3f1a38dada8ab",
+    "author": "Blurr",
+    "extract": "It appears Blurr wanted to bring some Far Cry feeling to Quake 3 with this map. The island design is nice but requires some vis improvement, from anywhere on the map all the polygons are drawn, and in some areas, r_speeds are up to 40k. Sounds are pleasant",
+    "includes": [
+      {
+        "bsp": "Island",
+        "title": "Bones and Pieces of Eight"
+      }
+    ],
+    "gameMode": [
+      "DM",
+      "Tourney",
+      "2-4 players"
+    ]
+  },
+  "qsc_tourney5": {
+    "levelId": "1979",
+    "dateStamp": "2021-01-25",
+    "zip": "qsc_tourney5",
+    "sha256": "32deac69bb2215cceab1bc3c6c303ab258f28a129624d9ede5dd104b9f23a1ea",
+    "author": "D_ooMNiCK",
+    "extract": "An unusual layout and visual style. The map is a little dark and a number of the texture choices appear to clash, but the layout and item placement is mostly successful for DM games. The gameplay flows throughout and over the two floors. The action in DM g",
+    "includes": [
+      {
+        "bsp": "qsc_tourney5",
+        "title": "Tour of Death by D_ooMNiCK"
+      }
+    ],
+    "gameMode": [
+      "DM",
+      "Tourney",
+      "2-6 players"
+    ]
+  },
+  "qsc_tourney5pro": {
+    "levelId": "1984",
+    "dateStamp": "2021-01-25",
+    "zip": "qsc_tourney5pro",
+    "sha256": "9286f1eeda0bd253868e174cd04c29a242725277f41fea3b1539edd9fe673860",
+    "author": "D_ooMNiCK",
+    "extract": "This is a largish tourney map decked out in id Gothic. It looks average, with no glaring construction errors, but no caulking behind some curves, which may cause visual glitches on poorer hardware. The map will chug on such hardware as the polygon counts g",
+    "includes": [
+      {
+        "bsp": "qsc_tourney5pro",
+        "title": "Tour of Death (pro) by D_ooMNiCK"
+      }
+    ],
+    "gameMode": [
+      "DM",
+      "Tourney",
+      "2-5 players"
+    ]
+  },
+  "qsc_town": {
+    "levelId": "2088",
+    "dateStamp": "2021-01-25",
+    "zip": "qsc_town",
+    "sha256": "619bc71fb48cc95b3b61e4b280f6f5f1a209c2b3d82b56f2cb02749a5e49b2b6",
+    "author": "D_ooMNiCK",
+    "extract": "Krichevo Town is is a large-scale urban-style map which requires a large-scale, urban-sized machine to run satisfactorily. When I was having a look around the map, the framerate dropped below 30fps at times (r_speeds max at 100K), and with bots, it dropped",
+    "includes": [
+      {
+        "bsp": "qsc_town",
+        "title": "Krichevo town by D_ooMNiCK"
+      }
+    ],
+    "gameMode": [
+      "DM",
+      "4-12 players"
+    ]
+  },
+  "qtctf_tubewars": {
+    "levelId": "471",
+    "dateStamp": "2021-01-25",
+    "zip": "qtctf_tubewars",
+    "sha256": "8fb9d3d1daada33ca17fd33f191c8f3296e74f0e16697b751b35712fc2f3da4c",
+    "author": "notime",
+    "extract": "Four simple gothic CTF maps in one pack; all with good texturing and architecture. The smallest map is kind of strange; having 4 flags makes for some small confusion. There are also a lot of power-ups on this level. The next size up is kind of cool, but th",
+    "includes": [
+      {
+        "bsp": "q3ctf_TWBig",
+        "title": "CTF Tube Wars by Notime"
+      },
+      {
+        "bsp": "q3ctf_TWSmall",
+        "title": "CTF Tube Wars by Notime"
+      },
+      {
+        "bsp": "q3ctf_TWSmaller",
+        "title": "CTF Tube Wars by Notime"
+      },
+      {
+        "bsp": "q3ctf_TWSmallst",
+        "title": "CTF Tube Wars by Notime"
+      }
+    ],
+    "gameMode": [
+      "CTF",
+      "DM",
+      "Tourney",
+      "2-12 players"
+    ]
+  },
+  "quaddamage": {
+    "levelId": "1750",
+    "dateStamp": "2021-01-25",
+    "zip": "quaddamage",
+    "sha256": "b3d7df820cb07e7822353f706b8143cc34ba41c10da97afa719181a1c2f77187",
+    "author": "ROODOG",
+    "extract": "My first spawn I grabbed a Grenade Launcher and touched what I thought was a wall. Wrong! I was teleported into a lava filled cage from which there is no escape. Not a great start and it doesn't get much better. Essentially it's a box map with gimmicks. Ge",
+    "includes": [
+      {
+        "bsp": "quaddamage",
+        "title": "quaddamage"
+      }
+    ],
+    "gameMode": [
+      "DM",
+      "4-8 players"
+    ]
+  },
+  "qxtourney1": {
+    "levelId": "784",
+    "dateStamp": "2021-01-25",
+    "zip": "qxtourney1",
+    "sha256": "0a2326cf7b8e69e7c005e630d4e156e0eb276662d14488f66d515c999996dc0f",
+    "author": "Quaker-X",
+    "extract": "A great FFA map with a simple gothic style. Classic over and under layout that wraps back on itself over three floors. The map is best played as a 3 or 4 player DM with good item placement. The architecture is simple and effective. The large curved archway",
+    "includes": [
+      {
+        "bsp": "qxtourney1",
+        "title": "Gothic Rage - by Quaker-X"
+      }
+    ],
+    "gameMode": [
+      "DM",
+      "Tourney",
+      "2-6 players"
+    ]
+  },
+  "rama": {
+    "levelId": "852",
+    "dateStamp": "2021-01-25",
+    "zip": "rama",
+    "sha256": "da543c279a876b83bbaced9cdde81d9498c5f25104f1ed7afb3b160ef2558e6d",
+    "author": "Trenox",
+    "extract": "An eclectic blend of styles and structures, its pretty clear that some areas of the map have received more attention than others. In some places the textures are completely misaligned and out of place, in other sections the textures are fine. The architect",
+    "includes": [
+      {
+        "bsp": "RAMA",
+        "title": "RAMA by Trenox"
+      }
+    ],
+    "gameMode": [
+      "DM",
+      "Tourney",
+      "2-5 players"
+    ]
+  },
+  "rev1": {
+    "levelId": "2339",
+    "dateStamp": "2021-01-25",
+    "zip": "rev1",
+    "sha256": "99a6c712c85546ca3a9644b1caefeca3f73d5032b63525bdff62d35392a39371",
+    "author": "Benjamin Pulido",
+    "extract": "Described as a transformation of the first mission of the expansion Quake 4: A Strogg's Revenge but that is about as exciting as it gets. The map looks nothing like anything I've seen in Quake 4 (which is fine for a conversion btw) but a hodgepodge of text",
+    "includes": [
+      {
+        "bsp": "rev1",
+        "title": "The Beginning"
+      }
+    ],
+    "gameMode": [
+      "CTF",
+      "DM",
+      "Team DM",
+      "Tourney",
+      "2-6 players"
+    ]
+  },
+  "rq3dm1": {
+    "levelId": "706",
+    "dateStamp": "2021-01-25",
+    "zip": "rq3dm1",
+    "sha256": "992046d28abd28fc5d563a1337b3c27b062017695648bfb7617ef5e46d1b5ee2",
+    "author": "RainmanTD",
+    "extract": "An enjoyable Tourney/FFA level with a symmetrical layout. The simple gothic architecture and texturing is used consistently and works well. Connectivity is good and so is the game flow. Items are located sensibly for Tourney games and are also good for FFA",
+    "includes": [
+      {
+        "bsp": "rq3dm1",
+        "title": "big mix - by rainmantd"
+      }
+    ],
+    "gameMode": [
+      "DM",
+      "Tourney",
+      "2-4 players"
+    ]
+  },
+  "s": {
+    "levelId": "101",
+    "dateStamp": "2021-01-25",
+    "zip": "s",
+    "sha256": "559038825d1aa63eb92bbf50358891cc96b41dbf43787e909bd429c6e0cf4b7a",
+    "author": "dd sCrEAm",
+    "extract": "What can only be described as a bad conversion of SinCity (I think that's what the level is called) from SiN. I really don't know what people see in it. The gameplay, physics, and weapons are so different in Q3A to SiN. You have to be a converted map colle",
+    "includes": [
+      {
+        "bsp": "s",
+        "title": "SINCITY REBUILT (BY DD SCREAM)"
+      }
+    ],
+    "gameMode": [
+      "DM",
+      "2-4 players"
+    ]
+  },
+  "sic": {
+    "levelId": "1835",
+    "dateStamp": "2021-01-25",
+    "zip": "sic",
+    "sha256": "da9ba0315132c3dfbefbb7ea6a896687726d061d7ee5ba9b81fb366e35486b8c",
+    "author": "Vadik",
+    "extract": "The first impression when looking around the map, is that it's just a box. But, this one is different because it's actually quite fun. Simmetry In Chaos is a miniature octagonal map which contains crushers, falling deaths, jumpads, all in one. It has 2 sho",
+    "includes": [
+      {
+        "bsp": "sic",
+        "title": "symmetry in chaos"
+      }
+    ],
+    "gameMode": [
+      "DM",
+      "Tourney",
+      "2-3 players"
+    ]
+  },
+  "sin": {
+    "levelId": "155",
+    "dateStamp": "2021-01-25",
+    "zip": "sin",
+    "sha256": "10a767f4bc72c2d5f26da7051720308cc4bbcbbf9762711b0a8ae6311f27331e",
+    "author": "Wiebo de Wit",
+    "extract": "A gothic castle with a fragmented overhang above one of the best organic outside areas we've seen. The map has a very polished feel with a consistent architectural theme and textures. The gameflow was a bit lacking however, connections seem unnecessarily r",
+    "includes": [
+      {
+        "bsp": "sin",
+        "title": "Sinister Purpose"
+      }
+    ],
+    "gameMode": [
+      "DM",
+      "Tourney",
+      "2-4 players"
+    ]
+  },
+  "skylancer": {
+    "levelId": "801",
+    "dateStamp": "2021-01-25",
+    "zip": "skylancer",
+    "sha256": "6338a63f1be83f69c1c6a20af1edc07ebe6f938dd4cac1ee5d99767f325a557b",
+    "author": "Priv",
+    "extract": "Zeppelin suspended wooden pirate ships aloft in a cloudy blue sky. A fantastical space map with a very cool concept which has been beautifully realised. Game play is another story, the game play is not smooth and the weapon selection and placement could ha",
+    "includes": [
+      {
+        "bsp": "sky",
+        "title": "sky"
+      }
+    ],
+    "gameMode": [
+      "DM",
+      "Floater",
+      "Tourney",
+      "2-4 players"
+    ]
+  },
+  "sota": {
+    "levelId": "1565",
+    "dateStamp": "2021-01-25",
+    "zip": "sota",
+    "sha256": "6d864079eb5fce6ebfde80726ce686ecf2c766425bfd2d71736db13ec33b6c38",
+    "author": "187-J4CK4L",
+    "extract": "The pk3 is 3.4Mb, 2Mb of which is the levelshot. Sigh. So what do you get for the 1.4Mb that really counts? The map is comprised of 2 outdoor areas.  The larger has a 3-tiered platform at one end that overlooks a large pool of water over which spans a brid",
+    "includes": [
+      {
+        "bsp": "SOTA",
+        "title": "187-J4CK4L's SPIRIT OF THE AGE"
+      }
+    ],
+    "gameMode": [
+      "DM",
+      "Team DM",
+      "3-6 players"
+    ]
+  },
+  "space": {
+    "levelId": "1622",
+    "dateStamp": "2021-01-25",
+    "zip": "space",
+    "sha256": "2f73962474c453f2b73a9cf692409e38605c445de5d1f90a43ca33047b66dbe8",
+    "author": "Wiggles",
+    "extract": "This generic, yet fairly enjoyable space map smacks of first-time level-building.  Lots of platforms, lots of bouncing, some teleporting and a quad.  Bots play pretty well.  Small, competently put together, yet lacking in any serious vertical play. This ma",
+    "includes": [
+      {
+        "bsp": "space",
+        "title": "Fallen Heroes"
+      }
+    ],
+    "gameMode": [
+      "DM",
+      "Floater",
+      "3-6 players"
+    ]
+  },
+  "spacedm1": {
+    "levelId": "632",
+    "dateStamp": "2021-01-25",
+    "zip": "spacedm1",
+    "sha256": "d0d684c6462a515ed4692dd2fd029a9c190bd338afbc4e9be26692ffd6d5dbec",
+    "author": "$p@cE",
+    "extract": "A gothic theme of stone and lava is a good choice of textures for this mostly well connected level. DeathMatches can move about the level but almost always come back to the Quad or Red Armour. Item placement could have done with a lot more work. Placing th",
+    "includes": [
+      {
+        "bsp": "spacedm1",
+        "title": "$p@cE's $hrinE"
+      }
+    ],
+    "gameMode": [
+      "DM",
+      "Tourney",
+      "2-5 players"
+    ]
+  },
+  "storage": {
+    "levelId": "527",
+    "dateStamp": "2021-01-25",
+    "zip": "storage",
+    "sha256": "00cb73be81aeb2e4300e8607c26421066f5237df6f725863f791f75c81063c2a",
+    "author": "Sp0ofY",
+    "extract": "A fast paced small Rail arena with a tech / warehouse theme. The crate cluttered floor creates plenty of cover which keeps you moving. There are a few overlapping brushes which will cause the *zebra effect* on some set-ups. The platform could have been mor",
+    "includes": [
+      {
+        "bsp": "storage",
+        "title": "Cold Storage"
+      }
+    ],
+    "gameMode": [
+      "Rail Arena",
+      "2 players"
+    ]
+  },
+  "temple": {
+    "levelId": "685",
+    "dateStamp": "2021-01-25",
+    "zip": "temple",
+    "sha256": "02a627d036334c61eef158c4939d3e13c421dc6df3d1668d610d052a125bae72",
+    "author": "maxxus",
+    "extract": "A small, symmetrical arena that is more like a small RA3 arena than anything. The weapons are Machine Gun, Shotgun, Grenade and Lighting, with a teamed entity in the center that is either Yellow Armour, Red Armour or a Mega health. The map feels like a pra",
+    "includes": [
+      {
+        "bsp": "temple",
+        "title": "the forbidden temple"
+      }
+    ],
+    "gameMode": [
+      "Tourney",
+      "2 players"
+    ]
+  },
+  "tm1": {
+    "levelId": "1152",
+    "dateStamp": "2021-01-25",
+    "zip": "tm1",
+    "sha256": "ee66601c699454160aed2ca78da694f97a99e937fed7c39ac90b9ff7e3041f37",
+    "author": "Various",
+    "extract": "An eclectic collection of 13 maps by a variety of authors, each created within a strict time limit of 1 week! Yikes.  The authors : Akuma, Ad5, Amphetamine, AsNagrim, Quakeulf (aka Hrewty), Jher, Julian 'Juz' Priestley, Monsto Brukes, Mr (Michael Cuneo), M",
+    "includes": [
+      {
+        "bsp": "tm1_ad5",
+        "title": "Fates Angel"
+      },
+      {
+        "bsp": "tm1_akuma",
+        "title": "Vertical Gimmick"
+      },
+      {
+        "bsp": "tm1_amphetamine",
+        "title": "The Last Strogg Base"
+      },
+      {
+        "bsp": "tm1_asnagrim",
+        "title": "tm1_asnagrim"
+      },
+      {
+        "bsp": "tm1_hrewty",
+        "title": "unpretty"
+      },
+      {
+        "bsp": "tm1_jher",
+        "title": "Clockwork Rush"
+      },
+      {
+        "bsp": "tm1_juz",
+        "title": "Fistagon by Juz"
+      },
+      {
+        "bsp": "tm1_monsto",
+        "title": "tm1_monsto"
+      },
+      {
+        "bsp": "tm1_mr",
+        "title": "Vertisan : Turtlemap 1, 2001"
+      },
+      {
+        "bsp": "tm1_myth",
+        "title": "GOLGAFRINCHAM - by Myth"
+      },
+      {
+        "bsp": "tm1_rayden",
+        "title": "So close, yet so far"
+      },
+      {
+        "bsp": "tm1_systemkrash",
+        "title": "Roast Turtle"
+      },
+      {
+        "bsp": "tm1_watt",
+        "title": "^4Base^0"
+      }
+    ],
+    "gameMode": [
+      "CTF",
+      "DM",
+      "Map pack",
+      "Tourney",
+      "2-10 players"
+    ]
+  },
+  "towers": {
+    "levelId": "1329",
+    "dateStamp": "2021-01-25",
+    "zip": "towers",
+    "sha256": "3bc98e152f543b37299409dc5edf679b9df093827687a3ade4032b57d0f0f701",
+    "author": "Anton",
+    "extract": "The author's first Q3A map shows two multi-leveled towers put in a large open area. At the different levels of each tower, you find different weapons, including the railgun, the grenade launcher, and the grappling hook. Via teleport, you reach the quad on ",
+    "includes": [
+      {
+        "bsp": "towers",
+        "title": "towers of death"
+      }
+    ],
+    "gameMode": [
+      "DM",
+      "Tourney",
+      "2-3 players"
+    ]
+  },
+  "utopia": {
+    "levelId": "1343",
+    "dateStamp": "2021-01-25",
+    "zip": "utopia",
+    "sha256": "79e5c0eca08171b3dd2d37294fc1ff1cf32c9e10fe32387b92f2087ffae48188",
+    "author": "Anton",
+    "extract": "This map is a boxmap, and a really bad boxmap at that. There are good boxmaps, check out Whitemeat from the Meatpak for example.  Alas, there is nothing fun in this one.  The map consists of a big square high walled courtyard with ledges that run all aroun",
+    "includes": [
+      {
+        "bsp": "utopia",
+        "title": "Utopia"
+      }
+    ],
+    "gameMode": [
+      "DM",
+      "3-6 players"
+    ]
+  },
+  "vq2dm1": {
+    "levelId": "2294",
+    "dateStamp": "2021-01-25",
+    "zip": "vq2dm1",
+    "sha256": "32bbd1304e7e7717abce89471c27b2d335bfe5136d4097092d1b73c41689a409",
+    "author": "V1979",
+    "extract": "A pure conversion of The Edge (q2dm1). As stated in the readme.txt. And I have to agree this is as close as you get with a conversion tool as q2toq3a. V1979 did not simply run the tool and left it at that. No, the leaks are fixed, textures replaced with be",
+    "includes": [
+      {
+        "bsp": "vq2dm1",
+        "title": "The Edge"
+      }
+    ],
+    "gameMode": [
+      "DM",
+      "Tourney",
+      "2-6 players"
+    ]
+  },
+  "zq3dm4": {
+    "levelId": "35",
+    "dateStamp": "2021-01-25",
+    "zip": "zq3dm4",
+    "sha256": "562aa721798938472f7c18795c2895904dd2284146a5d65269aa1b0442618156",
+    "author": "ZeroSecond",
+    "extract": "I was unsure about reviewing this map as the author has used a dodgy map building technique of placing the map within a box (so that the compile tools work correctly). This has made what should have been a super fast map a bit laggy in parts :[ However its",
+    "includes": [
+      {
+        "bsp": "zq3dm4",
+        "title": "The Bad Place by ZeroSecond"
+      }
+    ],
+    "gameMode": [
+      "DM",
+      "Tourney",
+      "2-4 players"
+    ]
+  },
+  "deepspace1": {
+    "levelId": "987",
+    "dateStamp": "2021-04-17",
+    "zip": "deepspace1",
+    "sha256": "746f3e92f8320e38c1e39ba355d5312b762d01952cc943ddbf8f463aa78eaa07",
+    "author": "cyberhazard",
+    "extract": "The map is set on an open plan space ship. The texturing is great, curves have been well used and the brush work is very effective without being over the top. The lighting is very flat and could probably have been a lot better but this is typical for a spa",
+    "includes": [
+      {
+        "bsp": "ds1_q3dm2",
+        "title": "Deep Space 1"
+      }
+    ],
+    "gameMode": [
+      "DM",
+      "Floater",
+      "Tourney",
+      "2-4 players"
+    ]
+  },
+  "ondadm1": {
+    "levelId": "537",
+    "dateStamp": "2021-04-18",
+    "zip": "ondadm1",
+    "sha256": "c5764fe8f9f9172e53e560f466b4194ffe2873deacfb914ee5c80a17b04a8613",
+    "author": "ONDA",
+    "extract": "A damn fine space rail arena, there's plenty of room to move around, and good connectivity between the platforms but it will be a little laggy on lower end set-ups. You do not respawn with a Railgun, but there are plenty around, as well as health and other",
+    "includes": [
+      {
+        "bsp": "ondadm1",
+        "title": "ONDADM1"
+      }
+    ],
+    "gameMode": [
+      "Floater",
+      "Rail Arena",
+      "2-4 players"
+    ]
+  },
+  "q3q1dm1": {
+    "levelId": "113",
+    "dateStamp": "2021-04-18",
+    "zip": "q3q1dm1",
+    "sha256": "b305717fd8e6a0b06f8b02463544e2838a15a1e44d36f0e2638aef904f9a4284",
+    "author": "Mike Zuber",
+    "extract": "It is hard to review a map like this. The original (by Tim Willits, id Software) was kind of hated for not including a rocketlaucher or lighting gun in it. However, it was a good, solidly designed map. This Q3A conversion has been made from the original re",
+    "includes": [
+      {
+        "bsp": "q3q1dm1",
+        "title": "Place of Two Deaths"
+      }
+    ],
+    "gameMode": [
+      "DM",
+      "Tourney",
+      "2-4 players"
+    ]
+  },
+  "q3q1dm2": {
+    "levelId": "117",
+    "dateStamp": "2021-04-18",
+    "zip": "q3q1dm2",
+    "sha256": "a56f0684dba5ed1d4c65aa29d5a5a1fc36af98e17ef3d9b6f422934e0443c994",
+    "author": "Mike Zuber",
+    "extract": "The quake classic (by American McGee for idsoftware) has been rebuilt again. A number of textures, and a few other structure changed in this build. The lava jump to RA and 100h is a snap, the around the couner jump still can not be done and the YA trap pus",
+    "includes": [
+      {
+        "bsp": "q3q1dm2",
+        "title": "Claustrophobopolis"
+      }
+    ],
+    "gameMode": [
+      "DM",
+      "Tourney",
+      "2-8 players"
+    ]
+  },
+  "reine10": {
+    "levelId": "28",
+    "dateStamp": "2021-04-18",
+    "zip": "reine10",
+    "sha256": "70da5f063ca3426827b461b330a0291ba8a579d499728525efaa8e836db27460",
+    "author": "Ygdrazil",
+    "extract": "A bit different for a space floater, more like a sections of a  DM map connected by jump pads than anything else. I like whats happening here, but its missing something that would make me want to come back to it again and again. Worth a look, but might not",
+    "includes": [
+      {
+        "bsp": "reine10",
+        "title": "Spring of Quake"
+      },
+      {
+        "bsp": "reine10r",
+        "title": "Spring of Quake - Rail version"
+      }
+    ],
+    "gameMode": [
+      "DM",
+      "Floater",
+      "3-5 players"
+    ]
+  },
+  "ruutq3dm8": {
+    "levelId": "48",
+    "dateStamp": "2021-04-18",
+    "zip": "ruutq3dm8",
+    "sha256": "92396992e13aa49247a5ccc9cf7ec8a797e9c880deacef8625dd4d6115769334",
+    "author": "G.C.",
+    "extract": "An ok space map, personally I found it a bit on the blocky side. By which I mean it could have been refined a bit more. I hate items being placed in really dumb locations which require really convoluted access paths - they just don't seem to ever work. The",
+    "includes": [
+      {
+        "bsp": "ruutq3dm8",
+        "title": "A Night at the Fragsbury - By: RuuT"
+      },
+      {
+        "bsp": "ruuttourney1",
+        "title": "A Night at the Fragsbury - By: RuuT"
+      }
+    ],
+    "gameMode": [
+      "DM",
+      "Floater",
+      "3-6 players"
+    ]
+  }
+}

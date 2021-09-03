@@ -15,12 +15,15 @@ async function registerCommand(cmd, desc, guildId = null) {
       'options': []
     }
   }
+  console.log('Registering command ', json.name)
   return await request({
     headers: {
       'Content-Type': 'application/json'
     },
     method: 'POST',
-    url: `applications/${DEFAULT_APPLICATION}/commands`,
+    url: guildId
+      ? `applications/${DEFAULT_APPLICATION}/guilds/${guildId}/commands`
+      : `applications/${DEFAULT_APPLICATION}/commands`,
     data: JSON.stringify(json)
   })
 }
@@ -42,7 +45,9 @@ async function interactionResponse(interactionId, interactionToken) {
 async function getCommands(guildId = null) {
   return await request({
     method: 'GET',
-    url: `applications/${DEFAULT_APPLICATION}/commands`
+    url: guildId
+      ? `applications/${DEFAULT_APPLICATION}/guilds/${guildId}/commands`
+      : `applications/${DEFAULT_APPLICATION}/commands`
   })
 }
 
@@ -60,11 +65,36 @@ async function updateInteraction(message, interactionId, interactionToken) {
   })
 }
 
+async function updateCommand(cmd, desc, commandId, guildId = null) {
+  if(typeof cmd == 'object') {
+    json = cmd
+  } else {
+    json = {
+      'name': cmd,
+      'description': desc,
+      'options': []
+    }
+  }
+  console.log('Updating command ', json.name)
+  return await request({
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    url: guildId
+      ? `applications/${DEFAULT_APPLICATION}/guilds/${guildId}/commands/${commandId}`
+      : `applications/${DEFAULT_APPLICATION}/commands/${commandId}`,
+    data: JSON.stringify(json)
+  })
+}
 
-async function deleteCommand(commandId) {
+async function deleteCommand(commandId, guildId = null) {
+  console.log('Deleting command ', commandId)
   return await request({
     method: 'DELETE',
-    url: `applications/${DEFAULT_APPLICATION}/commands/${commandId}`
+    url: guildId 
+      ? `applications/${DEFAULT_APPLICATION}/guilds/${guildId}/commands/${commandId}`
+      : `applications/${DEFAULT_APPLICATION}/commands/${commandId}`
   })
 }
 
@@ -73,5 +103,6 @@ module.exports = {
   interactionResponse,
   getCommands,
   updateInteraction,
-  deleteCommand
+  deleteCommand,
+  updateCommand,
 }
