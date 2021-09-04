@@ -7,13 +7,11 @@ TODO: Added database for keeping track of rankings and player stats.
 TODO: stats can be unique for a client/server or can be combined based on player name.
 
 
-
 ***/
 
 var dgram = require('dgram')
 var http = require('http')
 var url = require('url')
-var WebSocketClient = require('ws')
 var WebSocketServer = require('ws').Server
 
 var connections = []
@@ -301,7 +299,7 @@ function onMessage(conn, buffer) {
 	}
 }
 
-async function startMasterServer(port) {
+async function startMasterServer(port = 27950) {
 	var server = http.createServer()
 
 	var wss = new WebSocketServer({
@@ -364,13 +362,5 @@ async function startMasterServer(port) {
 
 	setInterval(pruneServers, pruneInterval)
 }
-
-(async function main() {
-	var port = parseInt(process.argv[2])
-	if(isNaN(port))
-		port = 27950
-	if(process.argv[1].match(/\/master\.js$/ig))
-		await startMasterServer(port)
-})()
 
 module.exports = startMasterServer

@@ -2,11 +2,12 @@ var {
   createMessage, triggerTyping, updateInteraction
 } = require('../discordApi')
 var gamedig = require('gamedig')
-var serverApi = importer.import('quake 3 server commands')
-var { sendRcon, nextAllResponses } = importer.import('quake 3 server commands')
-var discordApi = importer.import('discord api')
-var {parseConfigStr} = importer.import('quake 3 server responses')
-var removeCtrlChars = importer.import('remove ctrl characters')
+var {
+  sendRcon, nextResponse,
+  getServers, SV_EVENT
+} = require('../quake3Api')
+var parseConfigStr = require('../quake3Utils/parse-configstr.js')
+var removeCtrlChars = require('../quake3Utils/remove-ctrl.js')
 
 async function getStatus(ip, port) {
   return gamedig.query({
@@ -21,34 +22,17 @@ async function getStatus(ip, port) {
 }
 
 async function captureAllStats() {
-  var masters = await serverApi.getServers('master.ioquake3.org', void 0, false)
+  var masters = await getServers('master.ioquake3.org', void 0, false)
   //var status = await getStatus(masters[1].ip, masters[1].port)
   var status = await getStatus('45.32.237.139', 27960)
   console.log(status.bots)
 }
 
-//typedef enum {
-var SV_EVENT = {
-MAPCHANGE: 0,
-  CLIENTSAY: 1,
-  MATCHEND: 2,
-  CALLADMIN: 3,
-  CLIENTDIED: 4,
-  CLIENTWEAPON: 5,
-  CLIENTRESPAWN: 6,
-  CLIENTAWARD: 7,
-  GETSTATUS: 8,
-  SERVERINFO: 9,
-  CONNECTED: 10,
-  DISCONNECT: 11,
-}
-//} recentEvent_t;
-
 
 async function getChats(channelId) {
   var match = (/^(.*?):*([0-9]+)*$/ig).exec()
   await sendRcon('127.0.0.1', 27960, '', 'recentPassword')
-  var response = await nextAllResponses()
+  var response = await nextResponse()
 
   if(!response) return
 

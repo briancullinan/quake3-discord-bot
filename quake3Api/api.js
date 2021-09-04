@@ -9,4 +9,5 @@ module.exports = {
   ... {sendPureChecksums} = require('./send-checksums.js'),
   ... {sendSequence, sendReliable} = require('./send-sequence.js'),
   ... {nextResponse} = require('./parse-packet.js'),
+  ... {SV_EVENT} = require('./parse-event.js'),
 }

@@ -22,6 +22,7 @@ async function spectateServer(address = 'localhost', port = 27960) {
     challenge: challengeResponse.challenge,
     name: DEFAULT_USERNAME,
     protocol: 71,
+    cl_recentPassword: 'pass',
   })
   await nextResponse('svc_gamestate', address, port, true /* isChannel */)
   var server = mergeMaster({
