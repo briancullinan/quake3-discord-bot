@@ -18,9 +18,10 @@ async function monitorServer(address = 'q3msk.ru', port = 27977) {
   })
   //console.log(server)
 
+  // automatically update server status
   if(!monitors[server.ip + ':' + server.port]) {
     monitors[server.ip + ':' + server.port] = setInterval(() => {
-      Promise.resolve(monitorServer.bind(null, address, port)())
+      Promise.resolve(monitorServer(address, port))
     }, 60 * 1000)
   }
 

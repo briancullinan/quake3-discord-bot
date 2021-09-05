@@ -65,7 +65,12 @@ function saveMatch(server) {
     players: server.players,
     mapname: server.mapname,
     channel: {
-      serverId: server.channel.serverId
+      serverId: server.channel.serverId,
+      serverInfo: {
+        timelimit: server.channel.serverInfo.timelimit,
+        capturelimit: server.channel.serverInfo.capturelimit,
+        gamename: server.channel.serverInfo.gamename,
+      }
     }
   }, null, 2)
   if(existingMatch) {

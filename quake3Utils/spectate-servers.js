@@ -65,12 +65,10 @@ async function spectateServer(address = 'localhost', port = 27960) {
           var index = j & (MAX_RELIABLE_COMMANDS-1)
           var message = channel.serverCommands[index] + ''
           if((message).match(/^chat /i) /* || (message).match(/^print /i) */) {
+            console.log(server.ip + ':' + server.port + ' ---> ', message)
             //console.log(message.split('').map(c => c.charCodeAt(0)))
             message = removeCtrlChars((/"([^"]*?)"/).exec(message)[1])
             updateThread(threadName, discordChannel, message)
-          } else if (message.includes('map_restart')) {
-            channel.serverId = 0
-            console.log(channel)
           } else {
             console.log(message)
           }
