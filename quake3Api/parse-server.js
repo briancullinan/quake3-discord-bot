@@ -269,6 +269,14 @@ function parseCommandString(read, message, channel) {
   var index = seq & (MAX_RELIABLE_COMMANDS-1)
   read = ReadString(read, message)
   channel.serverCommands[index] = read[1]
+  if(channel.serverCommands[index].includes('map_restart')) {
+    channel.serverId = 0
+  }
+  if(channel.serverCommands[index].includes('cs 1')) {
+    channel.systemInfo = parseConfigStr((/"(.*)"/ig).exec(channel.serverCommands[index])[1])
+    channel.serverId = channel.systemInfo['sv_serverid']
+    channel.isPure = channel.systemInfo['sv_pure'] == '1'
+  }
   return read
 }
 
