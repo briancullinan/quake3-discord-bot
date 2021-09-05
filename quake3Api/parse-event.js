@@ -17,8 +17,8 @@ var SV_EVENT = {
 //} recentEvent_t;
 
 function recentEvent(message) {
-  var json = JSON.parse(message)
-  console.log(json)
+  console.log(message)
+  //var json = JSON.parse(message)
 }
 
 module.exports = {

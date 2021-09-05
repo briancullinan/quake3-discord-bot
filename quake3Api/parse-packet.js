@@ -34,10 +34,11 @@ async function packetEvent(m, rinfo) {
   if(m[0] == 255 && m[1] == 255 && m[2] == 255 && m[3] == 255) {
     m = m.slice(4, m.length)
     var data = connectionlessPacket(m)
-    mergeMaster(Object.assign(data, {
-      ip: rinfo.address,
-      port: rinfo.port
-    }))
+    if(data)
+      mergeMaster(Object.assign(data, {
+        ip: rinfo.address,
+        port: rinfo.port
+      }))
   } else {
     var master = mergeMaster({
       ip: rinfo.address,

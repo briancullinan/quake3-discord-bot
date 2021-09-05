@@ -68,6 +68,8 @@ async function spectateServer(address = 'localhost', port = 27960) {
             //console.log(message.split('').map(c => c.charCodeAt(0)))
             message = removeCtrlChars((/"([^"]*?)"/).exec(message)[1])
             updateThread(threadName, discordChannel, message)
+          } else {
+            console.log(message)
           }
         }
         commandNumber = channel.commandSequence

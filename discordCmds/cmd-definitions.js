@@ -29,7 +29,7 @@ var ALL_COMMANDS = [
   'rcon',
   'config',
   'map',
-  'servers'
+  'servers',
   'search',
   'author',
   'gametype',
