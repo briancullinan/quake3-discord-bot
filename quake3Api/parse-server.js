@@ -17,14 +17,53 @@ function SE() {}
 inherits(SE, EventEmitter)
 var serverMessageEvent = new SE
 
+var MAX_RELIABLE_COMMANDS = 64
+var	MAX_MODELS = 256		// these are sent over the net as 8 bits
+var	MAX_SOUNDS = 256		// so they cannot be blindly increased
+var	MAX_CLIENTS = 64
+var MAX_LOCATIONS = 64
+var MAX_GENTITIES = (1<<GENTITYNUM_BITS)
+
 var MAX_PACKETLEN = 1400
 var FRAGMENT_SIZE = (MAX_PACKETLEN - 100)
 var MAX_MSGLEN = 16384
 var FLOAT_INT_BITS = 13
 var FLOAT_INT_BIAS = (1<<(FLOAT_INT_BITS-1))
+
 var	CS_SERVERINFO = 0 // an info string with all the serverinfo cvars
 var CS_SYSTEMINFO = 1 // an info string for server system to client system configuration (timescale, etc)
-var MAX_RELIABLE_COMMANDS = 64
+var CS_MUSIC = 2
+var CS_MESSAGE = 3		// from the map worldspawn's message field
+var CS_MOTD = 	4		  // g_motd string for server message of the day
+var CS_WARMUP = 5		  // server time when the match will be restarted
+var CS_SCORES1 = 6
+var CS_SCORES2 = 7
+var CS_VOTE_TIME = 8
+var CS_VOTE_STRING = 9
+var CS_VOTE_YES = 10
+var CS_VOTE_NO = 11
+
+var CS_TEAMVOTE_TIME = 12
+var CS_TEAMVOTE_STRING = 14
+var CS_TEAMVOTE_YES = 16
+var CS_TEAMVOTE_NO = 18
+
+var CS_GAME_VERSION = 20
+var CS_LEVEL_START_TIME = 21		// so the timer only shows the current level
+var CS_INTERMISSION = 22		// when 1, fraglimit/timelimit has been hit and intermission will start in a second or two
+var CS_FLAGSTATUS = 23		// string indicating flag status in CTF
+var CS_SHADERSTATE = 24
+var CS_BOTINFO = 25
+
+var CS_ITEMS = 27		// string of 0's and 1's that tell which items are present
+var	CS_MODELS = 32
+
+var	CS_SOUNDS = (CS_MODELS+MAX_MODELS)
+var	CS_PLAYERS = (CS_SOUNDS+MAX_SOUNDS)
+var CS_LOCATIONS = (CS_PLAYERS+MAX_CLIENTS)
+var CS_PARTICLES = (CS_LOCATIONS+MAX_LOCATIONS)
+
+var CS_MAX = (CS_PARTICLES+MAX_LOCATIONS)
 
 function netchanProcess(message, channel) {
   var read = 0
@@ -212,7 +251,7 @@ function readDeltaPlayerstate() {
   */
 }
 
-function parseGamestate(read, message, channel) {
+function parseGamestate(read, message, channel, server) {
   console.log('parse gamestate')
   read = readBits(message, read[0], 32)
   channel.commandSequence = read[1]
@@ -254,13 +293,30 @@ function parseGamestate(read, message, channel) {
 
   // parse system info
   channel.systemInfo = parseConfigStr(channel.configStrings[CS_SYSTEMINFO])
-  channel.serverId = channel.systemInfo['sv_serverid']
-  channel.isPure = channel.systemInfo['sv_pure'] == '1'
+  systemInfoChanged(channel)
+  configStringsChanged(channel, server)
 
   return read
 }
 
-function parseCommandString(read, message, channel) {
+function configStringsChanged(channel, server) {
+  // parse player info out of config strings
+  if(typeof server.players == 'undefined')
+    server.players = []
+  for(var i = CS_PLAYERS; i < CS_PLAYERS + MAX_CLIENTS; i++) {
+    if(!channel.configStrings[i]) continue
+    var player = server.players[i-CS_PLAYERS] || {}
+    Object.assign(player, parseConfigStr('\\' + channel.configStrings[i]))
+    server.players[i-CS_PLAYERS] = player
+  }
+}
+
+function systemInfoChanged(channel) {
+  channel.serverId = channel.systemInfo['sv_serverid']
+  channel.isPure = channel.systemInfo['sv_pure'] == '1'
+}
+
+function parseCommandString(read, message, channel, server) {
   if(typeof channel.serverCommands == 'undefined')
       channel.serverCommands = []
   read = readBits(message, read[0], 32)
@@ -269,18 +325,58 @@ function parseCommandString(read, message, channel) {
   var index = seq & (MAX_RELIABLE_COMMANDS-1)
   read = ReadString(read, message)
   channel.serverCommands[index] = read[1]
-  if(channel.serverCommands[index].includes('map_restart')) {
+  if(channel.serverCommands[index].match(/^map_restart /ig)) {
     channel.serverId = 0
   }
-  if(channel.serverCommands[index].includes('cs 1')) {
+  if(channel.serverCommands[index].match(/^cs [0-9]+ /ig)) {
+    console.log(channel.serverCommands[index])
+    var i = (/^cs ([0-9]+) /ig).exec(channel.serverCommands[index])[1]
+    var value = (/"(.*)"/ig).exec(channel.serverCommands[index])[1]
+    channel.configStrings[i] = value
+    configStringsChanged(channel, server)
+  }
+  if(channel.serverCommands[index].match(/^cs 1 /ig)) {
     channel.systemInfo = parseConfigStr((/"(.*)"/ig).exec(channel.serverCommands[index])[1])
-    channel.serverId = channel.systemInfo['sv_serverid']
-    channel.isPure = channel.systemInfo['sv_pure'] == '1'
+    systemInfoChanged(channel)
+  }
+  if(channel.serverCommands[index].match(/^scores /ig)) {
+    var segs = channel.serverCommands[index]
+      .split(' ').slice(1)
+    /*
+    level.sortedClients[i],
+		cl->ps.persistant[PERS_SCORE],
+		ping,
+		(level.time - cl->pers.enterTime)/60000,
+		scoreFlags,
+		g_entities[level.sortedClients[i]].s.powerups,
+		accuracy, 
+		cl->ps.persistant[PERS_IMPRESSIVE_COUNT],
+		cl->ps.persistant[PERS_EXCELLENT_COUNT],
+		cl->ps.persistant[PERS_GAUNTLET_FRAG_COUNT], 
+		cl->ps.persistant[PERS_DEFEND_COUNT], 
+		cl->ps.persistant[PERS_ASSIST_COUNT], 
+		perfect,
+		cl->ps.persistant[PERS_CAPTURES]);
+    */
+    console.log(channel.serverCommands[index])
+    if(typeof server.players == 'undefined')
+      server.players = []
+    for(var i = 0; i < segs.length / 17; i++) {
+      var gameI = parseInt(segs[(i * 17) + 0])
+      var player = server.players[gameI - 1] || {}
+      Object.assign(player, {
+        'i': gameI,
+        'score': parseInt(segs[(i * 17) + 4]),
+        'ping': parseInt(segs[(i * 17) + 5]),
+      })
+      server.players[gameI - 1] = player
+    }
+    //console.log(segs)
   }
   return read
 }
 
-function parseServerMessage(message, channel) {
+function parseServerMessage(message, channel, server) {
   // get the reliable sequence acknowledge number
   var read = readBits(message, 0, 32)
   channel.reliableAcknowledge = read[1]
@@ -310,7 +406,7 @@ function parseServerMessage(message, channel) {
         eventName = 'svc_nop'
       break
       case 2: // svc_gamestate
-        read = parseGamestate(read, message, channel)
+        read = parseGamestate(read, message, channel, server)
         eventName = 'svc_gamestate'
       break
       case 3: // svc_configstring
@@ -320,7 +416,7 @@ function parseServerMessage(message, channel) {
         eventName = 'svc_baseline'
       break
       case 5: // svc_serverCommand
-        read = parseCommandString(read, message, channel)
+        read = parseCommandString(read, message, channel, server)
         eventName = 'svc_serverCommand'
       break
       case 6: // svc_download

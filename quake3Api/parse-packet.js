@@ -60,7 +60,7 @@ async function packetEvent(m, rinfo) {
     //console.log(m)
     master.channel = master.channel || {}
     var commandNumber = master.channel.commandSequence
-    var channel = parseServerMessage(m, master.channel)
+    var channel = parseServerMessage(m, master.channel, master)
     if(channel === false) {
       return
     }
