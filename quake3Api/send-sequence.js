@@ -3,7 +3,7 @@ var {NETCHAN_GENCHECKSUM} = require('./send-checksums.js')
 var {mergeMaster} = require('./parse-packet.js')
 var {writeBits} = require('../quake3Utils/huffman.js')
 var lookupDNS = require('../utilities/dns.js')
-var {MAX_RELIABLE_COMMANDS} = require('./parse-server.js')
+var {MAX_RELIABLE_COMMANDS} = require('./config-strings.js')
 
 async function sendSequence(address, port, channel) {
   var msg

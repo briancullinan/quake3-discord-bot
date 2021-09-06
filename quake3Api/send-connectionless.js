@@ -1,6 +1,7 @@
 var dgram = require('dgram')
 var udpClient = dgram.createSocket('udp4')
-var {mergeMaster, packetEvent, nextResponse} = require('./parse-packet.js')
+var {mergeMaster, packetEvent} = require('./parse-packet.js')
+var nextResponse = require('./response-event.js')
 var {connectionlessEvent} = require('./parse-connectionless.js')
 var lookupDNS = require('../utilities/dns.js')
 udpClient.on('message', packetEvent)

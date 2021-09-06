@@ -3,8 +3,7 @@ var {
 } = require('../discordApi')
 var gamedig = require('gamedig')
 var {
-  sendRcon, nextResponse,
-  getServers, SV_EVENT
+  sendRcon, nextResponse, getServers, SV_EVENT
 } = require('../quake3Api')
 var parseConfigStr = require('../quake3Utils/parse-configstr.js')
 var removeCtrlChars = require('../quake3Utils/remove-ctrl.js')

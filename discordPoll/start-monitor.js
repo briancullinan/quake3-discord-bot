@@ -1,4 +1,5 @@
 var monitorServer = require('../quake3Utils/monitor-servers.js')
+var spectateServer = require('../quake3Utils/spectate-servers.js')
 var serverList = require('./server-list.js')
 
 function startMonitor() {
@@ -6,7 +7,7 @@ function startMonitor() {
     var address = s.split(':')[0]
     var port = parseInt(s.split(':')[1] || '27960')
     Promise.resolve(monitorServer(address, port))
-    //await spectateServer(address, port)
+    Promise.resolve(spectateServer(address, port))
   })
 }
 

@@ -1,5 +1,6 @@
 var GENTITYNUM_BITS = 10
 var MAX_POWERUPS = 16
+var MAX_GENTITIES = (1<<GENTITYNUM_BITS)
 
 var entityStateFields = [
     32, //  NETF(pos.trTime)
@@ -59,4 +60,5 @@ module.exports = {
   entityStateFields,
   GENTITYNUM_BITS,
   MAX_POWERUPS,
+  MAX_GENTITIES,
 }
