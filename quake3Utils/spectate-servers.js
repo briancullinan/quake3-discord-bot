@@ -8,6 +8,7 @@ var {mergeMaster} = require('../quake3Api/parse-packet.js')
 var {MAX_RELIABLE_COMMANDS} = require('../quake3Api/parse-server.js')
 var getServerChannel = require('./map-server.js')
 var {updateThread} = require('./update-channel.js')
+var saveMatch = require('./match-db.js')
 
 async function spectateServer(address = 'localhost', port = 27960) {
   var challenge = new ArrayBuffer(4)
@@ -51,12 +52,12 @@ async function spectateServer(address = 'localhost', port = 27960) {
 
   var commandNumber = server.channel.commandSequence
   // await print commands
-  info.chatListener = setInterval(async () => {
-    if(!info.chatWaiting) {
-      info.chatWaiting = true
+  server.chatListener = setInterval(async () => {
+    if(!server.chatWaiting) {
+      server.chatWaiting = true
       var channel = await nextResponse(
         'svc_serverCommand', address, port, true /* isChannel */)
-      info.chatWaiting = false
+      server.chatWaiting = false
       if(!channel) return
 
       // forward print commands to discord
@@ -64,11 +65,19 @@ async function spectateServer(address = 'localhost', port = 27960) {
         for(var j = commandNumber + 1; j <= channel.commandSequence; j++) {
           var index = j & (MAX_RELIABLE_COMMANDS-1)
           var message = channel.serverCommands[index] + ''
-          if((message).match(/^chat /i) /* || (message).match(/^print /i) */) {
+          if(message.match(/^chat /i) /* || (message).match(/^print /i) */) {
             console.log(server.ip + ':' + server.port + ' ---> ', message)
             //console.log(message.split('').map(c => c.charCodeAt(0)))
             message = removeCtrlChars((/"([^"]*?)"/).exec(message)[1])
             updateThread(threadName, discordChannel, message)
+          } else if (message.match(/^scores /i)) {
+            saveMatch(server)
+            if(server.scoreTimeout) {
+              clearTimeout(server.scoreTimeout)
+              server.scoreTimeout = setTimeout(() => {
+                Promise.resolve(sendReliable(address, port, 'score'))
+              }, 10000)
+            }
           } else {
             console.log(message)
           }
@@ -76,7 +85,10 @@ async function spectateServer(address = 'localhost', port = 27960) {
         commandNumber = channel.commandSequence
       }
     }
-  }, 100)
+  }, 20)
+  server.scoreTimeout = setTimeout(() => {
+    Promise.resolve(sendReliable(address, port, 'score'))
+  }, 10000)
 }
 
 module.exports = spectateServer
