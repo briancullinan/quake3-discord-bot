@@ -20,10 +20,9 @@ async function startResponder() {
     var commands = await readAllCommands('@me')
     await respondCommand(commands)
     var commands = await readInteractions()
-    //console.log(commands)
     await respondCommand(commands)
   } catch (e) {
-    console.log(e)
+    console.log('Command responder error', e)
   }
   stillRunning = false
   if(!commandResponder)

@@ -39,7 +39,7 @@ sed "$((fileLength-1))s/$/,/;
 ${fileLength}i  \\\t\"\":\"\"" ../index.json`, [], options)
         
     } catch (e) {
-        console.log(e)
+        console.log('Ssh error', e)
     }
 }
 

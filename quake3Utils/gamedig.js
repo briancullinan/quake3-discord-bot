@@ -72,13 +72,11 @@ async function getChats(channelId) {
     console.log(match[match.length-1])
   }
 
-  //console.log(await getGuildRoles('752561748611039362'))
   if(call.length) {
     await triggerTyping(channelId)        
   }
   for(var i = 0; i < call.length; i++) {
     try {
-      //console.log('Say: ' + call[i].value)
       await createMessage({
         embed: {
           title: removeCtrlChars(server.hostname || server.sv_hostname || server.gamename),

@@ -23,17 +23,21 @@ function printResponse(message) {
 }
 
 function challengeResponse(message) {
+  var segs = message.split(/\s+/ig)
   return {
-    challenge: message.split(/\s+/ig)[0]
+    challenge: segs[0],
+    channel: {
+      compat: segs[2] && parseInt(segs[2]) < 71
+    },
   }
 }
 
-function connectResponse(message) {
+function connectResponse(message, _, server) {
   return {
     // begin netchan compression
     connected: true,
     channel: {
-      compat: false,
+      compat: server.challengeResponse && server.challengeResponse.channel.compat,
       incomingSequence: 0,
       fragmentSequence: 0,
       serverSequence: 0,
@@ -45,7 +49,8 @@ function connectResponse(message) {
   }
 }
 
-function connectionlessPacket(message) {
+function connectionlessPacket(message, server) {
+  console.log(message.toString('utf-8'))
   var connectionlessResponses = [
     {name: 'getserversResponse', fn: getServersResponse},
     {name: 'getserversExtResponse', fn: getServersResponse},
@@ -61,11 +66,10 @@ function connectionlessPacket(message) {
     if(message.slice(0, name.length).toString('utf-8').toLowerCase() == name.toLowerCase()) {
       var buffer = message.slice(name.length)
       var message = buffer.toString('utf-8').trim()
-      var data = connectionlessResponses[i].fn(message, buffer)
+      var data = connectionlessResponses[i].fn(message, buffer, server)
       if(typeof data == 'object')
         data[name] = data
       connectionlessEvent.emit(name, data)
-      //console.log(name, data)
       return data
     }
   }

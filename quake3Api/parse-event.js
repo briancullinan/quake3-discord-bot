@@ -17,7 +17,7 @@ var SV_EVENT = {
 //} recentEvent_t;
 
 function recentEvent(message) {
-  console.log(message)
+  console.log('Server push event:', message)
   //var json = JSON.parse(message)
 }
 

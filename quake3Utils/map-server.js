@@ -14,7 +14,6 @@ async function getServerChannel(server) {
     channelsLastUpdated = (new Date).getTime()
     channels = (await guildChannels()).filter(c => c.type == 0)
     channelsLastUpdated = (new Date).getTime()
-    //console.log(channels)
     channelsUpdating = false
   }
   var channel

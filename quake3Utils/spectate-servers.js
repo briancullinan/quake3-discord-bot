@@ -5,7 +5,7 @@ var {
 var {DEFAULT_USERNAME} = require('../discordApi')
 var removeCtrlChars = require('./remove-ctrl.js')
 var {mergeMaster} = require('../quake3Api/parse-packet.js')
-var {MAX_RELIABLE_COMMANDS} = require('../quake3Api/parse-server.js')
+var {MAX_RELIABLE_COMMANDS} = require('../quake3Api/config-strings.js')
 var getServerChannel = require('./map-server.js')
 var {updateThread} = require('./update-channel.js')
 var saveMatch = require('./match-db.js')
@@ -22,7 +22,8 @@ async function spectateServer(address = 'localhost', port = 27960) {
   var channel = await sendConnect(address, port, {
     challenge: challengeResponse.challenge,
     name: DEFAULT_USERNAME,
-    protocol: 71,
+    protocol: challengeResponse.channel.compat ? 68 : 71,
+    model: 'orbb',
     cl_recentPassword: 'pass',
   })
   await nextResponse('svc_gamestate', address, port, true /* isChannel */)
@@ -30,11 +31,9 @@ async function spectateServer(address = 'localhost', port = 27960) {
     domain: address,
     port: port
   })
-  Object.assign(server, server.channel.serverInfo, server.channel.systemInfo)
-  //console.log('gamestate', server.sv_hostname || server.hostname)
-  console.log(server)
   if(!server.channel)
     return
+  Object.assign(server, server.channel.serverInfo, server.channel.systemInfo)
 
   if(server.channel.isPure) {
     // TODO: send valid "cp" checksums to pure servers
@@ -48,7 +47,6 @@ async function spectateServer(address = 'localhost', port = 27960) {
       .trim()
       .replace(/[^0-9a-z\-]/ig, '-')
   var discordChannel = await getServerChannel(server)
-  //console.log(discordChannel)
 
   var commandNumber = server.channel.commandSequence
   // await print commands
@@ -67,26 +65,20 @@ async function spectateServer(address = 'localhost', port = 27960) {
           var message = channel.serverCommands[index] + ''
           if(message.match(/^chat /i) /* || (message).match(/^print /i) */) {
             console.log(server.ip + ':' + server.port + ' ---> ', message)
-            //console.log(message.split('').map(c => c.charCodeAt(0)))
             message = removeCtrlChars((/"([^"]*?)"/).exec(message)[1])
             updateThread(threadName, discordChannel, message)
-          } else if (message.match(/^scores /i)) {
+          } else if (message.match(/^cs [0-9]+ /i)
+            || message.match(/^scores /i)) {
             saveMatch(server)
-            if(server.scoreTimeout) {
-              clearTimeout(server.scoreTimeout)
-              server.scoreTimeout = setTimeout(() => {
-                Promise.resolve(sendReliable(address, port, 'score'))
-              }, 10000)
-            }
           } else {
-            console.log(message)
+            console.log('Unrecognized', message)
           }
         }
         commandNumber = channel.commandSequence
       }
     }
   }, 20)
-  server.scoreTimeout = setTimeout(() => {
+  server.scoreTimeout = setInterval(() => {
     Promise.resolve(sendReliable(address, port, 'score'))
   }, 10000)
 }

@@ -23,6 +23,7 @@ var FUSE_CONFIG = {
   id: '1'
 }
 var searchAll
+var searchMaps
 
 function tokenSearch(search) {
   if(!searchAll) {
@@ -32,14 +33,13 @@ function tokenSearch(search) {
   return response
 }
 
-var mapSearch
 function mapSearch(bsp) {
-  if(!mapSearch) {
-    mapSearch = new Fuse(cache, Object.assign({}, FUSE_CONFIG, {
+  if(!searchMaps) {
+    searchMaps = new Fuse(cache, Object.assign({}, FUSE_CONFIG, {
       keys: ['includes.bsp'] // server status always set to bsp name nothing else
     }))
   }
-  var response = mapSearch.search(search)
+  var response = searchMaps.search(bsp)
   return response
 }
 

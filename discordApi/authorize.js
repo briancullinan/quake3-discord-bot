@@ -74,7 +74,7 @@ async function authorizeGateway() {
   try {
     result = await gatewayUrl()
   } catch (e) {
-    console.log(e.message)
+    console.log('Authorize error', e.message)
     ws = false
     wsConnecting = false
     return

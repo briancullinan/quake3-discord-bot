@@ -79,7 +79,6 @@ function parseServerMessage(message, channel, server) {
         eventName = 'svc_zcmd'
       break
     }
-    //console.log(channel)
     channel[eventName] = channel
     serverMessageEvent.emit(eventName, channel)
   }

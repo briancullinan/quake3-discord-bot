@@ -16,7 +16,6 @@ async function monitorServer(address = 'q3msk.ru', port = 27977) {
     domain: address,
     port: port
   })
-  //console.log(server)
 
   // automatically update server status
   if(!monitors[server.ip + ':' + server.port]) {
@@ -34,11 +33,9 @@ async function monitorServer(address = 'q3msk.ru', port = 27977) {
     + removeCtrlChars(server.sv_hostname || server.hostname)
       .trim()
       .replace(/[^0-9a-z\-]/ig, '-')
-  //console.log(threadName)
 
   var json = formatPlayerList(server)
   var channel = await getServerChannel(server)
-  //console.log(channel)
 
   var thread
   if(!channel) {
@@ -51,9 +48,9 @@ async function monitorServer(address = 'q3msk.ru', port = 27977) {
       thread = await updateChannelThread(threadName, channel, json)
     } catch (e) {
       if(e.response && e.response.data)
-        console.log(e.response.data.message)
+        console.log('Thread error', e.response.data.message)
       else
-        console.log(e)
+        console.log('Thread error', e)
     }
     server.channelId = thread.id
   }

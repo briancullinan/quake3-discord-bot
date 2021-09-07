@@ -7,11 +7,10 @@ var {MAX_RELIABLE_COMMANDS} = require('./config-strings.js')
 
 async function sendSequence(address, port, channel) {
   var msg
-  //console.log('seq', channel.serverSequence, channel.commandSequence)
   msg = writeBits([]    , 0     , channel.serverId || 0, 32)
   msg = writeBits(msg[1], msg[0], channel.serverId ? (channel.serverSequence || 0) : 0, 32)
   msg = writeBits(msg[1], msg[0], channel.serverId ? (channel.commandSequence || 0) : 0, 32)
-  
+
   // write any unacknowledged clientCommands
   for ( var i = channel.reliableAcknowledge + 1 ; i <= channel.reliableSequence ; i++ ) {
     msg = writeBits(msg[1], msg[0], 4, 8) // clc_clientCommand
@@ -37,24 +36,39 @@ async function sendSequence(address, port, channel) {
   msg = writeBits(msg[1], msg[0], 1, 1)
   // TODO: spectate and record player locations
   msg = writeBits(msg[1], msg[0], 0, 1) // no change
+  
+  msg = writeBits( msg[1], msg[0], 5, 8 ); // clc_EOF
 
   var dstIP = await lookupDNS(address)
   var qport = udpClient.address().port
-  var checksum = NETCHAN_GENCHECKSUM(channel.challenge, channel.outgoingSequence)
-  var msgBuff = Buffer.concat([new Buffer.from([
+  var msgBuff = new Buffer.from([
     (channel.outgoingSequence >> 0) & 0xFF,
     (channel.outgoingSequence >> 8) & 0xFF,
     (channel.outgoingSequence >> 16) & 0xFF,
     (channel.outgoingSequence >> 24) & 0xFF,
     (qport >> 0) & 0xFF,
     (qport >> 8) & 0xFF,
-    (checksum >> 0) & 0xFF,
-    (checksum >> 8) & 0xFF,
-    (checksum >> 16) & 0xFF,
-    (checksum >> 24) & 0xFF,
-  ]), msg[1]])
+  ])
+
+  var checksum = NETCHAN_GENCHECKSUM(channel.challenge, channel.outgoingSequence)
+  if(!channel.compat) {
+    msgBuff = Buffer.concat([
+      msgBuff,
+      new Buffer.from([
+        (checksum >> 0) & 0xFF,
+        (checksum >> 8) & 0xFF,
+        (checksum >> 16) & 0xFF,
+        (checksum >> 24) & 0xFF,
+      ])
+    ])
+  }
+
+  msgBuff = Buffer.concat([
+    msgBuff,
+    msg[1]
+  ])
+
   channel.outgoingSequence++
-  //console.log(qport, channel.commandSequence)
   udpClient.send(msgBuff, 0, msgBuff.length, port, dstIP)
 }
 

@@ -7,10 +7,14 @@ var {
 
 function configStringsChanged(channel, server) {
   // parse player info out of config strings
+  //console.log(channel.configStrings.slice(CS_PLAYERS, CS_PLAYERS + MAX_CLIENTS))
   if(typeof server.players == 'undefined')
     server.players = []
   for(var i = CS_PLAYERS; i < CS_PLAYERS + MAX_CLIENTS; i++) {
-    if(!channel.configStrings[i]) continue
+    if(!channel.configStrings[i]) {
+      delete server.players[i-CS_PLAYERS]
+      continue
+    }
     var player = server.players[i-CS_PLAYERS] || {}
     Object.assign(player, parseConfigStr('\\' + channel.configStrings[i]))
     server.players[i-CS_PLAYERS] = player
@@ -23,7 +27,8 @@ function systemInfoChanged(channel) {
 }
 
 function parsePlayerScores(command, channel, server) {
-  var segs = command.split(' ').slice(1)
+  //console.log(command)
+  var segs = command.split(' ').slice(4)
   /*
   level.sortedClients[i],
   cl->ps.persistant[PERS_SCORE],
@@ -42,17 +47,31 @@ function parsePlayerScores(command, channel, server) {
   */
   if(typeof server.players == 'undefined')
     server.players = []
-  for(var i = 0; i < segs.length / 17; i++) {
-    var gameI = parseInt(segs[(i * 17) + 0])
-    var player = server.players[gameI - 1] || {}
+  if(server.gamename.toLowerCase() == 'defrag') {
+    for(var i = 0; i < segs.length / 4; i++) {
+      var gameI = parseInt(segs[(i * 4) + 0])
+      var player = server.players[gameI] || {}
+      Object.assign(player, {
+        'i': gameI,
+        'rank': parseInt(segs[(i * 4) + 0]),
+        'score': parseInt(segs[(i * 4) + 1]),
+        'ping': parseInt(segs[(i * 4) + 2]),
+      })
+      server.players[gameI] = player
+    }
+    return
+  }
+  for(var i = 0; i < segs.length / 14; i++) {
+    var gameI = parseInt(segs[(i * 14) + 0])
+    var player = server.players[gameI] || {}
     Object.assign(player, {
       'i': gameI,
-      'score': parseInt(segs[(i * 17) + 4]),
-      'ping': parseInt(segs[(i * 17) + 5]),
+      'rank': parseInt(segs[(i * 14) + 0]),
+      'score': parseInt(segs[(i * 14) + 1]),
+      'ping': parseInt(segs[(i * 14) + 2]),
     })
-    server.players[gameI - 1] = player
+    server.players[gameI] = player
   }
-  //console.log(segs)
 }
 
 function parseCommandString(read, message, channel, server) {
@@ -68,7 +87,6 @@ function parseCommandString(read, message, channel, server) {
     channel.serverId = 0
   }
   if(channel.serverCommands[index].match(/^cs [0-9]+ /ig)) {
-    console.log(channel.serverCommands[index])
     var i = (/^cs ([0-9]+) /ig).exec(channel.serverCommands[index])[1]
     var value = (/"(.*)"/ig).exec(channel.serverCommands[index])[1]
     channel.configStrings[i] = value

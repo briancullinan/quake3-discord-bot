@@ -24,19 +24,19 @@ function mergeMaster(master) {
 }
 
 async function packetEvent(m, rinfo) {
+  var master = mergeMaster({
+    ip: rinfo.address,
+    port: rinfo.port
+  })
   if(m[0] == 255 && m[1] == 255 && m[2] == 255 && m[3] == 255) {
     m = m.slice(4, m.length)
-    var data = connectionlessPacket(m)
+    var data = connectionlessPacket(m, master)
     if(data)
       mergeMaster(Object.assign(data, {
         ip: rinfo.address,
         port: rinfo.port
       }))
   } else {
-    var master = mergeMaster({
-      ip: rinfo.address,
-      port: rinfo.port
-    })
     if(!master.connected) {
       console.log("Sequenced packet without connection")
       return
@@ -50,14 +50,12 @@ async function packetEvent(m, rinfo) {
     } else {
       m = m.slice(read / 8, m.length)
     }
-    //console.log(m)
     master.channel = master.channel || {}
     var commandNumber = master.channel.commandSequence
     var channel = parseServerMessage(m, master.channel, master)
     if(channel === false) {
       return
     }
-    //console.log(channel)
     // always respond with input event
     // response to snapshots automatically and not waiting,
     //   so new messages can be received

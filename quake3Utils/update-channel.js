@@ -52,7 +52,7 @@ async function updateChannelThread(threadName, channel, json) {
         } catch (e) {
           if(e.code == '400' 
             && ((e.response.data || {}).message || '').includes('archived')) {
-            console.log(e.response.data.message)
+            console.log('Archived error', e.response.data.message)
             return // do nothing because it will run again in 1 minute
           }
         }
