@@ -4,6 +4,31 @@ var {mergeMaster} = require('./parse-packet.js')
 var {writeBits} = require('../quake3Utils/huffman.js')
 var lookupDNS = require('../utilities/dns.js')
 var {MAX_RELIABLE_COMMANDS} = require('./config-strings.js')
+var CL_ENCODE_START = 12
+
+function netchanEncode(message, channel) {
+  var messageView = new Uint32Array(message)
+
+  var cmdI = channel.commandSequence & (MAX_RELIABLE_COMMANDS-1)
+  var string = (channel.serverCommands || [])[ cmdI ] || ''
+  var index = 0;
+  //
+  var key = channel.challenge ^ channel.serverId ^ channel.serverSequence
+  for (var i = CL_ENCODE_START; i < messageView.length; i++) {
+    // modify the key with the last received now acknowledged server command
+    if (!string[index])
+      index = 0
+    if (string[index] > 127 || string[index] == '%') {
+      key ^= '.' << (i & 1);
+    }
+    else {
+      key ^= string[index] << (i & 1)
+    }
+    index++;
+    // encode the data with this key
+    messageView[i] = messageView[i] ^ key
+  }
+}
 
 async function sendSequence(address, port, channel) {
   var msg
@@ -62,6 +87,8 @@ async function sendSequence(address, port, channel) {
       ])
     ])
   }
+
+  netchanEncode(msg[1], channel)
 
   msgBuff = Buffer.concat([
     msgBuff,

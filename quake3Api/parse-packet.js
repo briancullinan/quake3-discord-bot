@@ -1,6 +1,6 @@
 var {connectionlessPacket} = require('./parse-connectionless.js')
 var {parseServerMessage} = require('./parse-server.js')
-var netchanProcess = require('./parse-netchan.js')
+var {netchanProcess, netchanDecode} = require('./parse-netchan.js')
 
 var masters = []
 
@@ -41,6 +41,7 @@ async function packetEvent(m, rinfo) {
       console.log("Sequenced packet without connection")
       return
     }
+    master.channel = master.channel || {}
     var read = netchanProcess(m, master.channel)
     if(read === false) return // fragment message, do nothing more
     if(read === true && master.channel.fragmentLength) {
@@ -50,7 +51,10 @@ async function packetEvent(m, rinfo) {
     } else {
       m = m.slice(read / 8, m.length)
     }
-    master.channel = master.channel || {}
+
+    if(master.channel.compat)
+      netchanDecode(m, master.channel)
+
     var commandNumber = master.channel.commandSequence
     var channel = parseServerMessage(m, master.channel, master)
     if(channel === false) {

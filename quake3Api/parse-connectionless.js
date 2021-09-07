@@ -27,7 +27,7 @@ function challengeResponse(message) {
   return {
     challenge: segs[0],
     channel: {
-      compat: segs[2] && parseInt(segs[2]) < 71
+      compat: segs[2] && parseInt(segs[2]) < 71 || segs.length < 3
     },
   }
 }

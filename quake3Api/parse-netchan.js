@@ -1,9 +1,38 @@
 var {
   SwapLong, SwapShort, NETCHAN_GENCHECKSUM
 } = require('../quake3Utils/maths.js')
+var {readBits} = require('../quake3Utils/huffman.js')
+var {MAX_RELIABLE_COMMANDS} = require('./config-strings.js')
 var MAX_PACKETLEN = 1400
 var FRAGMENT_SIZE = (MAX_PACKETLEN - 100)
 var MAX_MSGLEN = 16384
+var CL_DECODE_START = 4
+
+function netchanDecode(message, channel) {
+  var messageView = new Uint32Array(message)
+  var read = readBits(message, 0, 32)
+  var reliableAcknowledge = read[1]
+
+  var cmdI = reliableAcknowledge & (MAX_RELIABLE_COMMANDS-1)
+  var string = channel.reliableCommands[ cmdI ] || ''
+  var index = 0;
+  // xor the client challenge with the netchan sequence number (need something that changes every message)
+  var key = channel.challenge ^ channel.serverSequence
+  for (var i = CL_DECODE_START; i < messageView.length; i++) {
+    // modify the key with the last sent and with this message acknowledged client command
+		if (!string[index])
+			index = 0;
+		if (string[index] > 127 || string[index] == '%') {
+			key ^= '.' << (i & 1)
+		}
+		else {
+			key ^= string[index] << (i & 1)
+		}
+		index++;
+		// decode the data with this key
+		messageView[i] = messageView[i] ^ key
+  }
+}
 
 function netchanProcess(message, channel) {
   var read = 0
@@ -22,9 +51,11 @@ function netchanProcess(message, channel) {
     var checksum = SwapLong(read, message)
     read += 32
     valid = NETCHAN_GENCHECKSUM(channel.challenge, sequence) === checksum
+  } else {
+    valid = true
   }
   if(!valid) {
-      console.log('Invalid message received', sequence, channel.challenge)
+      console.log('Invalid message received', channel.compat, sequence, channel.challenge)
       return false
   }
   
@@ -72,6 +103,8 @@ function netchanProcess(message, channel) {
       return false
     }
 
+    channel.serverSequence = sequence    
+
     return true
   }
 
@@ -80,4 +113,7 @@ function netchanProcess(message, channel) {
   return read
 }
 
-module.exports = netchanProcess
+module.exports = {
+  netchanProcess,
+  netchanDecode,
+}

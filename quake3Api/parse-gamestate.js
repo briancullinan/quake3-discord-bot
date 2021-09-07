@@ -21,7 +21,7 @@ function parseGamestate(read, message, channel, server) {
 
     switch(read[1]) {
       default: 
-        console.log('Bad command byte')
+        console.log('Bad command byte', read[1])
       break
       case 3: // svc_configstring
         read = readBits(message, read[0], 16)
