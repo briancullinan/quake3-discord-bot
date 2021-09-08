@@ -7,26 +7,26 @@ var {MAX_RELIABLE_COMMANDS} = require('./config-strings.js')
 var CL_ENCODE_START = 12
 
 function netchanEncode(message, channel) {
-  var messageView = new Uint32Array(message)
+  //var messageView = new Uint32Array(message)
 
   var cmdI = channel.commandSequence & (MAX_RELIABLE_COMMANDS-1)
   var string = (channel.serverCommands || [])[ cmdI ] || ''
   var index = 0;
   //
-  var key = channel.challenge ^ channel.serverId ^ channel.serverSequence
-  for (var i = CL_ENCODE_START; i < messageView.length; i++) {
+  var key = (channel.challenge ^ channel.serverId ^ channel.serverSequence) & 0xFF
+  for (var i = CL_ENCODE_START; i < message.length; i++) {
     // modify the key with the last received now acknowledged server command
-    if (!string[index])
+    if (!string.charCodeAt(index))
       index = 0
-    if (string[index] > 127 || string[index] == '%') {
+    if (string.charCodeAt(index) > 127 || string.charCodeAt(index) == '%') {
       key ^= '.' << (i & 1);
     }
     else {
-      key ^= string[index] << (i & 1)
+      key ^= string.charCodeAt(index) << (i & 1)
     }
     index++;
     // encode the data with this key
-    messageView[i] = messageView[i] ^ key
+    message[i] = message[i] ^ key
   }
 }
 

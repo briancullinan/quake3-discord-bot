@@ -19,6 +19,13 @@ async function spectateServer(address = 'localhost', port = 27960) {
   if(!info)
     return
   var challengeResponse = await getChallenge(address, port, new Uint32Array(challenge)[0], info.gamename || info.game)
+  var server = mergeMaster({
+    domain: address,
+    port: port
+  })
+  if(!server.channel)
+    return
+  //server.channel.compat = true
   /*
   \cg_predictItems\1\cl_anonymous\0\cl_execOverflow\200\cl_execTimeout\2000
   \cl_guid\C4F0CF703C5CBB24F1A2725C1BC801FB\cl_paused\0\color1\4\color2\5
@@ -29,7 +36,7 @@ async function spectateServer(address = 'localhost', port = 27960) {
   var channel = await sendConnect(address, port, {
     challenge: challengeResponse.challenge,
     name: DEFAULT_USERNAME,
-    protocol: challengeResponse.channel.compat ? 68 : 71,
+    protocol: server.channel.compat ? 68 : 71,
     model: 'orbb',
     cl_recentPassword: 'pass',
     client: 'Q3 1.32e',
@@ -39,12 +46,6 @@ async function spectateServer(address = 'localhost', port = 27960) {
     cl_anonymous: '0',
     
   })
-  var server = mergeMaster({
-    domain: address,
-    port: port
-  })
-  if(!server.channel)
-    return
   await nextResponse('svc_gamestate', address, port, true /* isChannel */)
   Object.assign(server, server.channel.serverInfo, server.channel.systemInfo)
 

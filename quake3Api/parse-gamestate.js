@@ -11,7 +11,6 @@ var	CS_SERVERINFO = 0 // an info string with all the serverinfo cvars
 var CS_SYSTEMINFO = 1 // an info string for server system to client system configuration (timescale, etc)
 
 function parseGamestate(read, message, channel, server) {
-  console.log('parse gamestate')
   read = readBits(message, read[0], 32)
   channel.commandSequence = read[1]
   while(true) {

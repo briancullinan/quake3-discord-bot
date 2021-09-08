@@ -6,10 +6,11 @@ var {MAX_RELIABLE_COMMANDS} = require('./config-strings.js')
 var MAX_PACKETLEN = 1400
 var FRAGMENT_SIZE = (MAX_PACKETLEN - 100)
 var MAX_MSGLEN = 16384
-var CL_DECODE_START = 4
+var CL_DECODE_START = 4 // not 4 becuse we trim off sequence
 
 function netchanDecode(message, channel) {
-  var messageView = new Uint32Array(message)
+  //var buffer = bufferToArrayBuffer(message)
+  //var messageView = new Uint32Array(buffer)
   var read = readBits(message, 0, 32)
   var reliableAcknowledge = read[1]
 
@@ -17,20 +18,20 @@ function netchanDecode(message, channel) {
   var string = channel.reliableCommands[ cmdI ] || ''
   var index = 0;
   // xor the client challenge with the netchan sequence number (need something that changes every message)
-  var key = channel.challenge ^ channel.serverSequence
-  for (var i = CL_DECODE_START; i < messageView.length; i++) {
+  var key = (channel.challenge ^ channel.serverSequence) & 0xFF
+  for (var i = CL_DECODE_START; i < message.length; i++) {
     // modify the key with the last sent and with this message acknowledged client command
-		if (!string[index])
+		if (!string.charCodeAt(index))
 			index = 0;
-		if (string[index] > 127 || string[index] == '%') {
+		if (string.charCodeAt(index) > 127 || string.charCodeAt(index) == '%') {
 			key ^= '.' << (i & 1)
 		}
 		else {
-			key ^= string[index] << (i & 1)
+			key ^= string.charCodeAt(index) << (i & 1)
 		}
 		index++;
 		// decode the data with this key
-		messageView[i] = messageView[i] ^ key
+		message[i] = message[i] ^ key
   }
 }
 
@@ -76,7 +77,6 @@ function netchanProcess(message, channel) {
   //channel.dropped = sequence - (channel.incomingSequence+1)
   
   if(fragment) {
-    console.log('fragment message')
     // fragment and only return on final message
     if(!channel.fragmentBuffer) channel.fragmentBuffer = Buffer.from([])
     if(sequence != channel.fragmentSequence) {

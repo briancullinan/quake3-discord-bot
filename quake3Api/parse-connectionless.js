@@ -50,7 +50,7 @@ function connectResponse(message, _, server) {
 }
 
 function connectionlessPacket(message, server) {
-  console.log(message.toString('utf-8'))
+  //console.log(message.toString('utf-8'))
   var connectionlessResponses = [
     {name: 'getserversResponse', fn: getServersResponse},
     {name: 'getserversExtResponse', fn: getServersResponse},

@@ -55,7 +55,6 @@ async function packetEvent(m, rinfo) {
     if(master.channel.compat)
       netchanDecode(m, master.channel)
 
-    var commandNumber = master.channel.commandSequence
     var channel = parseServerMessage(m, master.channel, master)
     if(channel === false) {
       return
