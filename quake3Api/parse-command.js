@@ -27,7 +27,7 @@ function systemInfoChanged(channel) {
 }
 
 function parsePlayerScores(command, channel, server) {
-  //console.log(command)
+  console.log(command)
   var segs = command.split(' ').slice(4)
   /*
   level.sortedClients[i],
@@ -88,7 +88,8 @@ function parseCommandString(read, message, channel, server) {
   }
   if(channel.serverCommands[index].match(/^cs [0-9]+ /ig)) {
     var i = (/^cs ([0-9]+) /ig).exec(channel.serverCommands[index])[1]
-    var value = (/"(.*)"/ig).exec(channel.serverCommands[index])[1]
+    var value = (/^cs [0-9]+ (.*)/ig).exec(channel.serverCommands[index])[1]
+    value = value.trim().replace(/^"|"$/ig, '')
     channel.configStrings[i] = value
     configStringsChanged(channel, server)
   }

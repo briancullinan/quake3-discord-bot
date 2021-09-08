@@ -7,7 +7,7 @@ var RESPONSE_INTERVAL = 20
 var MAX_TIMEOUT = process.env.DEFAULT_TIMEOUT || 10000
 var responses = {}
 
-async function nextResponse(key, address, port = 27960, isChannel = false) {
+async function nextResponse(key, address, port = 27960, isChannel = false, maxTimeout = MAX_TIMEOUT) {
   var timeout = 0
   var server
   if(!address) {
@@ -40,7 +40,7 @@ async function nextResponse(key, address, port = 27960, isChannel = false) {
       if(server[key] != null) {
         clearInterval(waiter)
         resolve(server[key])
-      } else if (timeout >= MAX_TIMEOUT) {
+      } else if (timeout >= maxTimeout) {
         // restore old value, but return empty
         server[key] = backup 
         clearInterval(waiter)

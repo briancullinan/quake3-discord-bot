@@ -1,0 +1,38 @@
+{
+  "sv_hostname": "\u0007^^44FRZ Tournament #1^0\u0007",
+  "hostname": "\u0007^^44FRZ Tournament #1^0\u0007",
+  "gamename": "osp",
+  "game": "osp",
+  "ip": "92.38.139.65",
+  "port": 27980,
+  "players": [
+    null,
+    {
+      "n": "Orbb",
+      "t": "3",
+      "model": "orbb/red",
+      "hmodel": "/red",
+      "c1": "",
+      "c2": "",
+      "hc": "100",
+      "w": "0",
+      "l": "0",
+      "rt": "3",
+      "st": "0",
+      "i": 1,
+      "rank": 1,
+      "score": 0,
+      "ping": 131
+    }
+  ],
+  "mapname": "q3dm7",
+  "channel": {
+    "serverId": "302363953",
+    "serverInfo": {
+      "timelimit": "20",
+      "fraglimit": "10",
+      "capturelimit": "0",
+      "gamename": "osp"
+    }
+  }
+}

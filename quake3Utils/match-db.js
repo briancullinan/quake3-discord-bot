@@ -23,8 +23,10 @@ function checkMatchTimestamp(mapname, hash, serverId) {
   var times = matches.filter(m => {
     if(m[0] == '.') return false
     var segs = m.split(/[\-\.]|\.json/ig)
+    //console.log(hash, '!=', segs[segs.length-3], serverId, '!=', segs[segs.length-2])
     if(hash == segs[segs.length-3] && serverId == segs[segs.length-2]) {
       var match = require(path.join(MATCH_DIR, m))
+      //console.log(match)
       if(match.mapname == mapname
         && (now - parseInt(segs[0]) < MATCH_INTERVAL
           || match.channel.serverInfo.timelimit == 0
@@ -39,7 +41,7 @@ function checkMatchTimestamp(mapname, hash, serverId) {
 
 function saveMatch(server) {
   var title = removeCtrlChars(server.sv_hostname || server.hostname || server.gamename || server.game || '')
-  var hash = hashString(server.ip + ':' + server.port + '-' + title)
+  var hash = hashString(server.ip + ':' + server.port)
   if(hash < 0) {
     hash = -hash
   }
@@ -56,7 +58,7 @@ function saveMatch(server) {
   //   together
   // timestamp-0.0.0.0-27960-server name-00000000-serverId
   var file = (new Date()).getTime() + '-' + server.ip
-    + '-' + server.port + '-' + title + '-' + hash
+    + '-' + server.port + '-' + title.replace(/[^a-z0-9]/ig, '') + '-' + hash
     + '-' + server.channel.serverId
   var existingMatch = checkMatchTimestamp(server.mapname, hash, server.channel.serverId)
   // TODO: add fields?
@@ -85,6 +87,7 @@ function saveMatch(server) {
   } else {
     fs.writeFileSync(path.join(MATCH_DIR, file + '.json'), obj)
   }
+  lastMatchLoad = 0
 }
 
 module.exports = saveMatch

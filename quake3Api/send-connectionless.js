@@ -28,8 +28,15 @@ async function sendConnectionless(buffer, address, port) {
 }
 
 async function getChallenge(address, port = 27960, challenge, gamename) {
-  await sendConnectionless(`getchallenge ${challenge} ${gamename}`, address, port)
-  return await nextResponse('challengeResponse', address, port)
+  for(var i = 0; i < 3; i++) {
+    console.log(`Challenging ${i+1} (${challenge} ${gamename})...`)
+    await sendConnectionless(`getchallenge ${challenge} ${gamename}`, address, port)
+    var challengeResponse = await nextResponse('challengeResponse', address, port, false, 2 * 1000)
+    if(challengeResponse) {
+      break
+    }
+  }
+  return challengeResponse
 }
 
 async function sendConnect(address, port = 27960, info) {

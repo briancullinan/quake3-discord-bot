@@ -11,20 +11,28 @@ var {updateThread} = require('./update-channel.js')
 var saveMatch = require('./match-db.js')
 
 async function spectateServer(address = 'localhost', port = 27960) {
-  var challenge = new ArrayBuffer(4)
+  var challenge = []
   for(var c = 0; c < 4; c++) {
       challenge[c] = Math.round(Math.random() * 255)
   }
+  var unsigned = new Uint32Array(Uint8Array.from(challenge).buffer)
   var info = await getInfo(address, port)
   if(!info)
     return
-  var challengeResponse = await getChallenge(address, port, new Uint32Array(challenge)[0], info.gamename || info.game)
+  var challengeResponse = await getChallenge(
+    address, port, 
+    unsigned[0].toString(), 
+    info.gamename || 'Quake3Arena'
+  )
   var server = mergeMaster({
     domain: address,
     port: port
   })
-  if(!server.channel)
+  if(!server.channel) {
+    console.log('Could not connect.')
     return
+  }
+  console.log(challengeResponse)
   //server.channel.compat = true
   /*
   \cg_predictItems\1\cl_anonymous\0\cl_execOverflow\200\cl_execTimeout\2000
