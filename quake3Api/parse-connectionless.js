@@ -44,13 +44,13 @@ function connectResponse(message, _, server) {
       outgoingSequence: 0,
       reliableSequence: 0,
       reliableCommands: [],
-      challenge: message.split(/\s+/ig)[0]
+      challenge: message.split(/\s+/ig)[0] || server.challengeResponse.challenge
     }
   }
 }
 
 function connectionlessPacket(message, server) {
-  //console.log(message.toString('utf-8'))
+  console.log(message.toString('utf-8'))
   var connectionlessResponses = [
     {name: 'getserversResponse', fn: getServersResponse},
     {name: 'getserversExtResponse', fn: getServersResponse},

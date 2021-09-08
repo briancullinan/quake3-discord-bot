@@ -8,7 +8,6 @@ var CL_ENCODE_START = 12
 
 function netchanEncode(message, channel) {
   //var messageView = new Uint32Array(message)
-
   var cmdI = channel.commandSequence & (MAX_RELIABLE_COMMANDS-1)
   var string = (channel.serverCommands || [])[ cmdI ] || ''
   var index = 0;
@@ -88,7 +87,8 @@ async function sendSequence(address, port, channel) {
     ])
   }
 
-  netchanEncode(msg[1], channel)
+  if(channel.compat)
+    netchanEncode(msg[1], channel)
 
   msgBuff = Buffer.concat([
     msgBuff,
