@@ -19,7 +19,7 @@ var DISCORD_COMMANDS = {
   RANKINGS: /^[!\\\/]?rankings\s+(\w*)/ig,
   STATS: /^[!\\\/]?stats?\s+(\w*)/ig,
   HELLO: /^[!\\\/]?(\w\s*){0,2}hello(\w\s*){0,2}/ig,
-  UNKNOWN: /.*/ig,
+//  UNKNOWN: /.*/ig,
 }
 
 var ALL_COMMANDS = [

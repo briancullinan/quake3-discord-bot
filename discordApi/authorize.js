@@ -12,11 +12,11 @@ var wsConnecting = false
 var previousRequest = 0
 
 async function delay() {
-  var now = (new Date()).getTime()
+  var now = Date.now()
   previousRequest = now
   if(now - previousRequest < DEFAULT_RATE)
     await new Promise(resolve => setTimeout(resolve, DEFAULT_RATE - (now - previousRequest)))
-  previousRequest = (new Date()).getTime()
+  previousRequest = Date.now()
 }
 
 async function requestAuthQ(outgoing) {

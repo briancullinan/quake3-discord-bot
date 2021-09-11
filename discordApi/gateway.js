@@ -23,7 +23,7 @@ function gatewayMessage(ws, reconnectGateway, message) {
   var gateway = JSON.parse(msgBuff.toString('utf-8'))
   if(gateway.s) seq = gateway.s
   if(gateway.d && gateway.d.seq) seq = gateway.d.seq
-  console.log('Gateway message', gateway)
+  //console.log('Gateway message', gateway)
   if(gateway.op == 10) {
     ws.identified = true
     heartbeat = setInterval(sendHeartbeat.bind(null, ws), gateway.d.heartbeat_interval)

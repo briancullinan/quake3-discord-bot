@@ -2,8 +2,9 @@ var {
   userGuilds, guildChannels, channelMessages,
   DEFAULT_USERNAME,
 } = require('../discordApi')
-var {privateChannels} = require('../discordApi/gateway.js')
 var {DISCORD_COMMANDS} = require('../discordCmds')
+var {MESSAGE_TIME} = require('../discordApi/default-config.js')
+var messageIds = {}
 
 function interpretCommand(message) {
   return Object.keys(DISCORD_COMMANDS)
@@ -17,46 +18,20 @@ function interpretCommand(message) {
             || (e.description && e.description.match(DISCORD_COMMANDS[k]))).length > 0))
 }
 
-async function readAllCommands(specificChannel) {
+async function readAllCommands(channel, private = false, thread = false) {
   // matching format  @megamind  challenge freon dm17 , :thumbsup:   :thumbsdown: .
-  var private = false
-  var messages = []
+  var messages  = []
   var responses = []
-  var channels = []
-  var commands = []
-  var launches = []
-  
-  if(specificChannel == '@me') {
-    // only read channel if it was updated within the last hour
-    var userChannels = Object
-      .keys(privateChannels)
-      .filter(k => privateChannels[k] > Date.now() - 1000 * 60 * 60)
-      .map(k => ({id: k}))
-    channels.push.apply(channels, userChannels)
-    specificChannel = ''
-    private = true
-  } else {
-    var guilds = await userGuilds()
-    console.log(`Reading ${guilds.length} guilds`)
-    for(var i = 0; i < guilds.length; i++) {
-      channels.push.apply(channels, await guildChannels(guilds[i].id))
-    }
-  }
-  
-  console.log(`Reading ${channels.length} channels`)
-  for(var i = 0; i < channels.length; i++) {
-    if(!specificChannel
-      || channels[i].id == specificChannel
-      || (typeof specificChannel == 'string'
-      && (specificChannel.length === 0
-       || (channels[i].name
-         && channels[i].name.match(new RegExp(specificChannel, 'ig'))
-      )))) {
-      console.log(`Reading ${channels[i].name}`)
-      messages.push.apply(messages, await channelMessages(channels[i].id))
-    }
-  }
-  
+  var commands  = []
+  var launches  = []
+  var now       = Date.now()
+
+  Object.keys(messageIds)
+    .filter(t => now - t > MESSAGE_TIME * 2)
+    .forEach(t => delete messageIds[t])
+
+  var messages = await channelMessages(channel.id)
+
   // find commands in channel history
   console.log(`Reading ${messages.length} messages`)
   for(var j = 0; j < messages.length; j++) {
@@ -71,11 +46,13 @@ async function readAllCommands(specificChannel) {
         launches.push(messages[j])
       }
     }
+
     if(messages[j].content.match(/```BOT/ig)) {
       responses.push(messages[j])
       if((messages[j].reactions || [])
         .filter(a => a.emoji.name == '\u{1F44D}').length > 0) {
-        var l = messages.filter(m => messages[j].content.match('```BOT'+m.id))[0]
+        var l = messages.filter(m => messages[j].content
+          .match('```BOT'+m.id))[0]
         if(!l) continue
         l.launching = true
         l.reactions = l.reactions || []
@@ -83,7 +60,20 @@ async function readAllCommands(specificChannel) {
         if(l) launches.push(l)
       }
     }
+
+    if(messages[j].author.username != DEFAULT_USERNAME
+      && thread && applicableCommands.length == 0
+      && !Object.values(messageIds).flat().includes(messages[j].id)
+    ) {
+      messages[j].thread = true
+      messages[j].commands = ['RELAY']
+      messages[j].thread = thread
+      commands.push(messages[j])
+    }
   }
+
+  // save the ids in memory for extra safety
+  messageIds[now] = messages.map(m => m.id)
 
   // exclude commands that already got a response
   return commands

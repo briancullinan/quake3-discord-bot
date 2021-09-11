@@ -22,7 +22,8 @@ async function updateThread(threadName, channel, json) {
       thread = await createThread(threadName, channel.id)
     }
   }
-  await createMessage(json, thread.id)
+  if(json)
+    await createMessage(json, thread.id)
   return thread
 }
 

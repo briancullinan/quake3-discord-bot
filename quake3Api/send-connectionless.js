@@ -22,11 +22,11 @@ function udpPort() {
 }
 
 async function udpSend(msgBuff, port, dstIP) {
-  var now = (new Date()).getTime()
+  var now = Date.now()
   previousSend = now
   if(now - previousSend < DEFAULT_RATE)
     await new Promise(resolve => setTimeout(resolve, DEFAULT_RATE - (now - previousSend)))
-  previousSend = (new Date()).getTime()
+  previousSend = Date.now()
   udpClient.send(msgBuff, 0, msgBuff.length, port, dstIP)
 }
 

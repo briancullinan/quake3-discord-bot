@@ -1,7 +1,6 @@
 var {DEFAULT_CHANNEL} = require('./default-config.js')
 var {request} = require('./authorize.js')
 
-
 async function createMessage(message, channelId = DEFAULT_CHANNEL) {
   var params = typeof message == 'string' ? ({
     'content': message

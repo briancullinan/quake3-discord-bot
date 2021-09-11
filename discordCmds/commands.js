@@ -42,12 +42,16 @@ async function respondCommand(commands) {
       response = await chatCommand(commands[i])
     else if(commands[i].commands.includes('SEARCH'))
       response = await searchCommand(commands[i])
+    else if(commands[i].commands.includes('RELAY'))
+      continue // response = await relayCommand(commands[i])
     else if(commands[i].private) {
       console.log('Unknown command', commands[i])
       //await unknownCommand(commands[i])
+      continue
     }
     
-    await replyCommand(response, commands[i])
+    if(response)
+      await replyCommand(response, commands[i])
   }
 }
 

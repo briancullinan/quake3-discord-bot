@@ -9,7 +9,7 @@ var MATCH_INTERVAL = 9 * 1000
 var matches = []
 
 function loadMatches() {
-  var now = (new Date()).getTime()
+  var now = Date.now()
   if(now - lastMatchLoad > MATCH_INTERVAL) {
     lastMatchLoad = now
     matches = fs.readdirSync(MATCH_DIR)
@@ -18,7 +18,7 @@ function loadMatches() {
 
 function checkMatchTimestamp(mapname, hash, serverId) {
   loadMatches()
-  var now = (new Date()).getTime()
+  var now = Date.now()
   // try to find a match within 60 seconds matching one of hash and serverId
   var times = matches.filter(m => {
     if(m[0] == '.') return false
@@ -57,7 +57,7 @@ function saveMatch(server) {
   //   same title, so including them might allow admins to piece ranks back 
   //   together
   // timestamp-0.0.0.0-27960-server name-00000000-serverId
-  var file = (new Date()).getTime() + '-' + server.ip
+  var file = Date.now() + '-' + server.ip
     + '-' + server.port + '-' + title.replace(/[^a-z0-9]/ig, '') + '-' + hash
     + '-' + server.channel.serverId
   var existingMatch = checkMatchTimestamp(server.mapname, hash, server.channel.serverId)
