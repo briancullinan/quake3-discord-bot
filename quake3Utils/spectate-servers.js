@@ -95,7 +95,8 @@ async function spectateServer(address = 'localhost', port = 27960) {
         if(message.length == 0 
           || message.substr(0, DEFAULT_USERNAME.length + 1) == DEFAULT_USERNAME + ':')
           continue
-        Promise.resolve(updateThread(threadName, discordChannel, message))
+        if(discordChannel)
+          Promise.resolve(updateThread(threadName, discordChannel, message))
       } else if (message.match(/^cs [0-9]+ /i)
         || message.match(/^scores /i)) {
         // switch teams back to spectater in case automatically joined 
@@ -116,16 +117,17 @@ async function spectateServer(address = 'localhost', port = 27960) {
   }, 100)
   
   var discordThread
-  server.relayListener = setInterval(async () => {
-    if(!discordThread)
-      discordThread = await updateThread(threadName, discordChannel)
-    var commands = (await readAllCommands(discordThread, false, true))
-      .filter(c => c.commands.includes('RELAY') && c.content)
-    for(var i = 0; i < commands.length; i++) {
-      Promise.resolve(sendReliable(address, port, 
-        'say ' + commands[i].author.username + ': ' + commands[i].content))
-    }
-  }, 3000)
+  if(discordChannel)
+    server.relayListener = setInterval(async () => {
+      if(!discordThread)
+        discordThread = await updateThread(threadName, discordChannel)
+      var commands = (await readAllCommands(discordThread, false, true))
+        .filter(c => c.commands.includes('RELAY') && c.content)
+      for(var i = 0; i < commands.length; i++) {
+        Promise.resolve(sendReliable(address, port, 
+          'say ' + commands[i].author.username + ': ' + commands[i].content))
+      }
+    }, 3000)
 }
 
 module.exports = spectateServer
