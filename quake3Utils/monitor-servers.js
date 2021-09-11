@@ -1,4 +1,4 @@
-var {getInfo, getStatus} = require('../quake3Api')
+var {getInfo, getStatus, getUser} = require('../quake3Api')
 var getServerChannel = require('./map-server.js')
 var {updateChannelThread} = require('./update-channel.js')
 var {mergeMaster} = require('../quake3Api/parse-packet.js')
@@ -48,11 +48,10 @@ async function monitorServer(address = 'q3msk.ru', port = 27977) {
       thread = await updateChannelThread(threadName, channel, json)
     } catch (e) {
       if(e.response && e.response.data)
-        console.log('Thread error', e.response.data.message)
+        console.log('Thread error', e.response.data.message, e)
       else
         console.log('Thread error', e)
     }
-    server.channelId = thread.id
   }
   return thread
 }

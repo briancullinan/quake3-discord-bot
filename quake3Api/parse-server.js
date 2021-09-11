@@ -65,7 +65,7 @@ function parseServerMessage(message, channel, server) {
         // TODO: properly parse snapshot and read XYZ locations
         eventName = 'svc_snapshot'
         channel[eventName] = channel
-        serverMessageEvent.emit(eventName, channel)
+        //serverMessageEvent.emit(eventName, channel)
         return
       break
       case 9: // svc_voipSpeex
@@ -80,7 +80,7 @@ function parseServerMessage(message, channel, server) {
       break
     }
     channel[eventName] = channel
-    serverMessageEvent.emit(eventName, channel)
+    //serverMessageEvent.emit(eventName, channel)
   }
   return channel
 }

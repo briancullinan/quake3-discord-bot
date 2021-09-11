@@ -2,7 +2,9 @@ var {
   archivedThreads, getPins,
   activeThreads, createThread, createMessage,
   pinMessage, unpinMessage, DEFAULT_USERNAME,
+  userInfo, addThreadMember,
 } = require('../discordApi')
+var userInfo
 
 async function updateThread(threadName, channel, json) {
   // find old threads to reactivate
@@ -59,6 +61,10 @@ async function updateChannelThread(threadName, channel, json) {
       }
     } else {
       thread = await createThread(threadName, channel.id)
+      if(!userInfo) {
+        userInfo = await getUser()
+      }
+      await addThreadMember(userInfo.id, thread.id)
     }
   }
   // create new "whos online message"

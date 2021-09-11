@@ -31,8 +31,16 @@ async function activeThreads(channelId = DEFAULT_CHANNEL) {
   })
 }
 
+async function addThreadMember(memberId, channelId) {
+  return await request({
+    method: 'PUT',
+    url: `/channels/${channelId}/thread-members/${memberId}`
+  })
+}
+
 module.exports = {
   createThread,
   archivedThreads,
-  activeThreads
+  activeThreads,
+  addThreadMember,
 }

@@ -1,4 +1,4 @@
-var {udpClient} = require('./send-connectionless.js')
+var {udpPort, udpSend} = require('./send-connectionless.js')
 var {NETCHAN_GENCHECKSUM} = require('./send-checksums.js')
 var {mergeMaster} = require('./parse-packet.js')
 var {writeBits} = require('../quake3Utils/huffman.js')
@@ -64,7 +64,7 @@ async function sendSequence(address, port, channel) {
   msg = writeBits( msg[1], msg[0], 5, 8 ); // clc_EOF
 
   var dstIP = await lookupDNS(address)
-  var qport = udpClient.address().port
+  var qport = udpPort()
   var msgBuff = new Buffer.from([
     (channel.outgoingSequence >> 0) & 0xFF,
     (channel.outgoingSequence >> 8) & 0xFF,
@@ -96,7 +96,7 @@ async function sendSequence(address, port, channel) {
   ])
 
   channel.outgoingSequence++
-  udpClient.send(msgBuff, 0, msgBuff.length, port, dstIP)
+  await udpSend(msgBuff, port, dstIP)
 }
 
 async function sendReliable(address, port, cmd) {

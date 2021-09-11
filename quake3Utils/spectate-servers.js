@@ -5,7 +5,7 @@ var {
 var {DEFAULT_USERNAME} = require('../discordApi')
 var removeCtrlChars = require('./remove-ctrl.js')
 var {mergeMaster} = require('../quake3Api/parse-packet.js')
-var {MAX_RELIABLE_COMMANDS} = require('../quake3Api/config-strings.js')
+var {MAX_RELIABLE_COMMANDS, CS_PLAYERS} = require('../quake3Api/config-strings.js')
 var getServerChannel = require('./map-server.js')
 var {updateThread} = require('./update-channel.js')
 var saveMatch = require('./match-db.js')
@@ -32,7 +32,6 @@ async function spectateServer(address = 'localhost', port = 27960) {
     console.log('Could not connect.')
     return
   }
-  console.log(challengeResponse)
   //server.channel.compat = true
   /*
   \cg_predictItems\1\cl_anonymous\0\cl_execOverflow\200\cl_execTimeout\2000
@@ -54,6 +53,10 @@ async function spectateServer(address = 'localhost', port = 27960) {
     cl_anonymous: '0',
     
   })
+  if(!channel) {
+    console.log('Could not connect.')
+    return
+  }
   await nextResponse('svc_gamestate', address, port, true /* isChannel */)
   Object.assign(server, server.channel.serverInfo, server.channel.systemInfo)
 
@@ -62,7 +65,12 @@ async function spectateServer(address = 'localhost', port = 27960) {
     await sendPureChecksums(address, port, server.channel)
   }
   await nextResponse('svc_snapshot', address, port, true /* isChannel */)
+  var teamChanged = (new Date()).getTime()
+  
   await sendReliable(address, port, 'team s')
+  server.scoreTimeout = setInterval(() => {
+    Promise.resolve(sendReliable(address, port, 'score'))
+  }, 10000)
 
   var threadName = 'Pickup for '
     + removeCtrlChars(server.sv_hostname || server.hostname)
@@ -88,9 +96,19 @@ async function spectateServer(address = 'localhost', port = 27960) {
           if(message.match(/^chat /i) /* || (message).match(/^print /i) */) {
             console.log(server.ip + ':' + server.port + ' ---> ', message)
             message = removeCtrlChars((/"([^"]*?)"/).exec(message)[1])
+            if(message.length == 0)
+              continue
             updateThread(threadName, discordChannel, message)
           } else if (message.match(/^cs [0-9]+ /i)
             || message.match(/^scores /i)) {
+            // switch teams back to spectater in case automatically joined on map change or something
+            if(message.includes('cs ' + (CS_PLAYERS + channel.clientNum))
+              && (new Date()).getTime() - teamChanged > 30 * 1000) {
+              Promise.resolve(sendReliable(address, port, 'team s'))
+              teamChanged = (new Date()).getTime()
+            }
+            if(!server.channel.serverId)
+              continue
             saveMatch(server)
           } else {
             console.log('Unrecognized', message)
@@ -99,10 +117,7 @@ async function spectateServer(address = 'localhost', port = 27960) {
         commandNumber = channel.commandSequence
       }
     }
-  }, 20)
-  server.scoreTimeout = setInterval(() => {
-    Promise.resolve(sendReliable(address, port, 'score'))
-  }, 10000)
+  }, 100)
 }
 
 module.exports = spectateServer

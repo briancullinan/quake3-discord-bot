@@ -31,6 +31,8 @@ module.exports = {
     interactionResponse, updateInteraction, updateCommand
   } = require('./commands.js'),
   ... {
-    createThread, archivedThreads, activeThreads
-  } = require('./threads.js')
+    createThread, archivedThreads, activeThreads,
+    addThreadMember,
+  } = require('./threads.js'),
+  ... {getUser} = require('./users.js'),
 }

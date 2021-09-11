@@ -8,7 +8,9 @@ function formatPlayerList(server) {
     var blueTeam = (server.Players_Blue || '').trim()
         .split(/\s+/ig).filter(n => n)
         .map(i => parseInt(i))
-    server.players.forEach(p => {
+    var players = server.players
+      .filter(p => p.name)
+    players.forEach(p => {
         if(redTeam.includes(p.i))
             p.team = 'red'
         else if (blueTeam.includes(p.i))
@@ -16,7 +18,7 @@ function formatPlayerList(server) {
         else
             p.team = 'other'
     })
-    server.players.sort((a, b) => {
+    players.sort((a, b) => {
         return a.team - b.team
     })
     var json
@@ -34,34 +36,34 @@ function formatPlayerList(server) {
                     },
                     {
                         name: 'Players',
-                        value: server.players.length + '/' + server.sv_maxclients,
+                        value: players.length + '/' + server.sv_maxclients,
                         inline: false
                     },
                     {
                         name: 'Player',
                         value: ':red_circle: Red Team\n```http\n' 
-                            + server.players.filter(p => p.team == 'red').map((p, i) => (p.i) + ') ' 
+                            + players.filter(p => p.team == 'red').map((p, i) => (p.i) + ') ' 
                             + removeCtrlChars(p.name)).join('\n') + '\u0020\n```\n'
                             + ':blue_circle: Blue Team\n```http\n' 
-                            + server.players.filter(p => p.team == 'blue').map((p, i) => (p.i) + ') ' 
+                            + players.filter(p => p.team == 'blue').map((p, i) => (p.i) + ') ' 
                             + removeCtrlChars(p.name)).join('\n') + '\u0020\n```\n'
                             + 'Other\n```http\n' 
-                            + server.players.filter(p => p.team == 'other').map((p, i) => (p.i) + ') ' 
+                            + players.filter(p => p.team == 'other').map((p, i) => (p.i) + ') ' 
                             + removeCtrlChars(p.name)).join('\n') + '\u0020\n```\n',
                         inline: true
                     },
                     {
                         name: 'Score',
-                        value: '\u0020\n-\n```yaml\n' + server.players.filter(p => p.team == 'red').map(p => p.score).join('\n') + '\u0020\n```'
-                            + '\u0020\n-\n```yaml\n' + server.players.filter(p => p.team == 'blue').map(p => p.score).join('\n') + '\u0020\n```'
-                            + '\u0020\n-\n```yaml\n' + server.players.filter(p => p.team == 'other').map(p => p.score).join('\n') + '\u0020\n```',
+                        value: '\u0020\n-\n```yaml\n' + players.filter(p => p.team == 'red').map(p => p.score).join('\n') + '\u0020\n```'
+                            + '\u0020\n-\n```yaml\n' + players.filter(p => p.team == 'blue').map(p => p.score).join('\n') + '\u0020\n```'
+                            + '\u0020\n-\n```yaml\n' + players.filter(p => p.team == 'other').map(p => p.score).join('\n') + '\u0020\n```',
                         inline: true
                     },
                     {
                         name: 'Ping',
-                        value: '\u0020\n-\n```fix\n' + server.players.filter(p => p.team == 'red').map(p => p.ping).join('\n') + '\u0020\n```'
-                            + '\u0020\n-\n```fix\n' + server.players.filter(p => p.team == 'blue').map(p => p.ping).join('\n') + '\u0020\n```'
-                            + '\u0020\n-\n```fix\n' + server.players.filter(p => p.team == 'other').map(p => p.ping).join('\n') + '\u0020\n```',
+                        value: '\u0020\n-\n```fix\n' + players.filter(p => p.team == 'red').map(p => p.ping).join('\n') + '\u0020\n```'
+                            + '\u0020\n-\n```fix\n' + players.filter(p => p.team == 'blue').map(p => p.ping).join('\n') + '\u0020\n```'
+                            + '\u0020\n-\n```fix\n' + players.filter(p => p.team == 'other').map(p => p.ping).join('\n') + '\u0020\n```',
                         inline: true
                     }
                 ]
@@ -81,23 +83,23 @@ function formatPlayerList(server) {
                     },
                     {
                         name: 'Players',
-                        value: server.players.length + '/' + server.sv_maxclients,
+                        value: players.length + '/' + server.sv_maxclients,
                         inline: false
                     },
                     {
                         name: 'Player',
-                        value: '```http\n' + server.players.map((p, i) => (p.i) + ') ' 
+                        value: '```http\n' + players.map((p, i) => (p.i) + ') ' 
                             + removeCtrlChars(p.name)).join('\n') + '\u0020\n```',
                         inline: true
                     },
                     {
                         name: 'Score',
-                        value: '```yaml\n' + server.players.map(p => p.score).join('\n') + '\u0020\n```',
+                        value: '```yaml\n' + players.map(p => p.score).join('\n') + '\u0020\n```',
                         inline: true
                     },
                     {
                         name: 'Ping',
-                        value: '```fix\n' + server.players.map(p => p.ping).join('\n') + '\u0020\n```',
+                        value: '```fix\n' + players.map(p => p.ping).join('\n') + '\u0020\n```',
                         inline: true
                     }
                 ]

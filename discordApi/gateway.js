@@ -23,12 +23,20 @@ function gatewayMessage(ws, reconnectGateway, message) {
   var gateway = JSON.parse(msgBuff.toString('utf-8'))
   if(gateway.s) seq = gateway.s
   if(gateway.d && gateway.d.seq) seq = gateway.d.seq
+  console.log('Gateway message', gateway)
   if(gateway.op == 10) {
     ws.identified = true
     heartbeat = setInterval(sendHeartbeat.bind(null, ws), gateway.d.heartbeat_interval)
     ws.send(JSON.stringify({
       op: 2,
-      intents: ['DIRECT_MESSAGES', 'GUILD_MESSAGES', 'GUILDS'],
+      intents: [
+        'DIRECT_MESSAGES', 'DIRECT_MESSAGE_REACTIONS', 
+        'GUILD_MESSAGES', 'GUILD_MESSAGE_REACTIONS', 
+        'GUILDS', 'THREAD_UPDATE', 'THREAD_CREATE',
+        'THREAD_DELETE', 'THREAD_LIST_SYNC', 'THREAD_MEMBER_UPDATE',
+        'THREAD_MEMBERS_UPDATE', 'MESSAGE_CREATE', 'MESSAGE_UPDATE',
+        'GUILD_PRESENCES',
+      ],
       d: {
         token: TOKEN,
         properties: {
@@ -45,10 +53,12 @@ function gatewayMessage(ws, reconnectGateway, message) {
     setTimeout(reconnectGateway, 1000)
     return
   } else if (gateway.op === 0 || gateway.op === 9) {
-    if(gateway.t == 'MESSAGE_CREATE' 
+    if(gateway.t == 'MESSAGE_CREATE') {
       // guild ID can only be null if it is a personal message
-      && typeof gateway.d.guild_id == 'undefined') {
-      privateChannels[gateway.d.channel_id] = Date.now()
+      if(typeof gateway.d.guild_id == 'undefined') {
+        privateChannels[gateway.d.channel_id] = Date.now()
+      } else {
+      }
     }
     if(gateway.t == 'INTERACTION_CREATE') {
       if(typeof interactions[gateway.d.channel_id] == 'undefined')

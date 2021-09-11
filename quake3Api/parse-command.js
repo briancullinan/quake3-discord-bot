@@ -87,6 +87,7 @@ function parseCommandString(read, message, channel, server) {
     channel.serverId = 0
   }
   if(channel.serverCommands[index].match(/^cs [0-9]+ /ig)) {
+    //console.log(channel.serverCommands[index])
     var i = (/^cs ([0-9]+) /ig).exec(channel.serverCommands[index])[1]
     var value = (/^cs [0-9]+ (.*)/ig).exec(channel.serverCommands[index])[1]
     value = value.trim().replace(/^"|"$/ig, '')

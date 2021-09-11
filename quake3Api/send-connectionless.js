@@ -7,12 +7,27 @@ var lookupDNS = require('../utilities/dns.js')
 udpClient.on('message', packetEvent)
 var {compressMessage} = require('../quake3Utils/huffman.js')
 
+var DEFAULT_RATE = 1000 / 50 // from discord documentation
 var DEFAULT_MASTER = process.env.DEFAULT_MASTER || '207.246.91.235'
 var DEFAULT_PASS = process.env.DEFAULT_PASS || 'password123!'
 var MAX_TIMEOUT = process.env.DEFAULT_TIMEOUT || 10000
+var previousSend = 0
 
 function udpClose() {
   udpClient.close()
+}
+
+function udpPort() {
+  return udpClient.address().port
+}
+
+async function udpSend(msgBuff, port, dstIP) {
+  var now = (new Date()).getTime()
+  previousSend = now
+  if(now - previousSend < DEFAULT_RATE)
+    await new Promise(resolve => setTimeout(resolve, DEFAULT_RATE - (now - previousSend)))
+  previousSend = (new Date()).getTime()
+  udpClient.send(msgBuff, 0, msgBuff.length, port, dstIP)
 }
 
 async function sendConnectionless(buffer, address, port) {
@@ -24,14 +39,14 @@ async function sendConnectionless(buffer, address, port) {
     Buffer.from('\xFF\xFF\xFF\xFF'.split('').map(c => c.charCodeAt(0))),
     Buffer.from(buffer)
   ])
-  udpClient.send(msgBuff, 0, msgBuff.length, port, dstIP)
+  await udpSend(msgBuff, port, dstIP)
 }
 
 async function getChallenge(address, port = 27960, challenge, gamename) {
   for(var i = 0; i < 3; i++) {
     console.log(`Challenging ${i+1} (${challenge} ${gamename})...`)
     await sendConnectionless(`getchallenge ${challenge} ${gamename}`, address, port)
-    var challengeResponse = await nextResponse('challengeResponse', address, port, false, 2 * 1000)
+    var challengeResponse = await nextResponse('challengeResponse', address, port, false, 3 * 1000)
     if(challengeResponse) {
       break
     }
@@ -41,7 +56,7 @@ async function getChallenge(address, port = 27960, challenge, gamename) {
 
 async function sendConnect(address, port = 27960, info) {
   if(typeof info.qport == 'undefined')
-    info['qport'] = udpClient.address().port
+    info['qport'] = udpPort()
   var connectInfo = typeof info == 'string' 
     ? info 
     : Object.keys(info).map(k => '\\' + k + '\\' + info[k]).join('')
@@ -114,6 +129,7 @@ module.exports = {
   getStatus,
   getInfo,
   getServers,
-  udpClient,
+  udpPort,
+  udpSend,
   udpClose
 }
