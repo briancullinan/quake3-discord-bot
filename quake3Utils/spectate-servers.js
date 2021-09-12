@@ -73,10 +73,12 @@ async function spectateServer(address = 'localhost', port = 27960) {
     Promise.resolve(sendReliable(address, port, 'score'))
   }, 10000)
 
-  var threadName = 'Pickup for '
-    + removeCtrlChars(server.sv_hostname || server.hostname)
+  var threadName = removeCtrlChars(server.sv_hostname || server.hostname)
       .trim()
-      .replace(/[^0-9a-z\-]/ig, '-')
+      .replace(/[^0-9a-z\-\s]/ig, '')
+      .replace(/\s\s+/ig, ' ')
+      .replace(/\s\s+/ig, ' ')
+      .trim()
   var discordChannel = await getServerChannel(server)
 
   var commandNumber = server.channel.commandSequence
@@ -117,7 +119,7 @@ async function spectateServer(address = 'localhost', port = 27960) {
   }, 100)
   
   var discordThread
-  if(discordChannel)
+  if(discordChannel) {
     server.relayListener = setInterval(async () => {
       if(!discordThread)
         discordThread = await updateThread(threadName, discordChannel)
@@ -128,6 +130,7 @@ async function spectateServer(address = 'localhost', port = 27960) {
           'say ' + commands[i].author.username + ': ' + commands[i].content))
       }
     }, 3000)
+  }
 }
 
 module.exports = spectateServer

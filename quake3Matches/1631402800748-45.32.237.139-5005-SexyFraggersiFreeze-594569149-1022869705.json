@@ -9,7 +9,7 @@
     {
       "i": 0,
       "name": "Visor",
-      "score": 16,
+      "score": 14,
       "ping": 0,
       "isBot": true,
       "team": "other",
@@ -32,7 +32,7 @@
     {
       "i": 1,
       "name": "Bones",
-      "score": 13,
+      "score": 6,
       "ping": 0,
       "isBot": true,
       "team": "other",
@@ -80,9 +80,9 @@
       "tl": "0"
     }
   ],
-  "mapname": "bloodister",
+  "mapname": "campgrounds",
   "channel": {
-    "serverId": "1022057880",
+    "serverId": "1022869705",
     "serverInfo": {
       "timelimit": "20",
       "fraglimit": "15",

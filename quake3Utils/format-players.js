@@ -9,7 +9,9 @@ function formatPlayerList(server) {
         .split(/\s+/ig).filter(n => n)
         .map(i => parseInt(i))
     var players = server.players
-      .filter(p => p.name)
+      .filter(p => p.name
+        && (typeof server.channel == 'undefined'
+          || p.i != server.channel.clientNum))
     players.forEach(p => {
         if(redTeam.includes(p.i))
             p.team = 'red'

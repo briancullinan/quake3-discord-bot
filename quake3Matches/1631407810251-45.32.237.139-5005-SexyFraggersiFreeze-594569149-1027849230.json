@@ -9,11 +9,10 @@
     {
       "i": 0,
       "name": "Visor",
-      "score": 16,
+      "score": 0,
       "ping": 0,
       "isBot": true,
       "team": "other",
-      "rank": 0,
       "nn": "Visor",
       "n": "Visor",
       "t": "2",
@@ -27,16 +26,16 @@
       "l": "0",
       "skill": "3",
       "tt": "0",
-      "tl": "0"
+      "tl": "0",
+      "rank": 0
     },
     {
       "i": 1,
       "name": "Bones",
-      "score": 13,
+      "score": 6,
       "ping": 0,
       "isBot": true,
       "team": "other",
-      "rank": 1,
       "nn": "Bones",
       "n": "Bones",
       "t": "1",
@@ -50,7 +49,8 @@
       "l": "0",
       "skill": "3",
       "tt": "0",
-      "tl": "0"
+      "tl": "0",
+      "rank": 1
     },
     null,
     null,
@@ -60,11 +60,18 @@
     null,
     null,
     null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
     {
-      "i": 10,
-      "rank": 10,
-      "score": 0,
-      "ping": 31,
       "nn": "Orbb",
       "n": "Orbb",
       "t": "3",
@@ -77,12 +84,16 @@
       "w": "0",
       "l": "0",
       "tt": "0",
-      "tl": "0"
+      "tl": "0",
+      "i": 21,
+      "rank": 21,
+      "score": 0,
+      "ping": 30
     }
   ],
-  "mapname": "bloodister",
+  "mapname": "overkillPP",
   "channel": {
-    "serverId": "1022057880",
+    "serverId": "1027849230",
     "serverInfo": {
       "timelimit": "20",
       "fraglimit": "15",

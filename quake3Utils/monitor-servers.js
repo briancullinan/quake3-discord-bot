@@ -35,21 +35,25 @@ async function monitorServer(address = 'q3msk.ru', port = 27977) {
     return    
   }
 
-  var threadName = 'Pickup for '
-    + removeCtrlChars(server.sv_hostname || server.hostname)
+  var threadName = removeCtrlChars(server.sv_hostname || server.hostname)
       .trim()
-      .replace(/[^0-9a-z\-]/ig, '-')
-
+      .replace(/[^0-9a-z\-\s]/ig, '')
+      .replace(/\s\s+/ig, ' ')
+      .replace(/\s\s+/ig, ' ')
+      .trim()
   var json = formatPlayerList(server)
   var channel = await getServerChannel(server)
 
   var thread
   if(!channel) {
     console.log('No channel to create thread on.')
-  } else if(server.players.filter(p => p.ping > 0).length == 0) {
+  } else if(server.players.filter(p => p.ping > 0 
+    && (typeof server.channel == 'undefined' 
+      || p.i != server.channel.clientNum)).length == 0) {
     console.log('Skipping ' + address + ' because no humans.')
     return
   } else {
+    console.log(server.players)
     try {
       thread = await updateChannelThread(
         threadName,

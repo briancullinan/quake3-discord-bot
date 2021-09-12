@@ -22,11 +22,20 @@
     null,
     null,
     null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
     {
-      "i": 8,
-      "rank": 8,
+      "i": 17,
+      "rank": 17,
       "score": 0,
-      "ping": 193
+      "ping": 191
     }
   ],
   "mapname": "2castles-wfa",

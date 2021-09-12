@@ -9,7 +9,7 @@
     {
       "i": 0,
       "name": "Visor",
-      "score": 16,
+      "score": 15,
       "ping": 0,
       "isBot": true,
       "team": "other",
@@ -32,7 +32,7 @@
     {
       "i": 1,
       "name": "Bones",
-      "score": 13,
+      "score": 12,
       "ping": 0,
       "isBot": true,
       "team": "other",
@@ -60,11 +60,22 @@
     null,
     null,
     null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
     {
-      "i": 10,
-      "rank": 10,
+      "i": 21,
+      "rank": 21,
       "score": 0,
-      "ping": 31,
+      "ping": 30,
       "nn": "Orbb",
       "n": "Orbb",
       "t": "3",
@@ -80,9 +91,9 @@
       "tl": "0"
     }
   ],
-  "mapname": "bloodister",
+  "mapname": "q3dm4",
   "channel": {
-    "serverId": "1022057880",
+    "serverId": "1028093130",
     "serverInfo": {
       "timelimit": "20",
       "fraglimit": "15",

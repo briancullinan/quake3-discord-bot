@@ -11,6 +11,7 @@ var commandResponder
 
 async function respondChannel(specificChannel) {
   var channels = []
+  var threads = []
 
   if(specificChannel == '@me') {
     // only read channel if it was updated within the last hour

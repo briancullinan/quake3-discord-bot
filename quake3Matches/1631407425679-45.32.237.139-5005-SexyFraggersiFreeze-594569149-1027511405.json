@@ -9,7 +9,7 @@
     {
       "i": 0,
       "name": "Visor",
-      "score": 16,
+      "score": 0,
       "ping": 0,
       "isBot": true,
       "team": "other",
@@ -32,7 +32,7 @@
     {
       "i": 1,
       "name": "Bones",
-      "score": 13,
+      "score": 1,
       "ping": 0,
       "isBot": true,
       "team": "other",
@@ -60,9 +60,18 @@
     null,
     null,
     null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
     {
-      "i": 10,
-      "rank": 10,
+      "i": 19,
+      "rank": 19,
       "score": 0,
       "ping": 31,
       "nn": "Orbb",
@@ -80,9 +89,9 @@
       "tl": "0"
     }
   ],
-  "mapname": "bloodister",
+  "mapname": "jaxdm8",
   "channel": {
-    "serverId": "1022057880",
+    "serverId": "1027511405",
     "serverInfo": {
       "timelimit": "20",
       "fraglimit": "15",

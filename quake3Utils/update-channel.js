@@ -10,7 +10,7 @@ async function updateThread(threadName, channel, json) {
   if(!channel)
     return
   // find old threads to reactivate
-  var archived = (await archivedThreads(channel.id)).threads 
+  var archived = (await archivedThreads(channel.id)).threads
     .filter(t => t.name == threadName)
   if(archived.length > 0) {
     thread = archived[0]

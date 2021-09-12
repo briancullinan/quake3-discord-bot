@@ -42,6 +42,9 @@ async function getServerChannel(server) {
     channel = channels.filter(c => c.name.toLowerCase() == '1on1-duel')[0]
   }
   if(!channel) {
+    channel = channels.filter(c => c.name.toLowerCase() == 'free-for-all')[0]
+  }
+  if(!channel) {
     channel = channels.filter(c => c.name.toLowerCase() == 'quake3')[0]
   }
   if(!channel) {
