@@ -1,7 +1,7 @@
 var {
   DEFAULT_GUILD, DEFAULT_CHANNEL, MESSAGE_TIME
-} = require('./default-config.js')
-var {request} = require('./authorize.js')
+} = require('../discordApi/default-config.js')
+var {request} = require('../discordApi/authorize.js')
 
 async function userChannels(userId = '@me') {
   return await request({

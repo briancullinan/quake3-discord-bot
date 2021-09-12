@@ -1,4 +1,4 @@
-var {TOKEN} = require('./default-config.js')
+var {TOKEN} = require('../discordApi/default-config.js')
 
 var indentifyTimer
 var globalWS = null

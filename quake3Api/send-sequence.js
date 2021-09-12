@@ -1,9 +1,9 @@
-var {udpPort, udpSend} = require('./send-connectionless.js')
-var {NETCHAN_GENCHECKSUM} = require('./send-checksums.js')
-var {mergeMaster} = require('./parse-packet.js')
+var {udpPort, udpSend} = require('../quake3Api/send-connectionless.js')
+var {NETCHAN_GENCHECKSUM} = require('../quake3Api/send-checksums.js')
+var {mergeMaster} = require('../quake3Api/parse-packet.js')
 var {writeBits} = require('../quake3Utils/huffman.js')
 var lookupDNS = require('../utilities/dns.js')
-var {MAX_RELIABLE_COMMANDS} = require('./config-strings.js')
+var {MAX_RELIABLE_COMMANDS} = require('../quake3Api/config-strings.js')
 var CL_ENCODE_START = 12
 
 function netchanEncode(message, channel) {

@@ -1,4 +1,4 @@
-var serverList = require('./server-list.js')
+var serverList = require('../discordPoll/server-list.js')
 
 function startMultiple() {
   // TODO: comment the slice out when it is working

@@ -1,7 +1,7 @@
-var {DEFAULT_CHANNEL, DEFAULT_USERNAME} = require('./default-config.js')
+var {DEFAULT_CHANNEL, DEFAULT_USERNAME} = require('../discordApi/default-config.js')
 var {
   authorizeGateway, authorizeUrl, closeGateway, request
-} = require('./authorize.js')
+} = require('../discordApi/authorize.js')
 
 async function triggerTyping(channelId = DEFAULT_CHANNEL) {
   return await request({
@@ -18,21 +18,23 @@ module.exports = {
   triggerTyping,
   ... {
     userChannels, guildChannels, channelMessages, deleteChannel
-  } = require('./channels.js'),
+  } = require('../discordApi/channels.js'),
   ... {
     userGuilds, userConnections, getGuildRoles
-  } = require('./guilds.js'),
+  } = require('../discordApi/guilds.js'),
   ... {
     createMessage, updateMessage,
     getPins, pinMessage, unpinMessage
-  } = require('./messages.js'),
+  } = require('../discordApi/messages.js'),
   ... {
     registerCommand, getCommands, deleteCommand,
     interactionResponse, updateInteraction, updateCommand
-  } = require('./commands.js'),
+  } = require('../discordApi/commands.js'),
   ... {
     createThread, archivedThreads, activeThreads,
     addThreadMember,
-  } = require('./threads.js'),
-  ... {getUser} = require('./users.js'),
+  } = require('../discordApi/threads.js'),
+  ... {
+    getUser
+  } = require('../discordApi/users.js'),
 }

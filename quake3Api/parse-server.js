@@ -6,9 +6,9 @@ This is basically organized the same way as the Quake 3 client code
 var {inherits} = require('util')
 var {EventEmitter} = require('events')
 var {readBits} = require('../quake3Utils/huffman.js')
-var {MAX_RELIABLE_COMMANDS} = require('./config-strings.js')
-var parseGamestate = require('./parse-gamestate.js')
-var {parseCommandString} = require('./parse-command.js')
+var {MAX_RELIABLE_COMMANDS} = require('../quake3Api/config-strings.js')
+var parseGamestate = require('../quake3Api/parse-gamestate.js')
+var {parseCommandString} = require('../quake3Api/parse-command.js')
 function SE() {}
 inherits(SE, EventEmitter)
 var serverMessageEvent = new SE

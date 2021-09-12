@@ -1,5 +1,5 @@
-var {DEFAULT_GUILD} = require('./default-config.js')
-var {request} = require('./authorize.js')
+var {DEFAULT_GUILD} = require('../discordApi/default-config.js')
+var {request} = require('../discordApi/authorize.js')
 
 
 async function userGuilds(userId = '@me') {

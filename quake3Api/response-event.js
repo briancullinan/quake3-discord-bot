@@ -1,7 +1,7 @@
 var lookupDNS = require('../utilities/dns.js')
-var {connectionlessEvent} = require('./parse-connectionless.js')
-var {serverMessageEvent} = require('./parse-server.js')
-var {mergeMaster} = require('./parse-packet.js')
+var {connectionlessEvent} = require('../quake3Api/parse-connectionless.js')
+var {serverMessageEvent} = require('../quake3Api/parse-server.js')
+var {mergeMaster} = require('../quake3Api/parse-packet.js')
 
 var RESPONSE_INTERVAL = 20
 var MAX_TIMEOUT = process.env.DEFAULT_TIMEOUT || 10000

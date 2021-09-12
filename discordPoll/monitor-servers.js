@@ -1,9 +1,9 @@
 var {getInfo, getStatus, getUser} = require('../quake3Api')
-var getServerChannel = require('./map-server.js')
-var {updateChannelThread} = require('./update-channel.js')
+var getServerChannel = require('../discordPoll/map-server.js')
+var {updateChannelThread} = require('../discordPoll/update-channel.js')
 var {mergeMaster} = require('../quake3Api/parse-packet.js')
-var formatPlayerList = require('./format-players.js')
-var getThreadName = require('./thread-name.js')
+var formatPlayerList = require('../quake3Utils/format-players.js')
+var getThreadName = require('../quake3Utils/thread-name.js')
 var monitors = {}
 var UPDATE_INTERVAL = 30 * 1000
 

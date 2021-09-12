@@ -1,5 +1,5 @@
-var {DEFAULT_CHANNEL} = require('./default-config.js')
-var {request} = require('./authorize.js')
+var {DEFAULT_CHANNEL} = require('../discordApi/default-config.js')
+var {request} = require('../discordApi/authorize.js')
 
 async function createThread(name, channelId = DEFAULT_CHANNEL) {
   var json = {

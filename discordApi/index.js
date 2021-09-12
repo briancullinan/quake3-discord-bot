@@ -1,1 +1,1 @@
-module.exports = require('./api.js')
+module.exports = require('../discordApi/api.js')

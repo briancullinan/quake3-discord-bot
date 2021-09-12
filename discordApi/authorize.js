@@ -2,10 +2,10 @@ var {request} = require('gaxios')
 var WebSocket = require('ws')
 var {
   gatewayIdentified, gatewayClose, gatewayMessage
-} = require('./gateway.js')
+} = require('../discordApi/gateway.js')
 var {
   TOKEN, DEFAULT_API, DEFAULT_RATE
-} = require('./default-config.js')
+} = require('../discordApi/default-config.js')
 
 var ws = false
 var wsConnecting = false

@@ -2,7 +2,7 @@ var {
   SwapLong, SwapShort, NETCHAN_GENCHECKSUM
 } = require('../quake3Utils/maths.js')
 var {readBits} = require('../quake3Utils/huffman.js')
-var {MAX_RELIABLE_COMMANDS} = require('./config-strings.js')
+var {MAX_RELIABLE_COMMANDS} = require('../quake3Api/config-strings.js')
 var MAX_PACKETLEN = 1400
 var FRAGMENT_SIZE = (MAX_PACKETLEN - 100)
 var MAX_MSGLEN = 16384

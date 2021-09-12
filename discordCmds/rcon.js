@@ -1,4 +1,4 @@
-var {DISCORD_COMMANDS} = require('./cmd-definitions.js')
+var {DISCORD_COMMANDS} = require('../discordCmds/cmd-definitions.js')
 var {triggerTyping} = require('../discordApi')
 var {sendRcon} = require('../quake3Api')
 var formatQuake3Response = require('../quake3Utils/format-status.js')

@@ -1,14 +1,14 @@
 var {
   createMessage, triggerTyping, updateInteraction
 } = require('../discordApi')
-var {DISCORD_COMMANDS} = require('./cmd-definitions.js')
-var challengeCommand = require('./challenge.js')
-var connectCommand = require('./connect.js')
-var configCommand = require('./config.js')
-var rconCommand = require('./rcon.js')
-var chatCommand = require('./chat.js')
-var searchCommand = require('./search.js')
-var readInteractions = require('./interactions.js')
+var {DISCORD_COMMANDS} = require('../discordCmds/cmd-definitions.js')
+var challengeCommand = require('../discordCmds/challenge.js')
+var connectCommand = require('../discordCmds/connect.js')
+var configCommand = require('../discordCmds/config.js')
+var rconCommand = require('../discordCmds/rcon.js')
+var chatCommand = require('../discordCmds/chat.js')
+var searchCommand = require('../discordCmds/search.js')
+var readInteractions = require('../discordCmds/interactions.js')
 
 async function replyCommand(response, command) {
   if(typeof response == 'string')

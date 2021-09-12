@@ -1,6 +1,6 @@
 var {sendReliable} = require('../quake3Api')
-var {updateThread} = require('./update-channel.js')
-var removeCtrlChars = require('./remove-ctrl.js')
+var {updateThread} = require('../discordPoll/update-channel.js')
+var removeCtrlChars = require('../quake3Utils/remove-ctrl.js')
 var readAllCommands = require('../discordPoll/poll-channels.js')
 
 

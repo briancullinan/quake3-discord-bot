@@ -1,4 +1,4 @@
-var removeCtrlChars = require('./remove-ctrl.js')
+var removeCtrlChars = require('../quake3Utils/remove-ctrl.js')
 
 function getThreadName(server) {
   return removeCtrlChars(server.sv_hostname || server.hostname)

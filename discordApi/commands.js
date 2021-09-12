@@ -1,5 +1,5 @@
-var {DEFAULT_APPLICATION} = require('./default-config.js')
-var {request} = require('./authorize.js')
+var {DEFAULT_APPLICATION} = require('../discordApi/default-config.js')
+var {request} = require('../discordApi/authorize.js')
 
 
 async function registerCommand(cmd, desc, guildId = null) {

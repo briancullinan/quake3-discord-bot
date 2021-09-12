@@ -1,6 +1,6 @@
-var {connectionlessPacket} = require('./parse-connectionless.js')
-var {parseServerMessage} = require('./parse-server.js')
-var {netchanProcess, netchanDecode} = require('./parse-netchan.js')
+var {connectionlessPacket} = require('../quake3Api/parse-connectionless.js')
+var {parseServerMessage} = require('../quake3Api/parse-server.js')
+var {netchanProcess, netchanDecode} = require('../quake3Api/parse-netchan.js')
 
 var masters = []
 

@@ -1,4 +1,4 @@
-var {request} = require('./authorize.js')
+var {request} = require('../discordApi/authorize.js')
 
 async function getUser(userId = '@me') {
   return await request({

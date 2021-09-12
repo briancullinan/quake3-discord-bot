@@ -1,5 +1,5 @@
 var {triggerTyping} = require('../discordApi')
-var {DISCORD_COMMANDS} = require('./cmd-definitions.js')
+var {DISCORD_COMMANDS} = require('../discordCmds/cmd-definitions.js')
 
 async function configCommand(command) {
   if(!command.attachments && !command.embed) return

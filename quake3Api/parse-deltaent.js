@@ -1,5 +1,5 @@
 var {readBits} = require('../quake3Utils/huffman.js')
-var {entityStateFields} = require('./entity-fields.js')
+var {entityStateFields} = require('../quake3Api/entity-fields.js')
 
 var FLOAT_INT_BITS = 13
 var FLOAT_INT_BIAS = (1<<(FLOAT_INT_BITS-1))

@@ -1,13 +1,19 @@
 var {
   getChallenge, sendConnect, sendRcon, 
   getStatus, getInfo, getServers, udpClose
-} = require('./send-connectionless.js')
+} = require('../quake3Api/send-connectionless.js')
 
 module.exports = {
   getChallenge, sendConnect, sendRcon, 
   getStatus, getInfo, getServers, udpClose,
-  ... {sendPureChecksums} = require('./send-checksums.js'),
-  ... {sendSequence, sendReliable} = require('./send-sequence.js'),
-  nextResponse: require('./response-event.js'),
-  ... {SV_EVENT} = require('./parse-event.js'),
+  ... {
+    sendPureChecksums
+  } = require('../quake3Api/send-checksums.js'),
+  ... {
+    sendSequence, sendReliable
+  } = require('../quake3Api/send-sequence.js'),
+  nextResponse: require('../quake3Api/response-event.js'),
+  ... {
+    SV_EVENT
+  } = require('../quake3Api/parse-event.js'),
 }

@@ -1,9 +1,9 @@
 var {inherits} = require('util')
 var {EventEmitter} = require('events')
-var statusResponse = require('./parse-status.js')
+var statusResponse = require('../quake3Api/parse-status.js')
 var parseConfigStr = require('../quake3Utils/parse-configstr.js')
 var parseMasters = require('../quake3Utils/parse-masters.js')
-var {recentEvent} = require('./parse-event.js')
+var {recentEvent} = require('../quake3Api/parse-event.js')
 function CE() {}
 inherits(CE, EventEmitter)
 var connectionlessEvent = new CE

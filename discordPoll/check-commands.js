@@ -1,8 +1,10 @@
 var {sendReliable} = require('../quake3Api')
-var {updateThread} = require('./update-channel.js')
-var removeCtrlChars = require('./remove-ctrl.js')
-var saveMatch = require('./match-db.js')
-var {MAX_RELIABLE_COMMANDS, CS_PLAYERS} = require('../quake3Api/config-strings.js')
+var {updateThread} = require('../discordPoll/update-channel.js')
+var removeCtrlChars = require('../quake3Utils/remove-ctrl.js')
+var saveMatch = require('../quake3Utils/match-db.js')
+var {
+  MAX_RELIABLE_COMMANDS, CS_PLAYERS
+} = require('../quake3Api/config-strings.js')
 var {DEFAULT_USERNAME} = require('../discordApi')
 
 

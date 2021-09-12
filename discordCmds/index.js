@@ -1,1 +1,1 @@
-module.exports = require('./commands.js')
+module.exports = require('../discordCmds/commands.js')

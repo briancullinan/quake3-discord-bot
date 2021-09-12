@@ -1,5 +1,5 @@
 var {readInteractions, respondCommand} = require('../discordCmds')
-var readAllCommands = require('./poll-channels.js')
+var readAllCommands = require('../discordPoll/poll-channels.js')
 var {authorizeGateway} = require('../discordApi')
 var {MESSAGE_TIME} = require('../discordApi/default-config.js')
 var {privateChannels} = require('../discordApi/gateway.js')

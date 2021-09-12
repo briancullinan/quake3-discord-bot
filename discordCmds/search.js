@@ -1,4 +1,4 @@
-var {DISCORD_COMMANDS} = require('./cmd-definitions.js')
+var {DISCORD_COMMANDS} = require('../discordCmds/cmd-definitions.js')
 var formatMap = require('../quake3Utils/format-map.js')
 var {tokenSearch} = require('../utilities/map-search.js')
 

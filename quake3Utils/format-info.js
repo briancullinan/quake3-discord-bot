@@ -1,4 +1,4 @@
-var remoteCtrlChars = require('./remove-ctrl.js')
+var remoteCtrlChars = require('../quake3Utils/remove-ctrl.js')
 var {mapSearch} = require('../utilities/map-search.js')
 
 function formatInfoResponse(info) {

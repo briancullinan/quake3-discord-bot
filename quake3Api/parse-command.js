@@ -3,7 +3,7 @@ var {ReadString} = require('../quake3Utils/maths.js')
 var parseConfigStr = require('../quake3Utils/parse-configstr.js')
 var {
   MAX_RELIABLE_COMMANDS, CS_PLAYERS, MAX_CLIENTS
-} = require('./config-strings.js')
+} = require('../quake3Api/config-strings.js')
 
 function configStringsChanged(channel, server) {
   // parse player info out of config strings

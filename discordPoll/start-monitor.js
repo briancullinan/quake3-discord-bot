@@ -1,6 +1,6 @@
-var monitorServer = require('../quake3Utils/monitor-servers.js')
-var spectateServer = require('../quake3Utils/spectate-servers.js')
-var serverList = require('./server-list.js')
+var monitorServer = require('../discordPoll/monitor-servers.js')
+var spectateServer = require('../discordPoll/spectate-servers.js')
+var serverList = require('../discordPoll/server-list.js')
 
 async function startMonitor() {
   // TODO: comment the slice out when it is working

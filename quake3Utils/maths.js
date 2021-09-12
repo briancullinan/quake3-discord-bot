@@ -1,4 +1,4 @@
-var {readBits} = require('./huffman.js')
+var {readBits} = require('../quake3Utils/huffman.js')
 var MAX_STRING_CHARS = 1024
 var BIG_INFO_STRING = 8192
 

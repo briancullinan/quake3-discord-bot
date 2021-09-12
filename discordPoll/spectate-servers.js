@@ -3,11 +3,11 @@ var {
   nextResponse, sendReliable, sendPureChecksums,
 } = require('../quake3Api')
 var {DEFAULT_USERNAME} = require('../discordApi')
-var getThreadName = require('./thread-name.js')
+var getThreadName = require('../quake3Utils/thread-name.js')
 var {mergeMaster} = require('../quake3Api/parse-packet.js')
-var getServerChannel = require('./map-server.js')
-var checkServerCommands = require('./check-commands.js')
-var relayChat = require('./chat-relay.js')
+var getServerChannel = require('../discordPoll/map-server.js')
+var checkServerCommands = require('../discordPoll/check-commands.js')
+var relayChat = require('../discordPoll/chat-relay.js')
 
 async function spectateServer(address = 'localhost', port = 27960) {
   var challenge = []

@@ -1,6 +1,6 @@
 var path = require('path')
 var fs = require('fs')
-var removeCtrlChars = require('./remove-ctrl.js')
+var removeCtrlChars = require('../quake3Utils/remove-ctrl.js')
 var hashString = require('../utilities/simple-hash.js')
 var MATCH_DIR = process.env.LVLWORLD || path.join(process.env.HOME || process.env.HOMEPATH 
   || process.env.USERPROFILE || os.tmpdir(), '/quake3-discord-bot/quake3Matches')

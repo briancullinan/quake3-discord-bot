@@ -1,11 +1,11 @@
 var {readBits} = require('../quake3Utils/huffman.js')
 var {ReadString} = require('../quake3Utils/maths.js')
-var {GENTITYNUM_BITS} = require('./entity-fields.js')
+var {GENTITYNUM_BITS} = require('../quake3Api/entity-fields.js')
 var parseConfigStr = require('../quake3Utils/parse-configstr.js')
 var {
   systemInfoChanged, configStringsChanged
-} = require('./parse-command.js')
-var readDeltaEntity = require('./parse-deltaent.js')
+} = require('../quake3Api/parse-command.js')
+var readDeltaEntity = require('../quake3Api/parse-deltaent.js')
 
 var	CS_SERVERINFO = 0 // an info string with all the serverinfo cvars
 var CS_SYSTEMINFO = 1 // an info string for server system to client system configuration (timescale, etc)
