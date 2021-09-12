@@ -12,8 +12,6 @@
       "score": 42,
       "ping": 0,
       "isBot": true,
-      "team": "other",
-      "rank": 0,
       "nn": "Phobos",
       "n": "Phobos",
       "t": "2",
@@ -27,16 +25,15 @@
       "l": "0",
       "skill": "5",
       "tt": "0",
-      "tl": "0"
+      "tl": "0",
+      "rank": 0
     },
     {
       "i": 1,
       "name": "Patriot",
-      "score": 12,
+      "score": 13,
       "ping": 0,
       "isBot": true,
-      "team": "other",
-      "rank": 1,
       "nn": "Patriot",
       "n": "Patriot",
       "t": "1",
@@ -50,7 +47,8 @@
       "l": "0",
       "skill": "5",
       "tt": "0",
-      "tl": "0"
+      "tl": "0",
+      "rank": 1
     },
     null,
     null,
@@ -59,11 +57,8 @@
     null,
     null,
     null,
+    null,
     {
-      "i": 9,
-      "rank": 9,
-      "score": 0,
-      "ping": 30,
       "nn": "Orbb",
       "n": "Orbb",
       "t": "3",
@@ -76,12 +71,16 @@
       "w": "0",
       "l": "0",
       "tt": "0",
-      "tl": "0"
+      "tl": "0",
+      "i": 10,
+      "rank": 10,
+      "score": 0,
+      "ping": 30
     }
   ],
   "mapname": "almostlost",
   "channel": {
-    "serverId": "3410044",
+    "serverId": "5262334",
     "serverInfo": {
       "timelimit": "15",
       "fraglimit": "75",

@@ -7,13 +7,6 @@
   "port": 5000,
   "players": [
     {
-      "i": 0,
-      "name": "Phobos",
-      "score": 42,
-      "ping": 0,
-      "isBot": true,
-      "team": "other",
-      "rank": 0,
       "nn": "Phobos",
       "n": "Phobos",
       "t": "2",
@@ -27,16 +20,13 @@
       "l": "0",
       "skill": "5",
       "tt": "0",
-      "tl": "0"
+      "tl": "0",
+      "i": 0,
+      "rank": 0,
+      "score": 48,
+      "ping": 0
     },
     {
-      "i": 1,
-      "name": "Patriot",
-      "score": 12,
-      "ping": 0,
-      "isBot": true,
-      "team": "other",
-      "rank": 1,
       "nn": "Patriot",
       "n": "Patriot",
       "t": "1",
@@ -50,7 +40,11 @@
       "l": "0",
       "skill": "5",
       "tt": "0",
-      "tl": "0"
+      "tl": "0",
+      "i": 1,
+      "rank": 1,
+      "score": 11,
+      "ping": 0
     },
     null,
     null,
@@ -59,11 +53,11 @@
     null,
     null,
     null,
+    null,
+    null,
+    null,
+    null,
     {
-      "i": 9,
-      "rank": 9,
-      "score": 0,
-      "ping": 30,
       "nn": "Orbb",
       "n": "Orbb",
       "t": "3",
@@ -76,12 +70,16 @@
       "w": "0",
       "l": "0",
       "tt": "0",
-      "tl": "0"
+      "tl": "0",
+      "i": 13,
+      "rank": 13,
+      "score": 0,
+      "ping": 30
     }
   ],
   "mapname": "almostlost",
   "channel": {
-    "serverId": "3410044",
+    "serverId": "7114624",
     "serverInfo": {
       "timelimit": "15",
       "fraglimit": "75",

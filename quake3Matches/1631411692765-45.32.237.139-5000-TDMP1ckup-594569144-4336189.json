@@ -32,7 +32,7 @@
     {
       "i": 1,
       "name": "Patriot",
-      "score": 12,
+      "score": 19,
       "ping": 0,
       "isBot": true,
       "team": "other",
@@ -81,7 +81,7 @@
   ],
   "mapname": "almostlost",
   "channel": {
-    "serverId": "3410044",
+    "serverId": "4336189",
     "serverInfo": {
       "timelimit": "15",
       "fraglimit": "75",

@@ -3,13 +3,11 @@ var {
   nextResponse, sendReliable, sendPureChecksums,
 } = require('../quake3Api')
 var {DEFAULT_USERNAME} = require('../discordApi')
-var removeCtrlChars = require('./remove-ctrl.js')
+var getThreadName = require('./thread-name.js')
 var {mergeMaster} = require('../quake3Api/parse-packet.js')
-var {MAX_RELIABLE_COMMANDS, CS_PLAYERS} = require('../quake3Api/config-strings.js')
 var getServerChannel = require('./map-server.js')
-var {updateThread} = require('./update-channel.js')
-var saveMatch = require('./match-db.js')
-var readAllCommands = require('../discordPoll/poll-channels.js')
+var checkServerCommands = require('./check-commands.js')
+var relayChat = require('./chat-relay.js')
 
 async function spectateServer(address = 'localhost', port = 27960) {
   var challenge = []
@@ -73,62 +71,19 @@ async function spectateServer(address = 'localhost', port = 27960) {
     Promise.resolve(sendReliable(address, port, 'score'))
   }, 10000)
 
-  var threadName = removeCtrlChars(server.sv_hostname || server.hostname)
-      .trim()
-      .replace(/[^0-9a-z\-\s]/ig, '')
-      .replace(/\s\s+/ig, ' ')
-      .replace(/\s\s+/ig, ' ')
-      .trim()
+  var threadName = getThreadName(server)
   var discordChannel = await getServerChannel(server)
 
   var commandNumber = server.channel.commandSequence
   // await print commands
-  server.chatListener = setInterval(async () => {
-    // forward print commands to discord
-    if(commandNumber >= server.channel.commandSequence)
-      return // nothing to do
-
-    for(var j = commandNumber + 1; j <= server.channel.commandSequence; j++) {
-      var index = j & (MAX_RELIABLE_COMMANDS-1)
-      var message = server.channel.serverCommands[index] + ''
-      if(message.match(/^chat /i) /* || (message).match(/^print /i) */) {
-        console.log(server.ip + ':' + server.port + ' ---> ', message)
-        message = removeCtrlChars((/"([^"]*?)"/).exec(message)[1])
-        if(message.length == 0 
-          || message.substr(0, DEFAULT_USERNAME.length + 1) == DEFAULT_USERNAME + ':')
-          continue
-        if(discordChannel)
-          Promise.resolve(updateThread(threadName, discordChannel, message))
-      } else if (message.match(/^cs [0-9]+ /i)
-        || message.match(/^scores /i)) {
-        // switch teams back to spectater in case automatically joined 
-        //   on map change or something
-        if(message.includes('cs ' + (CS_PLAYERS + server.channel.clientNum))
-          && Date.now() - teamChanged > 30 * 1000) {
-          Promise.resolve(sendReliable(address, port, 'team s'))
-          teamChanged = Date.now()
-        }
-        if(!server.channel.serverId)
-          continue
-        saveMatch(server)
-      } else {
-        console.log('Unrecognized', message)
-      }
-    }
+  server.chatListener = setInterval(() => {
+    checkServerCommands(commandNumber, threadName, discordChannel, server)
     commandNumber = server.channel.commandSequence
   }, 100)
   
-  var discordThread
   if(discordChannel) {
-    server.relayListener = setInterval(async () => {
-      if(!discordThread)
-        discordThread = await updateThread(threadName, discordChannel)
-      var commands = (await readAllCommands(discordThread, false, true))
-        .filter(c => c.commands.includes('RELAY') && c.content)
-      for(var i = 0; i < commands.length; i++) {
-        Promise.resolve(sendReliable(address, port, 
-          'say ' + commands[i].author.username + ': ' + commands[i].content))
-      }
+    server.relayListener = setInterval(() => {
+      Promise.resolve(relayChat(threadName, discordChannel, server))
     }, 3000)
   }
 }

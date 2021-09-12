@@ -31,11 +31,12 @@
     null,
     null,
     null,
+    null,
+    null,
+    null,
+    null,
+    null,
     {
-      "i": 5,
-      "rank": 5,
-      "score": 0,
-      "ping": 30,
       "nn": "Orbb",
       "n": "Orbb",
       "t": "3",
@@ -49,12 +50,16 @@
       "w": "0",
       "l": "0",
       "tt": "0",
-      "tl": "0"
+      "tl": "0",
+      "i": 10,
+      "rank": 10,
+      "score": 0,
+      "ping": 30
     }
   ],
   "mapname": "q3dm17",
   "channel": {
-    "serverId": "1757099989",
+    "serverId": "1761342271",
     "serverInfo": {
       "timelimit": "10",
       "fraglimit": "100",

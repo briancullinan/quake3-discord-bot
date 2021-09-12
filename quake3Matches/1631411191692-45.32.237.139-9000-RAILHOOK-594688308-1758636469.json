@@ -35,7 +35,7 @@
       "i": 5,
       "rank": 5,
       "score": 0,
-      "ping": 30,
+      "ping": 14,
       "nn": "Orbb",
       "n": "Orbb",
       "t": "3",
@@ -54,7 +54,7 @@
   ],
   "mapname": "q3dm17",
   "channel": {
-    "serverId": "1757099989",
+    "serverId": "1758636469",
     "serverInfo": {
       "timelimit": "10",
       "fraglimit": "100",

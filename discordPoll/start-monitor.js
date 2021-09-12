@@ -8,7 +8,7 @@ async function startMonitor() {
     var address = serverList[i].split(':')[0]
     var port = parseInt(serverList[i].split(':')[1] || '27960')
     await new Promise(resolve => setTimeout(resolve, 100))
-    Promise.resolve(monitorServer(address, port))
+    //Promise.resolve(monitorServer(address, port))
     Promise.resolve(spectateServer(address, port))
   }
 }

@@ -3,7 +3,7 @@ var getServerChannel = require('./map-server.js')
 var {updateChannelThread} = require('./update-channel.js')
 var {mergeMaster} = require('../quake3Api/parse-packet.js')
 var formatPlayerList = require('./format-players.js')
-var removeCtrlChars = require('./remove-ctrl.js')
+var getThreadName = require('./thread-name.js')
 var monitors = {}
 var UPDATE_INTERVAL = 30 * 1000
 
@@ -35,12 +35,7 @@ async function monitorServer(address = 'q3msk.ru', port = 27977) {
     return    
   }
 
-  var threadName = removeCtrlChars(server.sv_hostname || server.hostname)
-      .trim()
-      .replace(/[^0-9a-z\-\s]/ig, '')
-      .replace(/\s\s+/ig, ' ')
-      .replace(/\s\s+/ig, ' ')
-      .trim()
+  var threadName = getThreadName(server)
   var json = formatPlayerList(server)
   var channel = await getServerChannel(server)
 
@@ -53,7 +48,7 @@ async function monitorServer(address = 'q3msk.ru', port = 27977) {
     console.log('Skipping ' + address + ' because no humans.')
     return
   } else {
-    console.log(server.players)
+    console.log('client num', server.channel ? server.channel.clientNum : '', server.players)
     try {
       thread = await updateChannelThread(
         threadName,

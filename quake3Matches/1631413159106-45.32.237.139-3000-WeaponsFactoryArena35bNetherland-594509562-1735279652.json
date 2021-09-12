@@ -28,17 +28,11 @@
     null,
     null,
     null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
     {
-      "i": 20,
-      "rank": 20,
+      "i": 14,
+      "rank": 14,
       "score": 0,
-      "ping": 196
+      "ping": 281
     }
   ],
   "mapname": "2castles-wfa",
