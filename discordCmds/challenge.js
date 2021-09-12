@@ -44,7 +44,6 @@ async function challengeCommand(replyCommand, command) {
     }
     await sendRcon(masters[0].ip, masters[0].port, '\exec ' + launch + '.cfg')
     await sendRcon(masters[0].ip, masters[0].port, '\map ' + map)
-    await new Promise(resolve => setTimeout(resolve, 1000))
     return `Match is ready ${DEFAULT_HOST}?connect%20${masters[0].ip}:${masters[0].port} (${masters[0].ip}:${masters[0].port})`
   } else if (instruction.length > 0) {
     return message + instruction

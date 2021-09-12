@@ -1,11 +1,13 @@
 var dgram = require('dgram')
 var udpClient = dgram.createSocket('udp4')
+var {delay} = require('../utilities/timeout-delay.js')
 var {mergeMaster, packetEvent} = require('../quake3Api/parse-packet.js')
 var nextResponse = require('../quake3Api/response-event.js')
 var {connectionlessEvent} = require('../quake3Api/parse-connectionless.js')
 var lookupDNS = require('../utilities/dns.js')
 udpClient.on('message', packetEvent)
 var {compressMessage} = require('../quake3Utils/huffman.js')
+var generateChallenge = require('../quake3Utils/generate-challenge.js')
 
 var DEFAULT_RATE = 1000 / 50 // from discord documentation
 var DEFAULT_MASTER = process.env.DEFAULT_MASTER || '207.246.91.235'
@@ -22,11 +24,7 @@ function udpPort() {
 }
 
 async function udpSend(msgBuff, port, dstIP) {
-  var now = Date.now()
-  previousSend = now
-  if(now - previousSend < DEFAULT_RATE)
-    await new Promise(resolve => setTimeout(resolve, DEFAULT_RATE - (now - previousSend)))
-  previousSend = Date.now()
+  previousSend = await delay(previousSend, DEFAULT_RATE)
   udpClient.send(msgBuff, 0, msgBuff.length, port, dstIP)
 }
 
@@ -42,7 +40,9 @@ async function sendConnectionless(buffer, address, port) {
   await udpSend(msgBuff, port, dstIP)
 }
 
-async function getChallenge(address, port = 27960, challenge, gamename) {
+async function getChallenge(address, port = 27960, challenge = 0, gamename = 'Quake3Arena') {
+  if(!challenge)
+    challenge = generateChallenge()
   for(var i = 0; i < 3; i++) {
     console.log(`Challenging ${i+1} (${challenge} ${gamename})...`)
     await sendConnectionless(`getchallenge ${challenge} ${gamename}`, address, port)
@@ -94,20 +94,11 @@ async function getServers(master = DEFAULT_MASTER, port = 27950, wait = true) {
     Promise.resolve(getStatus(servers[m].ip, servers[m].port))
   }
   if(wait) {
-    await new Promise(resolve => {
-      var waitForResponses = setTimeout(resolve, MAX_TIMEOUT)
-      var responseCount = 0
-      var countResponses
-      countResponses = () => {
-        responseCount++
-        if(responseCount == servers.length) {
-          clearTimeout(waitForResponses)
-          connectionlessEvent.off('statusResponse', countResponses)
-          resolve() // return immediately instead
-        }
-      }
-      connectionlessEvent.on('statusResponse', countResponses)
-    })
+    var responseCount
+    var countResponses = () => responseCount++
+    connectionlessEvent.on('statusResponse', countResponses)
+    await wait(() => responseCount == servers.length, MAX_TIMEOUT)
+    connectionlessEvent.off('statusResponse', countResponses)
   } else {
     // can't use getInfo() because it depends on at least 1 statusResponse
     await nextResponse('statusResponse')
@@ -122,14 +113,7 @@ async function getServers(master = DEFAULT_MASTER, port = 27950, wait = true) {
 }
 
 module.exports = {
-  sendConnectionless,
-  getChallenge,
-  sendConnect,
-  sendRcon,
-  getStatus,
-  getInfo,
-  getServers,
-  udpPort,
-  udpSend,
-  udpClose
+  sendConnectionless, getChallenge, sendConnect, sendRcon, 
+  getStatus, getInfo, getServers,
+  udpPort, udpSend, udpClose,
 }

@@ -1,7 +1,6 @@
 var {TOKEN} = require('../discordApi/default-config.js')
 
 var indentifyTimer
-var globalWS = null
 var privateChannels = {}
 var interactions = {}
 var cancelConnection // if gateway doesn't respond properly, close web socket
@@ -47,7 +46,7 @@ function gatewayMessage(ws, reconnectGateway, message) {
       }
     }))
     return
-  } else if (gateway.op === 7) {
+  } else if (gateway.op === 7) { // should reconnect
     console.log('Reconnecting...')
     gatewayClose(ws)
     setTimeout(reconnectGateway, 1000)
@@ -83,32 +82,12 @@ function gatewayClose(ws) {
   if(ws.readyState == 1)
     ws.close()
   ws.identified = false
-  globalWS = false
   return
-}
-
-async function gatewayIdentified(ws) {
-  var identifyCount = 0
-  if(ws)
-    globalWS = ws
-  await new Promise(resolve => {
-    indentifyTimer = setInterval(() => {
-      if((ws && ws.identified)
-        || (globalWS && globalWS.identified)
-        || identifyCount == 30) {
-        clearInterval(indentifyTimer)
-        resolve()
-      } else {
-        identifyCount++
-      }
-    }, 100)
-  })
 }
 
 module.exports = {
   gatewayClose,
   gatewayMessage,
-  gatewayIdentified,
   privateChannels,
   interactions
 }

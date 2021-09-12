@@ -2,8 +2,21 @@ var {
   getChallenge, sendConnect, sendRcon, 
   getStatus, getInfo, getServers, udpClose
 } = require('../quake3Api/send-connectionless.js')
+var {mergeMaster} = require('../quake3Api/parse-packet.js')
+
+function getServer(address, port) {
+  var server = mergeMaster({
+    domain: address,
+    port: port
+  })
+  await getInfo(address, port)
+  await getStatus(address, port)
+  return server
+}
+
 
 module.exports = {
+  getServer,
   getChallenge, sendConnect, sendRcon, 
   getStatus, getInfo, getServers, udpClose,
   ... {

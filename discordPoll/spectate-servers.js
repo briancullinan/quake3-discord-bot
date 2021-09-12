@@ -10,35 +10,14 @@ var checkServerCommands = require('../discordPoll/check-commands.js')
 var relayChat = require('../discordPoll/chat-relay.js')
 
 async function spectateServer(address = 'localhost', port = 27960) {
-  var challenge = []
-  for(var c = 0; c < 4; c++) {
-      challenge[c] = Math.round(Math.random() * 255)
-  }
-  var unsigned = new Uint32Array(Uint8Array.from(challenge).buffer)
-  var info = await getInfo(address, port)
-  if(!info)
+  var server = getServer(address, port)
+  if(!server)
     return
-  var challengeResponse = await getChallenge(
-    address, port, 
-    unsigned[0].toString(), 
-    info.gamename || 'Quake3Arena'
-  )
-  var server = mergeMaster({
-    domain: address,
-    port: port
-  })
+  var challengeResponse = await getChallenge(address, port)
   if(!server.channel) {
     console.log('Could not connect.')
     return
   }
-  //server.channel.compat = true
-  /*
-  \cg_predictItems\1\cl_anonymous\0\cl_execOverflow\200\cl_execTimeout\2000
-  \cl_guid\C4F0CF703C5CBB24F1A2725C1BC801FB\cl_paused\0\color1\4\color2\5
-  \handicap\100\headmodel\sarge\model\sarge\name\UnnamedPlayer\rate\25000
-  \sex\male\snaps\20\team_headmodel\sarge\team_model\sarge\protocol\68
-  \qport\51590\challenge\-1167726640\client\Q3 1.32e
-  */
   var channel = await sendConnect(address, port, {
     challenge: challengeResponse.challenge,
     name: DEFAULT_USERNAME,

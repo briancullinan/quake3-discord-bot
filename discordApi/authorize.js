@@ -1,5 +1,6 @@
 var {request} = require('gaxios')
 var WebSocket = require('ws')
+var {delay, wait} = require('../utilities/timeout-delay.js')
 var {
   gatewayIdentified, gatewayClose, gatewayMessage
 } = require('../discordApi/gateway.js')
@@ -11,21 +12,13 @@ var ws = false
 var wsConnecting = false
 var previousRequest = 0
 
-async function delay() {
-  var now = Date.now()
-  previousRequest = now
-  if(now - previousRequest < DEFAULT_RATE)
-    await new Promise(resolve => setTimeout(resolve, DEFAULT_RATE - (now - previousRequest)))
-  previousRequest = Date.now()
-}
-
 async function requestAuthQ(outgoing) {
   await authorizeGateway()
   if(typeof outgoing.headers == 'undefined')
     outgoing.headers = {}
   outgoing.headers['Authorization'] = `Bot ${TOKEN}`
   outgoing.url = DEFAULT_API + outgoing.url
-  await delay()
+  previousRequest = await delay(previousRequest, DEFAULT_RATE)
   var resolveRequest
   resolveRequest = async () => {
     var result
@@ -64,27 +57,29 @@ function gatewayOpen() {
 }
 
 async function authorizeGateway() {
-  var result
   if(wsConnecting) {
-    await gatewayIdentified()
+    var result = await wait(() => ws && ws.identified, 3000)
+    if(!result)
+      return await authorizeGateway()
+    else
+      return ws
+  } else if (ws && ws.readyState == 1 && ws.identified) {
+    return ws
   }
-  if(typeof ws == 'object' && ws.identified)
-    return // already connected, no need to continue
   wsConnecting = true
   try {
-    result = await gatewayUrl()
+    ws = new WebSocket((await gatewayUrl()).url)
+    ws.identified = false
   } catch (e) {
     console.log('Authorize error', e.message)
     ws = false
     wsConnecting = false
     return
   }
-  ws = new WebSocket(result.url)
-  ws.identified = false
   ws.on('open', gatewayOpen)
   ws.on('message', gatewayMessage.bind(null, ws, authorizeGateway))
   ws.on('close', gatewayClose.bind(null, ws))
-  await gatewayIdentified(ws)
+  await wait(() => ws.identified, 3000)
   wsConnecting = false
   return ws
 }

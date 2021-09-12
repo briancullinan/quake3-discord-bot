@@ -1,4 +1,7 @@
+var {wait} = require('../utilities/timeout-delay.js')
 var {guildChannels} = require('../discordApi')
+
+var DEFAULT_REFRESH = 10 * 1000
 var channelsLastUpdated = 0
 var channelsUpdating = false
 var channels
@@ -6,12 +9,10 @@ var channels
 async function getServerChannel(server) {
   // get a list of channels to pair gametype up with
   if(channelsUpdating) {
-    await new Promise(resolve => setTimeout(resolve, 3000))
-  }
-  if((new Date).getTime() - channelsLastUpdated > 10 * 1000
+    await wait(() => channelsUpdating == false, 3000)
+  } else if((new Date).getTime() - channelsLastUpdated > DEFAULT_REFRESH
     || !channels) {
     channelsUpdating = true
-    channelsLastUpdated = (new Date).getTime()
     channels = (await guildChannels()).filter(c => c.type == 0)
     channelsLastUpdated = (new Date).getTime()
     channelsUpdating = false
