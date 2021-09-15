@@ -71,6 +71,8 @@ function saveMatch(server) {
     port: server.port,
     players: server.players,
     mapname: server.mapname,
+    Players_Red: server.Players_Red,
+    Players_Blue: server.Players_Blue,
     channel: {
       serverId: server.channel.serverId,
       serverInfo: {

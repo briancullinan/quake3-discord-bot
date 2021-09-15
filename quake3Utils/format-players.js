@@ -9,7 +9,7 @@ function formatPlayerList(server) {
         .split(/\s+/ig).filter(n => n)
         .map(i => parseInt(i))
     var players = server.players
-      .filter(p => p.name
+      .filter(p => (p.name || p.n)
         && (typeof server.channel == 'undefined'
           || p.i != server.channel.clientNum))
     players.forEach(p => {
@@ -45,13 +45,13 @@ function formatPlayerList(server) {
                         name: 'Player',
                         value: ':red_circle: Red Team\n```http\n' 
                             + players.filter(p => p.team == 'red').map((p, i) => (p.i) + ') ' 
-                            + removeCtrlChars(p.name)).join('\n') + '\u0020\n```\n'
+                            + removeCtrlChars(p.name || p.n)).join('\n') + '\u0020\n```\n'
                             + ':blue_circle: Blue Team\n```http\n' 
                             + players.filter(p => p.team == 'blue').map((p, i) => (p.i) + ') ' 
-                            + removeCtrlChars(p.name)).join('\n') + '\u0020\n```\n'
+                            + removeCtrlChars(p.name || p.n)).join('\n') + '\u0020\n```\n'
                             + 'Other\n```http\n' 
                             + players.filter(p => p.team == 'other').map((p, i) => (p.i) + ') ' 
-                            + removeCtrlChars(p.name)).join('\n') + '\u0020\n```\n',
+                            + removeCtrlChars(p.name || p.n)).join('\n') + '\u0020\n```\n',
                         inline: true
                     },
                     {
@@ -91,7 +91,7 @@ function formatPlayerList(server) {
                     {
                         name: 'Player',
                         value: '```http\n' + players.map((p, i) => (p.i) + ') ' 
-                            + removeCtrlChars(p.name)).join('\n') + '\u0020\n```',
+                            + removeCtrlChars(p.name || p.n)).join('\n') + '\u0020\n```',
                         inline: true
                     },
                     {

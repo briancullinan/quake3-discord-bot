@@ -3,8 +3,6 @@ var readAllCommands = require('../discordPoll/poll-channels.js')
 var {authorizeGateway} = require('../discordApi')
 var {MESSAGE_TIME} = require('../discordApi/default-config.js')
 var {privateChannels} = require('../discordApi/gateway.js')
-//var monitorServer = importer.import('monitor q3 servers')
-//var spectateServer = importer.import('spectate q3 server')
 var DEFAULT_CHANNEL = process.env.DEFAULT_CHANNEL || 'general'
 var stillRunning = false
 var commandResponder

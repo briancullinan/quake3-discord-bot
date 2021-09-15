@@ -4,7 +4,7 @@ var {
 } = require('../quake3Api/send-connectionless.js')
 var {mergeMaster} = require('../quake3Api/parse-packet.js')
 
-function getServer(address, port) {
+async function getServer(address, port) {
   var server = mergeMaster({
     domain: address,
     port: port

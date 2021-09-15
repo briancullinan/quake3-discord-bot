@@ -4,13 +4,48 @@ var {
 } = require('../quake3Api')
 var {DEFAULT_USERNAME} = require('../discordApi')
 var getThreadName = require('../quake3Utils/thread-name.js')
-var {mergeMaster} = require('../quake3Api/parse-packet.js')
+var {getServer} = require('../quake3Api')
 var getServerChannel = require('../discordPoll/map-server.js')
 var checkServerCommands = require('../discordPoll/check-commands.js')
 var relayChat = require('../discordPoll/chat-relay.js')
+var monitorServer = require('../discordPoll/monitor-servers.js')
+var servers = []
+var SCORE_FREQUENCY = 15 * 1000
+var COMMAND_FREQUENCY = 1000
+var RELAY_FREQUENCY = 3 * 1000
+var MONITOR_FREQUENCY = 30 * 1000
+var subInterval = setInterval(subscribeUpdates, 100)
+
+function subscribeUpdates() {
+  var now = Date.now()
+  for(var i = 0; i < servers.length; i++) {
+    /*
+    if(now - servers[i].lastScore > SCORE_FREQUENCY) {
+      Promise.resolve(sendReliable(servers[i].ip, servers[i].port, 'score'))
+      servers[i].lastScore = now
+    }
+    if(now - servers[i].lastCommand > COMMAND_FREQUENCY) {
+      checkServerCommands(
+        servers[i].previousCommandNum || 0,
+        servers[i].threadName,
+        servers[i].discordChannel, servers[i])
+      servers[i].previousCommandNum = servers[i].channel.commandSequence
+      servers[i].lastCommand = now
+    }
+    if(now - servers[i].lastRelay > RELAY_FREQUENCY) {
+      Promise.resolve(relayChat(servers[i].threadName, servers[i].discordChannel, servers[i]))
+      servers[i].lastRelay = now
+    }
+    */
+    if(now - servers[i].lastMonitor > MONITOR_FREQUENCY) {
+      Promise.resolve(monitorServer(servers[i].threadName, servers[i].discordChannel, servers[i]))
+      servers[i].lastMonitor = now
+    }
+  }
+}
 
 async function spectateServer(address = 'localhost', port = 27960) {
-  var server = getServer(address, port)
+  var server = await getServer(address, port)
   if(!server)
     return
   var challengeResponse = await getChallenge(address, port)
@@ -43,28 +78,18 @@ async function spectateServer(address = 'localhost', port = 27960) {
     await sendPureChecksums(address, port, server.channel)
   }
   await nextResponse('svc_snapshot', address, port, true /* isChannel */)
-  var teamChanged = Date.now()
-  
+  server.teamChanged = Date.now()
   await sendReliable(address, port, 'team s')
-  server.scoreTimeout = setInterval(() => {
-    Promise.resolve(sendReliable(address, port, 'score'))
-  }, 10000)
+  await nextResponse('svc_snapshot', address, port, true /* isChannel */)
 
-  var threadName = getThreadName(server)
-  var discordChannel = await getServerChannel(server)
-
-  var commandNumber = server.channel.commandSequence
-  // await print commands
-  server.chatListener = setInterval(() => {
-    checkServerCommands(commandNumber, threadName, discordChannel, server)
-    commandNumber = server.channel.commandSequence
-  }, 100)
-  
-  if(discordChannel) {
-    server.relayListener = setInterval(() => {
-      Promise.resolve(relayChat(threadName, discordChannel, server))
-    }, 3000)
-  }
+  server.threadName = getThreadName(server)
+  server.discordChannel = await getServerChannel(server)
+  server.lastScore 
+    = server.lastCommand 
+    = server.lastRelay 
+    = server.lastMonitor
+    = 0
+  servers.push(server)
 }
 
 module.exports = spectateServer

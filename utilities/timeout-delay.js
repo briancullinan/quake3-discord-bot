@@ -1,12 +1,40 @@
 
+var timers = {}
+var mainTimer = setInterval(callResolve, 20)
+
+function callResolve() {
+  var now = Date.now()
+  var times = Object.keys(timers)
+  for(var i = 0; i < times.length; i++) {
+    if(now > times[i]) {
+      try {
+        Promise.resolve(timers[times[i]]())
+      } catch (e) {
+        console.log('timer failed', e)
+        throw e
+      }
+      delete timers[times[i]]
+      return
+    }
+  }
+}
+
+function addResolve(resolve, time) {
+  while(typeof timers[time] != 'undefined') {
+    time++
+  }
+  timers[time] = resolve
+}
+
 async function timeout(delay) {
-  await new Promise(resolve => setTimeout(resolve, delay))  
+  var now = Date.now()
+  await new Promise(resolve => addResolve(resolve, now + delay))  
 }
 
 async function delay(prev, delay) {
   var now = Date.now()
   if(now - prev < delay)
-    await new Promise(resolve => setTimeout(resolve, delay - (now - prev)))
+    await new Promise(resolve => addResolve(resolve, now + (delay - (now - prev))))
   return Date.now()
 }
 

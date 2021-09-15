@@ -10,12 +10,16 @@ function configStringsChanged(channel, server) {
   //console.log(channel.configStrings.slice(CS_PLAYERS, CS_PLAYERS + MAX_CLIENTS))
   if(typeof server.players == 'undefined')
     server.players = []
+  var numPlayers = 0
   for(var i = CS_PLAYERS; i < CS_PLAYERS + MAX_CLIENTS; i++) {
     if(!channel.configStrings[i]) {
       delete server.players[i-CS_PLAYERS]
       continue
     }
     var player = server.players[i-CS_PLAYERS] || {}
+    if(server.statusResponse) {
+      Object.assign(player, server.statusResponse.players[numPlayers++])
+    }
     Object.assign(player, parseConfigStr('\\' + channel.configStrings[i]))
     server.players[i-CS_PLAYERS] = player
   }
