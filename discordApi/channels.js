@@ -1,5 +1,6 @@
 var {
-  DEFAULT_GUILD, DEFAULT_CHANNEL, MESSAGE_TIME
+  DEFAULT_GUILD, DEFAULT_CHANNEL, MESSAGE_TIME,
+  MESSAGES_START, 
 } = require('../discordApi/default-config.js')
 var {request} = require('../discordApi/authorize.js')
 
@@ -17,10 +18,10 @@ async function guildChannels(guildId = DEFAULT_GUILD) {
   })
 }
 
-async function channelMessages(channelId = DEFAULT_CHANNEL) {
+async function channelMessages(channelId = DEFAULT_CHANNEL, messageTime = MESSAGE_TIME) {
   var params = {
     limit: 100,
-    after: (BigInt(Date.now() - 1420070400000 - MESSAGE_TIME) << BigInt(22)).toString()
+    after: (BigInt(Date.now() - MESSAGES_START - messageTime) << BigInt(22)).toString()
   };
   return await request({
     method: 'GET',

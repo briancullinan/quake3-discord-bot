@@ -1,6 +1,7 @@
 var {
   getInfo, getChallenge, sendConnect,
   nextResponse, sendReliable, sendPureChecksums,
+  sendSequence
 } = require('../quake3Api')
 var {DEFAULT_USERNAME} = require('../discordApi')
 var getThreadName = require('../quake3Utils/thread-name.js')
@@ -19,11 +20,14 @@ var subInterval = setInterval(subscribeUpdates, 100)
 function subscribeUpdates() {
   var now = Date.now()
   for(var i = 0; i < servers.length; i++) {
-    /*
+    Promise.resolve(sendSequence(servers[i].ip, servers[i].port, servers[i].channel))
     if(now - servers[i].lastScore > SCORE_FREQUENCY) {
       Promise.resolve(sendReliable(servers[i].ip, servers[i].port, 'score'))
       servers[i].lastScore = now
     }
+
+    if(!servers[i].threadName) continue
+
     if(now - servers[i].lastCommand > COMMAND_FREQUENCY) {
       checkServerCommands(
         servers[i].previousCommandNum || 0,
@@ -36,7 +40,6 @@ function subscribeUpdates() {
       Promise.resolve(relayChat(servers[i].threadName, servers[i].discordChannel, servers[i]))
       servers[i].lastRelay = now
     }
-    */
     if(now - servers[i].lastMonitor > MONITOR_FREQUENCY) {
       Promise.resolve(monitorServer(servers[i].threadName, servers[i].discordChannel, servers[i]))
       servers[i].lastMonitor = now
@@ -69,9 +72,14 @@ async function spectateServer(address = 'localhost', port = 27960) {
   if(!channel) {
     console.log('Could not connect.')
     return
+  } else {
+    console.log('Connected', server.ip + ':' + server.port)
   }
+  servers.push(server)
+
   await nextResponse('svc_gamestate', address, port, true /* isChannel */)
   Object.assign(server, server.channel.serverInfo, server.channel.systemInfo)
+  console.log(server)
 
   if(server.channel.isPure) {
     // TODO: send valid "cp" checksums to pure servers
@@ -89,7 +97,6 @@ async function spectateServer(address = 'localhost', port = 27960) {
     = server.lastRelay 
     = server.lastMonitor
     = 0
-  servers.push(server)
 }
 
 module.exports = spectateServer

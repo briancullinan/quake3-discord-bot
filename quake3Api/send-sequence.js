@@ -34,6 +34,7 @@ async function sendSequence(address, port, channel) {
   msg = writeBits([]    , 0     , channel.serverId || 0, 32)
   msg = writeBits(msg[1], msg[0], channel.serverId ? (channel.serverSequence || 0) : 0, 32)
   msg = writeBits(msg[1], msg[0], channel.serverId ? (channel.commandSequence || 0) : 0, 32)
+  //console.log('Sending sequence', channel.serverSequence)
 
   // write any unacknowledged clientCommands
   for ( var i = channel.reliableAcknowledge + 1 ; i <= channel.reliableSequence ; i++ ) {

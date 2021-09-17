@@ -2,8 +2,9 @@ var {
   archivedThreads, getPins,
   activeThreads, createThread, createMessage,
   pinMessage, unpinMessage, DEFAULT_USERNAME,
-  userInfo, addThreadMember,
+  userInfo, addThreadMember, deleteMessage
 } = require('../discordApi')
+var STATUS_REMOVE = 72 * 60 * 60 * 1000 // past 72 hours
 var userInfo
 
 async function updateThread(threadName, channel, json) {
@@ -75,8 +76,24 @@ async function updateChannelThread(threadName, channel, json, noUpdate) {
   // create new "whos online message"
   var message = await createMessage(json, thread.id)
   await pinMessage(message.id, thread.id)
+
+  // get all previous status messages
+  var messages = (await channelMessages(thread.id, STATUS_REMOVE))
+  messages = messages
+    .filter(m => m.id != message.id 
+      && m.author.username == DEFAULT_USERNAME
+      && ((m.embeds && m.embeds[0] && m.embeds[0].fields
+        && m.embeds[0].fields[0] && m.embeds[0].fields[0].name == 'Map')
+      || (m.content.length == 0 && (!m.embed || m.embeds.length == 0))))
+  console.log(messages)
+  for(var i = 0; i < messages.length; i++) {
+    Promise.resolve(deleteMessage(messages[i].id, thread.id))
+  }
+
   if(pins && pins.length > 0) {
-    await unpinMessage(pins[0].id, thread.id)
+    for(var i = 0; i < pins.length; i++) {
+      Promise.resolve(unpinMessage(pins[i].id, thread.id))
+    }
   }
   return thread
 }

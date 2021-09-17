@@ -15,6 +15,13 @@ async function createMessage(message, channelId = DEFAULT_CHANNEL) {
   })
 }
 
+async function deleteMessage(messageId, channelId = DEFAULT_CHANNEL) {
+  return await request({
+    method: 'DELETE',
+    url: `channels/${channelId}/messages/${messageId}`
+  })
+}
+
 async function updateMessage(message, messageId, channelId = DEFAULT_CHANNEL) {
   var params = typeof message == 'string' ? ({
     'content': message
@@ -52,6 +59,7 @@ async function unpinMessage(messageId, channelId = DEFAULT_CHANNEL) {
 
 module.exports = {
   createMessage,
+  deleteMessage,
   updateMessage,
   getPins,
   pinMessage,

@@ -57,10 +57,11 @@ function saveMatch(server) {
   //   same title, so including them might allow admins to piece ranks back 
   //   together
   // timestamp-0.0.0.0-27960-server name-00000000-serverId
+  var serverId = (new Uint32Array([server.channel.serverId]))[0].toString()
   var file = Date.now() + '-' + server.ip
     + '-' + server.port + '-' + title.replace(/[^a-z0-9]/ig, '') + '-' + hash
-    + '-' + server.channel.serverId
-  var existingMatch = checkMatchTimestamp(server.mapname, hash, server.channel.serverId)
+    + '-' + serverId
+  var existingMatch = checkMatchTimestamp(server.mapname, hash, serverId)
   // TODO: add fields?
   var obj = JSON.stringify({
     sv_hostname: server.sv_hostname,

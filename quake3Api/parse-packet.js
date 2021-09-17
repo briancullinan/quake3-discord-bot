@@ -56,6 +56,7 @@ async function packetEvent(m, rinfo) {
       netchanDecode(m, master.channel)
 
     var channel = parseServerMessage(m, master.channel, master)
+    //console.log(channel)
     if(channel === false) {
       return
     }

@@ -9,6 +9,7 @@ var MESSAGE_TIME = process.env.DEFAULT_TIME || 1000 * 60 // * 60 // 1 minute to 
 var DEFAULT_RATE = 1000 / 50 // from discord documentation
 var PROFILE_PATH = process.env.HOME || process.env.HOMEPATH || process.env.USERPROFILE
 var DEFAULT_USERNAME = 'Orbb'
+var MESSAGES_START = 1420070400000
 
 var tokenPath
 if(fs.existsSync('./discord-bot.txt')) {
@@ -28,4 +29,5 @@ module.exports = {
   PROFILE_PATH,
   TOKEN,
   DEFAULT_USERNAME,
+  MESSAGES_START
 }

@@ -26,7 +26,7 @@ function configStringsChanged(channel, server) {
 }
 
 function systemInfoChanged(channel) {
-  channel.serverId = channel.systemInfo['sv_serverid']
+  channel.serverId = parseInt(channel.systemInfo['sv_serverid'])
   channel.isPure = channel.systemInfo['sv_pure'] == '1'
 }
 

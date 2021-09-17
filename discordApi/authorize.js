@@ -1,6 +1,6 @@
 var {request} = require('gaxios')
 var WebSocket = require('ws')
-var {delay, wait} = require('../utilities/timeout-delay.js')
+var {delay, wait, timeout} = require('../utilities/timeout-delay.js')
 var {
   gatewayIdentified, gatewayClose, gatewayMessage
 } = require('../discordApi/gateway.js')
@@ -27,10 +27,10 @@ async function requestAuthQ(outgoing) {
     } catch (e) {
       // check result for rate limit and re-run this request in a queue
       if(e.code == 429) {
-        result = await new Promise(resolve => setTimeout(() => {
-          resolve(resolveRequest())
-        }, e.response.data.retry_after * 1000))
+        await timeout(e.response.data.retry_after * 1000)
+        return await resolveRequest()
       } else {
+        console.log(e)
         throw e
       }
     }

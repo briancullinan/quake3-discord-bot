@@ -34,7 +34,7 @@ function parseServerMessage(message, channel, server) {
     var eventName
     switch(cmd) {
       default:
-        console.log('Illegible server message', cmd)
+        console.log(server.ip + ':' + server.port, 'Illegible server message', cmd)
       break
       case 0: // svc_bad
         eventName = 'svc_bad'

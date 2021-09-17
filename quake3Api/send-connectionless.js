@@ -60,6 +60,14 @@ async function sendConnect(address, port = 27960, info) {
   var connectInfo = typeof info == 'string' 
     ? info 
     : Object.keys(info).map(k => '\\' + k + '\\' + info[k]).join('')
+  /*
+  connectInfo = '\\cg_predictItems\\1\\cl_anonymous\\0\\cl_execOverflow\\200'
+    + '\\cl_execTimeout\\2000\\cl_guid\\3A0E8B9163D86AD5015909ED8301ABB6' 
+    + '\\cl_paused\\0\\color1\\4\\color2\\5\\handicap\\100\\headmodel\\sarge'
+    + '\\model\\sarge\\name\\UnnamedPlayer\\rate\\25000\\sex\\male\\snaps\\20'
+    + '\\team_headmodel\\sarge\\team_model\\sarge\\protocol\\71'
+    + `\\qport\\${udpPort()}\\challenge\\${info.challenge}\\client\\Q3 1.32e`
+  */
   console.log('Connecting', address + ':' + port, connectInfo)
   var compressedInfo = await compressMessage(`"${connectInfo}"`)
   await sendConnectionless(Buffer.concat([

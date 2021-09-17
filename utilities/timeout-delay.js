@@ -42,19 +42,14 @@ async function wait(until, delay) {
   var waitTimer
   var waitCount = 0
   var result
-  await new Promise(resolve => {
-    waitTimer = setInterval(() => {
-      if((result = until())) {
-        clearInterval(waitTimer)
-        resolve(result)
-      } else if (waitCount == Math.round(delay / 100)) {
-        clearInterval(waitTimer)
-        resolve(false)
-      } else {
-        waitCount++
-      }
-    }, 100)
-  })
+  var now = Date.now()
+  var delayed = now + delay
+  while(!result && now < delayed) {
+    await timeout(100)
+    result = await until()
+    now = Date.now()
+  }
+  return result
 }
 
 module.exports = {
