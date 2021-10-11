@@ -18,16 +18,36 @@ async function guildChannels(guildId = DEFAULT_GUILD) {
   })
 }
 
+async function channelMessagesB(channelId = DEFAULT_CHANNEL, messageTime = MESSAGE_TIME) {
+  var params = {
+    limit: 100,
+    after: messageTime.toString()
+  };
+  var messages = await request({
+    method: 'GET',
+    url: `channels/${channelId}/messages`,
+    params
+  })
+  if(messages.length == 100) {
+    messages = messages.concat(await channelMessagesB(channelId, BigInt(messages[0].id) + BigInt(1)))
+  }
+  return messages
+}
+
 async function channelMessages(channelId = DEFAULT_CHANNEL, messageTime = MESSAGE_TIME) {
   var params = {
     limit: 100,
     after: (BigInt(Date.now() - MESSAGES_START - messageTime) << BigInt(22)).toString()
   };
-  return await request({
+  var messages = await request({
     method: 'GET',
     url: `channels/${channelId}/messages`,
     params
   })
+  if(messages.length == 100) {
+    messages = messages.concat(await channelMessagesB(channelId, BigInt(messages[0].id) + BigInt(1)))
+  }
+  return messages
 }
 
 async function deleteChannel(channelId) {

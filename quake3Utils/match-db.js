@@ -89,8 +89,8 @@ function saveMatch(server) {
     fs.writeFileSync(path.join(MATCH_DIR, existingMatch), obj)
   } else {
     fs.writeFileSync(path.join(MATCH_DIR, file + '.json'), obj)
+    lastMatchLoad = 0
   }
-  lastMatchLoad = 0
 }
 
 module.exports = saveMatch

@@ -6,6 +6,7 @@ var {privateChannels} = require('../discordApi/gateway.js')
 var DEFAULT_CHANNEL = process.env.DEFAULT_CHANNEL || 'general'
 var stillRunning = false
 var commandResponder
+var excluded = []
 
 async function respondChannel(specificChannel) {
   var channels = []
@@ -25,9 +26,21 @@ async function respondChannel(specificChannel) {
     for(var i = 0; i < guilds.length; i++) {
       channels.push.apply(channels, await guildChannels(guilds[i].id))
     }
-    console.log(channels)
+    //console.log(channels)
     for(var k = 0; k < channels.length; k++) {
-      threads.push.apply(threads, await activeThreads(channels[k].id))
+      if(channels[k].type != 0)
+        continue
+      
+      if(excluded.includes(channels[k].id))
+        continue
+
+      try {
+        threads.push.apply(threads, await activeThreads(channels[k].id))
+      } catch (e) {
+        if(e.code == '403') {
+          excluded.push(channels[k].id)
+        }
+      }
     }
     console.log(threads)
     channels.push.apply(channels, threads)
@@ -35,6 +48,12 @@ async function respondChannel(specificChannel) {
   
   console.log(`Reading ${channels.length} channels`)
   for(var i = 0; i < channels.length; i++) {
+    if(channels[i].type != 0)
+      continue
+    
+    if(excluded.includes(channels[i].id))
+      continue
+
     if(!specificChannel
       || channels[i].id == specificChannel
       || (typeof specificChannel == 'string'

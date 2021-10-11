@@ -21,8 +21,7 @@ async function getServerChannel(server) {
   // sort ffa/ctf/freeZe
   if(!channel && (server.server_freezetag == '1'
     || (server.game || server.gamename || '').toLowerCase() == 'freon'
-    || (typeof server.xp_version != 'undefined'
-      && server.g_gametype == '8'))) {
+    || (typeof server.xp_version != 'undefined' && server.g_gametype == '8'))) {
     channel = channels.filter(c => c.name.toLowerCase() == 'freeze-tag')[0]
   }
   if(!channel && server.gamename.toLowerCase() == 'defrag') {

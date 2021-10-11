@@ -23,10 +23,12 @@ async function requestAuthQ(outgoing) {
   resolveRequest = async () => {
     var result
     try {
+      //console.log('Discord request', outgoing)
       result = (await request(outgoing)).data
     } catch (e) {
       // check result for rate limit and re-run this request in a queue
       if(e.code == 429) {
+        console.log('Delayed request', e.response.data.retry_after)
         await timeout(e.response.data.retry_after * 1000)
         return await resolveRequest()
       } else {

@@ -26,7 +26,9 @@ function subscribeUpdates() {
       servers[i].lastScore = now
     }
 
-    if(!servers[i].threadName) continue
+    if(!servers[i].threadName) {
+      continue
+    }
 
     if(now - servers[i].lastCommand > COMMAND_FREQUENCY) {
       checkServerCommands(
@@ -45,6 +47,20 @@ function subscribeUpdates() {
       servers[i].lastMonitor = now
     }
   }
+  
+  
+  // reconnect to server if connection doesn't respond
+  for(var i = 0; i < servers.length; i++) {
+    if(!servers[i]) continue;
+    if(servers[i].lastCommand
+      && now - servers[i].lastCommand > 10 * 1000) {
+      Promise.resolve(spectateServer(servers[i].ip, servers[i].port))
+      delete servers[i]
+      i--;
+      continue
+    }
+  }
+
 }
 
 async function spectateServer(address = 'localhost', port = 27960) {

@@ -9,9 +9,9 @@ async function monitorServer(threadName, discordChannel, server) {
     console.log('No channel to create thread on.')
   } else {
     var humans = server.players.filter(p => p.ping > 0 
-    && (typeof server.channel == 'undefined'
-    // TODO: don't know why this is incorrect 
-      || p.i != server.channel.clientNum)
+      /* && (typeof server.channel == 'undefined'
+      // TODO: don't know why this is incorrect 
+        || p.i != server.channel.clientNum) */
       && (p.name || p.n) != 'Orbb')
     if(humans.length == 0) {
       console.log('Skipping ' + server.ip + ' because no humans.')

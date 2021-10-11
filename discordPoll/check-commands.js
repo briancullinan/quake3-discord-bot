@@ -16,7 +16,7 @@ function checkServerCommands(commandNumber, threadName, discordChannel, server) 
   for(var j = commandNumber + 1; j <= server.channel.commandSequence; j++) {
     var index = j & (MAX_RELIABLE_COMMANDS-1)
     var message = server.channel.serverCommands[index] + ''
-    if(message.match(/^chat /i) /* || (message).match(/^print /i) */) {
+    if(message.match(/^chat "([^"]*?)"/i) /* || (message).match(/^print /i) */) {
       console.log(server.ip + ':' + server.port + ' ---> ', message)
       message = removeCtrlChars((/"([^"]*?)"/).exec(message)[1])
       if(message.length == 0 

@@ -1,0 +1,83 @@
+{
+  "sv_hostname": "^1! TDM ! ^7P1ckup",
+  "hostname": "^1! TDM ! ^7P1ckup",
+  "gamename": "q3plus",
+  "game": "q3plus",
+  "ip": "45.32.237.139",
+  "port": 5000,
+  "players": [
+    {
+      "i": 0,
+      "name": "Daemia",
+      "score": 47,
+      "ping": 0,
+      "isBot": true,
+      "nn": "Daemia",
+      "n": "Daemia",
+      "t": "2",
+      "model": "major/daemia",
+      "hmodel": "major/daemia",
+      "c": "",
+      "c1": "4",
+      "c2": "5",
+      "hc": "100",
+      "w": "0",
+      "l": "0",
+      "skill": "5",
+      "tt": "0",
+      "tl": "0",
+      "rank": 0
+    },
+    {
+      "i": 1,
+      "name": "Klesk",
+      "score": 11,
+      "ping": 0,
+      "isBot": true,
+      "nn": "Klesk",
+      "n": "Klesk",
+      "t": "1",
+      "model": "klesk",
+      "hmodel": "klesk",
+      "c": "",
+      "c1": "4",
+      "c2": "5",
+      "hc": "100",
+      "w": "0",
+      "l": "0",
+      "skill": "5",
+      "tt": "0",
+      "tl": "0",
+      "rank": 1
+    },
+    {
+      "nn": "Orbb",
+      "n": "Orbb",
+      "t": "3",
+      "model": "",
+      "hmodel": "",
+      "c": "",
+      "c1": "",
+      "c2": "",
+      "hc": "100",
+      "w": "0",
+      "l": "0",
+      "tt": "0",
+      "tl": "0",
+      "i": 2,
+      "rank": 2,
+      "score": 0,
+      "ping": 29
+    }
+  ],
+  "mapname": "almostlost",
+  "channel": {
+    "serverId": 593439846,
+    "serverInfo": {
+      "timelimit": "15",
+      "fraglimit": "75",
+      "capturelimit": "8",
+      "gamename": "q3plus"
+    }
+  }
+}
